@@ -1,0 +1,10 @@
+@import "./src/variables";
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.title{
+  font-size: 2rem;
+  color: $color6;
+  font-family: Impact;
+}
