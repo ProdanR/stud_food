@@ -1,0 +1,28 @@
+<div class="main-container">
+  <mat-card class="example-card p-5">
+
+    <mat-card-header class="flex-column">
+      <h1 class="header">Authentication</h1>
+    </mat-card-header>
+
+    <mat-card-content class="d-flex flex-column">
+      <mat-form-field appearance="legacy">
+        <mat-label>Email Address</mat-label>
+        <input [(ngModel)]="user.email" matInput placeholder="Placeholder">
+      </mat-form-field>
+      <mat-form-field appearance="legacy">
+        <mat-label>Password</mat-label>
+        <input [(ngModel)]="user.password" matInput placeholder="Placeholder">
+      </mat-form-field>
+
+      <a href="reset-password" class="forget-password">Forget password?</a>
+      <button mat-flat-button class="login-button">LogIn</button>
+      <span class="span-info d-flex justify-content-center">
+        <p class="forget-password">New client? <a href="sign-up" style="color: #747474">Make your account</a> </p>
+      </span>
+
+    </mat-card-content>
+
+  </mat-card>
+</div>
+

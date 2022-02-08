@@ -9,11 +9,23 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatButtonModule} from "@angular/material/button";
+import { SignInComponent } from './sign-in/sing-in.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import { SignUpComponent } from './sign-up/sign-up.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopToolBarComponent
+    TopToolBarComponent,
+    SignInComponent,
+    SignUpComponent,
+    ResetPasswordComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -23,7 +35,11 @@ import {MatButtonModule} from "@angular/material/button";
     MatIconModule,
     MatBadgeModule,
     MatButtonModule,
-
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
