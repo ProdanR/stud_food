@@ -17,6 +17,11 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import {FormsModule} from "@angular/forms";
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../environments/environment";
+
 
 @NgModule({
   declarations: [
@@ -28,6 +33,9 @@ import {FormsModule} from "@angular/forms";
 
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
