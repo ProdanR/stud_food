@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatCheckboxChange} from "@angular/material/checkbox";
+import {AuthService} from "../_shared/services/auth.service";
 
 @Component({
   selector: 'app-sing-up',
@@ -11,7 +12,7 @@ export class SignUpComponent implements OnInit {
   isChecked=false;
   user:any={};
 
-  constructor() {
+  constructor(public authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -21,7 +22,7 @@ export class SignUpComponent implements OnInit {
     this.isChecked=event.checked;
   }
 
-  SignUp() {
-    console.log(this.user);
+  signUp() {
+    console.log(this.authService.signUp(this.user.email, this.user.password));
   }
 }

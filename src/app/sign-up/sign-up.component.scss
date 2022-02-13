@@ -5,10 +5,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 @media screen and (max-width: 400px){
   .main-container {
     height: auto;
+  }
+  .example-card {
+    width: 400px;
+    max-width: 400px;
+    border-radius: 0% !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 }
 
@@ -16,6 +24,7 @@
   width: 400px;
   max-width: 400px;
   border-radius: 5%;
+  border: 1px solid #ccc;
 }
 
 .login-button {
