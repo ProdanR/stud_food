@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatCheckboxChange} from "@angular/material/checkbox";
 import {AuthService} from "../_shared/services/auth.service";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 @Component({
   selector: 'app-sing-up',
@@ -12,7 +13,7 @@ export class SignUpComponent implements OnInit {
   isChecked=false;
   user:any={};
 
-  constructor(public authService: AuthService) {
+  constructor(private authService: AuthService,private afAuth: AngularFireAuth) {
   }
 
   ngOnInit(): void {
@@ -23,6 +24,6 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
-    console.log(this.authService.signUp(this.user.email, this.user.password));
+    console.log(this.authService.signUp(this.user));
   }
 }

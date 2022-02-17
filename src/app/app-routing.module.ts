@@ -4,11 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {SignInComponent} from "./sign-in/sing-in.component";
 import {ResetPasswordComponent} from "./reset-password/reset-password.component";
+import {AuthGuard} from "./_shared/guard/auth.guard";
+import {MenuComponent} from "./menu/menu.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: SignInComponent
+    component: MenuComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'sign-in',
@@ -21,6 +24,11 @@ const routes: Routes = [
   {
     path: 'reset-password',
     component: ResetPasswordComponent
+  },
+  {
+    path: 'menu',
+    component: MenuComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

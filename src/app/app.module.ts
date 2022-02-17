@@ -21,7 +21,8 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
-
+import { MenuComponent } from './menu/menu.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {environment} from "../environments/environment";
     SignInComponent,
     SignUpComponent,
     ResetPasswordComponent,
+    MenuComponent,
 
   ],
   imports: [
@@ -48,6 +50,7 @@ import {environment} from "../environments/environment";
     MatInputModule,
     MatCheckboxModule,
     FormsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
