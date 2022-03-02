@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../_shared/services/auth.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sing-in',
@@ -8,17 +9,15 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  user: any={};
+  user: any = {};
 
-  constructor(public authService: AuthService,private afAuth: AngularFireAuth) { }
+  constructor(private router: Router, public authService: AuthService, private afAuth: AngularFireAuth) {
+  }
 
   ngOnInit(): void {
   }
 
   signIn() {
-    console.log(this.afAuth.authState);
-    console.log(this.authService.signIn(this.user));
-    console.log(this.afAuth.authState);
-    console.log(this.authService.isLoggedIn());
+    this.authService.signIn(this.user);
   }
 }

@@ -7,7 +7,7 @@ import {AuthService} from "../services/auth.service";
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  userDetails:any;
+  userDetails: any;
 
   constructor(public router: Router, public authService: AuthService) {
 
@@ -23,11 +23,8 @@ export class AuthGuard implements CanActivate {
   checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
     if (this.authService.isLoggedIn()) {
       this.userDetails = JSON.parse(<any>localStorage.getItem('loggedUsed'));
-      console.log(this.userDetails);
-      const userRoles= this.userDetails.roles;
-      console.log(userRoles.includes(route.data.role));
+      const userRoles = this.userDetails.roles;
       if (route.data.role && !userRoles.includes(route.data.role)) {
-        this.router.navigate(['sign-in']);
         return false;
       }
       return true;

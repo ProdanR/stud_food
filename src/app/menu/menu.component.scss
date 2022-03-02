@@ -1,0 +1,36 @@
+//
+//::ng-deep .mat-chip-list-wrapper {
+//  display: flex;
+//  flex-wrap: nowrap !important;
+//  overflow-x: auto;
+//
+//  .mat-chip {
+//    flex: 0 0 auto;
+//  }
+//
+//
+//
+//}
+//
+//
+//
+//::ng-deep .mat-chip-list-wrapper::-webkit-scrollbar {
+//  display: none!important;
+//}
+//::ng-deep .list::-webkit-scrollbar {
+//  display: none!important;
+//}
+.example-card {
+  max-width: 400px;
+  margin: 10px;
+}
+
+h1{
+  font-weight: 500;
+  color: #444;
+  font-size: 35px;
+}
+
+.mat-card{
+  box-shadow: none;
+}

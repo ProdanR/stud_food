@@ -23,6 +23,8 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import { MenuComponent } from './menu/menu.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatChipsModule} from "@angular/material/chips";
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     SignUpComponent,
     ResetPasswordComponent,
     MenuComponent,
+    AdminPageComponent,
 
   ],
   imports: [
@@ -50,7 +53,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatInputModule,
     MatCheckboxModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

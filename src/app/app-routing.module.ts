@@ -6,6 +6,8 @@ import {SignInComponent} from "./sign-in/sing-in.component";
 import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 import {AuthGuard} from "./_shared/guard/auth.guard";
 import {MenuComponent} from "./menu/menu.component";
+import {AdminPageComponent} from "./admin-page/admin-page.component";
+
 
 const routes: Routes = [
   {
@@ -28,8 +30,13 @@ const routes: Routes = [
   {
     path: 'menu',
     component: MenuComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], data: { role: 'user' }
   },
+  {
+    path: 'admin-page',
+    component: AdminPageComponent,
+    canActivate: [AuthGuard], data: { role: 'admin' }
+  }
 ];
 
 @NgModule({

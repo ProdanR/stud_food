@@ -36,10 +36,10 @@ export class AuthService {
     })
   }
 
-  signIn(user: User) {
-    return this.afAuth.signInWithEmailAndPassword(user.email, user.password)
+   signIn(user: User) {
+    return  this.afAuth.signInWithEmailAndPassword(user.email, user.password)
       .then((result) => {
-        this.saveLoggedUserToDataStorage(result.user?.uid).then(r => this.router.navigate(['menu']));
+        this.saveLoggedUserToDataStorage(result.user?.uid);
       }).catch((error) => {
         this._snackBar.open("Invalid credentials", "", this.configSnackBar);
       })
@@ -53,10 +53,13 @@ export class AuthService {
         this.isStudent(user.cnp, user.studentNumber).then(isStudent => {
           if (isStudent) {
             user.roles.push("student");
+            user.hasDiscount=true;
           } else {
             user.cnp = '';
             user.studentNumber = '';
+            user.hasDiscount=false;
           }
+          this.saveUserDataToFirebase(user);
           this.signIn(user);
         });
       }).catch((error) => {
@@ -76,6 +79,7 @@ export class AuthService {
       this.router.navigate(['sign-in']);
     })
   }
+
 
   resetPassword(passwordResetEmail: any) {
     return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
@@ -103,19 +107,21 @@ export class AuthService {
     return true;
   }
 
-  async saveLoggedUserToDataStorage(uid: any) {
-    console.log(uid);
-    await this.afs.collection('users').ref
-      .where('uid', '==', uid)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.docs.forEach((doc) => {
-          localStorage.setItem('loggedUsed', JSON.stringify(doc.data()));
-          JSON.parse(<string>localStorage.getItem('loggedUsed'));
-        });
-      });
-
-  }
+    saveLoggedUserToDataStorage(uid: any) {
+     console.log(uid);
+     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${uid}`);
+     userRef.get().subscribe(doc => {
+       localStorage.setItem('loggedUsed', JSON.stringify(doc.data()));
+       JSON.parse(<string>localStorage.getItem('loggedUsed'));
+       console.log(JSON.parse(<any>localStorage.getItem('loggedUsed')));
+       if(doc.data().roles.indexOf('admin')!==-1) {
+         this.router.navigate(['admin-page']);
+       }
+       else{
+         this.router.navigate(['menu']);
+       }
+     });
+   }
 
   isLoggedIn() {
     const user = JSON.parse(<string>localStorage.getItem('user'));
@@ -124,6 +130,7 @@ export class AuthService {
     }
     return false;
   }
+
 
   saveUserDataToFirebase(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
@@ -135,7 +142,9 @@ export class AuthService {
       email: user.email,
       cnp: user.cnp,
       studentNumber: user.studentNumber,
-      roles: user.roles
+      roles: user.roles,
+      hasDiscount: user.hasDiscount,
+      moneyInApp: 0
     }
     return userRef.set(userData, {
       merge: true
@@ -151,6 +160,19 @@ export class AuthService {
       }
     }
     return false
+  }
+
+  getCurrentUser() {
+    return this.afAuth.authState.subscribe(data=>{
+      this.afs.collection('users').ref
+        .where('uid', '==', data?.uid)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.docs.forEach((doc) => {
+            return doc.data();
+          });
+        });
+    })
   }
 
 
