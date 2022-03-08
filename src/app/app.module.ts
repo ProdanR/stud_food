@@ -25,6 +25,11 @@ import { MenuComponent } from './menu/menu.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatChipsModule} from "@angular/material/chips";
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminUsersEditComponent } from './admin-users-edit/admin-users-edit.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
   declarations: [
@@ -35,6 +40,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     ResetPasswordComponent,
     MenuComponent,
     AdminPageComponent,
+    AdminUsersEditComponent,
 
   ],
   imports: [
@@ -54,7 +60,11 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     MatCheckboxModule,
     FormsModule,
     MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

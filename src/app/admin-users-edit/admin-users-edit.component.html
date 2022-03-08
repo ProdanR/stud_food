@@ -1,0 +1,91 @@
+<div class="mat-elevation-z8">
+
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+        FirstName
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.firstName}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+        LastName
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.lastName}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+        Email
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="roles">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+        Roles
+      </th>
+      <td mat-cell *matCellDef="let user">
+        <section class="d-flex flex-column" >
+
+          <mat-checkbox class="checkbox-middle" color="primary" is [checked]="user.roles.includes('user')" (change)="computeRoles(user,'user',user.roles.includes('user'))">user</mat-checkbox>
+
+          <mat-checkbox class="checkbox-middle" color="primary" [checked]="user.roles.includes('admin')" (change)="computeRoles(user,'admin',user.roles.includes('admin'))">admin</mat-checkbox>
+
+          <mat-checkbox class="checkbox-middle" color="primary" [checked]="user.roles.includes('worker')" (change)="computeRoles(user,'worker',user.roles.includes('worker'))">worker</mat-checkbox>
+        </section>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="moneyInApp">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+        MoneyInApp
+      </th>
+      <td mat-cell *matCellDef="let user"> <mat-form-field appearance="legacy">
+        <input matInput  type="number" [(ngModel)]="user.moneyInApp" >
+      </mat-form-field></td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="hasDiscount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+        HasDiscount
+      </th>
+      <td mat-cell *matCellDef="let user"><section >
+        <mat-checkbox class="checkbox-middle" [(ngModel)]="user.hasDiscount" color="primary"></mat-checkbox>
+      </section> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+      </th>
+      <td mat-cell *matCellDef="let user">   <button mat-mini-fab (click)="updateUser(user)"  color="primary">
+        <mat-icon>edit</mat-icon>
+      </button> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+      </th>
+      <td mat-cell *matCellDef="let user">   <button mat-mini-fab (click)="deleteUser(user)" color="warn">
+        <mat-icon>delete</mat-icon>
+      </button> </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10]"
+                 showFirstLastButtons
+                 aria-label="Select page of users">
+  </mat-paginator>    
+
+</div>

@@ -13,6 +13,7 @@ export class AuthService {
 
   configSnackBar = new MatSnackBarConfig();
 
+
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
               private router: Router,
@@ -36,8 +37,8 @@ export class AuthService {
     })
   }
 
-   signIn(user: User) {
-    return  this.afAuth.signInWithEmailAndPassword(user.email, user.password)
+  signIn(user: User) {
+    return this.afAuth.signInWithEmailAndPassword(user.email, user.password)
       .then((result) => {
         this.saveLoggedUserToDataStorage(result.user?.uid);
       }).catch((error) => {
@@ -53,11 +54,11 @@ export class AuthService {
         this.isStudent(user.cnp, user.studentNumber).then(isStudent => {
           if (isStudent) {
             user.roles.push("student");
-            user.hasDiscount=true;
+            user.hasDiscount = true;
           } else {
             user.cnp = '';
             user.studentNumber = '';
-            user.hasDiscount=false;
+            user.hasDiscount = false;
           }
           this.saveUserDataToFirebase(user);
           this.signIn(user);
@@ -104,24 +105,42 @@ export class AuthService {
       });
       return false;
     }
+    foundStudent.docs.forEach((stud: any) => {
+      const studRef: AngularFirestoreDocument<any> = this.afs.doc(`allStudents/${stud.id}`);
+      console.log(stud.id);
+      if (stud.data().used){
+        this._snackBar.open("We crate an account for you, but your student's are already used.\nPlease contact us to solve the problem!", "Close", {
+          panelClass: ['my_snackBar'],
+          verticalPosition: 'top'
+        });
+        return false;
+      }
+      else {
+        const data: any = {used: true};
+        studRef.set(data, {
+          merge: true
+        })
+        return true;
+      }
+    })
+
     return true;
   }
 
-    saveLoggedUserToDataStorage(uid: any) {
-     console.log(uid);
-     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${uid}`);
-     userRef.get().subscribe(doc => {
-       localStorage.setItem('loggedUsed', JSON.stringify(doc.data()));
-       JSON.parse(<string>localStorage.getItem('loggedUsed'));
-       console.log(JSON.parse(<any>localStorage.getItem('loggedUsed')));
-       if(doc.data().roles.indexOf('admin')!==-1) {
-         this.router.navigate(['admin-page']);
-       }
-       else{
-         this.router.navigate(['menu']);
-       }
-     });
-   }
+  saveLoggedUserToDataStorage(uid: any) {
+    console.log(uid);
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${uid}`);
+    userRef.get().subscribe(doc => {
+      localStorage.setItem('loggedUsed', JSON.stringify(doc.data()));
+      JSON.parse(<string>localStorage.getItem('loggedUsed'));
+      console.log(JSON.parse(<any>localStorage.getItem('loggedUsed')));
+      if (doc.data().roles.indexOf('admin') !== -1) {
+        this.router.navigate(['admin-page']);
+      } else {
+        this.router.navigate(['menu']);
+      }
+    });
+  }
 
   isLoggedIn() {
     const user = JSON.parse(<string>localStorage.getItem('user'));
@@ -135,7 +154,7 @@ export class AuthService {
   saveUserDataToFirebase(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: any = {
-      uid: user.uid,
+      id: user.uid,
       firstName: user.firstName,
       lastName: user.lastName,
       mobile: user.mobile,
@@ -163,7 +182,7 @@ export class AuthService {
   }
 
   getCurrentUser() {
-    return this.afAuth.authState.subscribe(data=>{
+    return this.afAuth.authState.subscribe(data => {
       this.afs.collection('users').ref
         .where('uid', '==', data?.uid)
         .get()
