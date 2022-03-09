@@ -30,6 +30,8 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { ToolBarMobileComponent } from './tool-bar-mobile/tool-bar-mobile.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -41,31 +43,33 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     MenuComponent,
     AdminPageComponent,
     AdminUsersEditComponent,
+    ToolBarMobileComponent,
 
   ],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatBadgeModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    FormsModule,
-    MatSnackBarModule,
-    MatChipsModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatSlideToggleModule
-  ],
+    imports: [
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatBadgeModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCheckboxModule,
+        FormsModule,
+        MatSnackBarModule,
+        MatChipsModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatSlideToggleModule,
+        MatTabsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

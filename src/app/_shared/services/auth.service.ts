@@ -4,6 +4,7 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import {User} from "../model/user";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import firebase from "firebase/compat/app";
 
 @Injectable({
   providedIn: 'root'
@@ -46,23 +47,26 @@ export class AuthService {
       })
   }
 
+  async signInWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const credential = await this.afAuth.signInWithPopup(provider);
+    this.saveUserDataToFirebase(credential.user);
+    this.saveLoggedUserToDataStorage(credential.user?.uid);
+  }
+
+  async signInWithFacebook() {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    const credential = await this.afAuth.signInWithPopup(provider);
+    this.saveUserDataToFirebase(credential.user);
+    this.saveLoggedUserToDataStorage(credential.user?.uid);
+  }
+
   signUp(user: User) {
     return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
       .then((result) => {
         user.uid = <string>result.user?.uid;
-        user.roles = ["user"];
-        this.isStudent(user.cnp, user.studentNumber).then(isStudent => {
-          if (isStudent) {
-            user.roles.push("student");
-            user.hasDiscount = true;
-          } else {
-            user.cnp = '';
-            user.studentNumber = '';
-            user.hasDiscount = false;
-          }
-          this.saveUserDataToFirebase(user);
-          this.signIn(user);
-        });
+        this.saveUserDataToFirebase(user);
+        this.signIn(user);
       }).catch((error) => {
         if (error.code == 'auth/weak-password') {
           this._snackBar.open("Password is too short", "", this.configSnackBar);
@@ -92,48 +96,14 @@ export class AuthService {
       })
   }
 
-  private async isStudent(cnp: any, studentNumber: any) {
-    if (!cnp || !studentNumber) return false;
-    const foundStudent = await this.afs.collection('allStudents').ref
-      .where('cnp', '==', cnp)
-      .where('studentNumber', '==', studentNumber)
-      .get();
-    if (foundStudent.empty) {
-      this._snackBar.open("We crate an account for you, but your student's info are incorrect.\nPlease contact us to solve the problem!", "Close", {
-        panelClass: ['my_snackBar'],
-        verticalPosition: 'top'
-      });
-      return false;
-    }
-    foundStudent.docs.forEach((stud: any) => {
-      const studRef: AngularFirestoreDocument<any> = this.afs.doc(`allStudents/${stud.id}`);
-      console.log(stud.id);
-      if (stud.data().used){
-        this._snackBar.open("We crate an account for you, but your student's are already used.\nPlease contact us to solve the problem!", "Close", {
-          panelClass: ['my_snackBar'],
-          verticalPosition: 'top'
-        });
-        return false;
-      }
-      else {
-        const data: any = {used: true};
-        studRef.set(data, {
-          merge: true
-        })
-        return true;
-      }
-    })
-
-    return true;
-  }
 
   saveLoggedUserToDataStorage(uid: any) {
     console.log(uid);
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${uid}`);
     userRef.get().subscribe(doc => {
-      localStorage.setItem('loggedUsed', JSON.stringify(doc.data()));
-      JSON.parse(<string>localStorage.getItem('loggedUsed'));
-      console.log(JSON.parse(<any>localStorage.getItem('loggedUsed')));
+      localStorage.setItem('loggedUser', JSON.stringify(doc.data()));
+      JSON.parse(<string>localStorage.getItem('loggedUser'));
+      console.log(JSON.parse(<any>localStorage.getItem('loggedUser')));
       if (doc.data().roles.indexOf('admin') !== -1) {
         this.router.navigate(['admin-page']);
       } else {
@@ -150,19 +120,31 @@ export class AuthService {
     return false;
   }
 
+  saveUserDate(user: any) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+
+    const data = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      roles: ['user'],
+      moneyInApp: 0
+    }
+
+    // @ts-ignore
+    return userRef.set(data, {merge: true})
+  }
 
   saveUserDataToFirebase(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: any = {
       id: user.uid,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      mobile: user.mobile,
+      displayName: user.displayName,
+      phoneNumber: user.phoneNumber,
       email: user.email,
-      cnp: user.cnp,
-      studentNumber: user.studentNumber,
-      roles: user.roles,
-      hasDiscount: user.hasDiscount,
+      roles: ["user"],
+      hasDiscount: false,
       moneyInApp: 0
     }
     return userRef.set(userData, {

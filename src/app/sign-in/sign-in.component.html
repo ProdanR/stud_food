@@ -7,21 +7,35 @@
 
     <mat-card-content>
       <form #singInForm="ngForm" class="d-flex flex-column">
-      <mat-form-field appearance="legacy">
-        <mat-label>Email Address</mat-label>
-        <input [(ngModel)]="user.email" matInput placeholder="Placeholder" name="email" type="email" required>
-      </mat-form-field>
-      <mat-form-field appearance="legacy">
-        <mat-label>Password</mat-label>
-        <input [(ngModel)]="user.password" matInput placeholder="Placeholder" name="password" type="password" required>
-      </mat-form-field>
+        <mat-form-field appearance="legacy">
+          <mat-label>Email Address</mat-label>
+          <input [(ngModel)]="user.email" matInput placeholder="Placeholder" name="email" type="email" required>
+        </mat-form-field>
+        <mat-form-field appearance="legacy">
+          <mat-label>Password</mat-label>
+          <input [(ngModel)]="user.password" matInput placeholder="Placeholder" name="password" type="password"
+                 required>
+        </mat-form-field>
 
-      <a href="reset-password" class="forget-password">Forget password?</a>
-      <button mat-flat-button class="login-button" [disabled]="!singInForm.valid" (click)="signIn()">LogIn</button>
-      <span class="span-info d-flex justify-content-center">
+        <a href="reset-password" class="forget-password">Forget password?</a>
+        <button mat-flat-button class="login-button" (click)="singInForm.valid ? signIn():null">LogIn</button>
+        <span class="span-info d-flex justify-content-center">
         <p class="forget-password">New client? <a href="sign-up" style="color: #747474">Make your account</a> </p>
-      </span>
+        </span>
+
+        <h3><span>OR</span></h3>
+
+
       </form>
+
+
+      <button mat-stroked-button class="fb" (click)="signInWithFacebook()">
+        <i class="fa fa-facebook fa-fw" style="margin-bottom: 4px"></i> Login with Facebook
+      </button>
+      <button mat-stroked-button class="google"  (click)="signInWithGoogle()">
+        <i class="fa fa-google fa-fw" style="margin-bottom: 4px"></i> Login with Google
+      </button>
+
     </mat-card-content>
 
   </mat-card>

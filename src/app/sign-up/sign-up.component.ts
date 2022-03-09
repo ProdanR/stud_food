@@ -9,8 +9,6 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-  color6 = "#353C7D";
-  isChecked=false;
   user:any={};
 
   constructor(private authService: AuthService,private afAuth: AngularFireAuth) {
@@ -19,9 +17,6 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showField(event: any) {
-    this.isChecked=event.checked;
-  }
 
   signUp() {
     console.log(this.authService.signUp(this.user));

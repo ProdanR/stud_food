@@ -45,3 +45,38 @@
 .header{
   font-weight: bold; color:#444444
 }
+
+h3 {
+  width: 100%;
+  text-align: center;
+  line-height: 0.1em;
+  margin: 20px 0 20px;
+  height:2px;
+  border-width:0;
+  color:gray;
+  background-color:gray
+}
+
+h3 span {
+  background:#fff;
+  padding:0 10px;
+}
+
+
+.fb {
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  color: #3B5998;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.google {
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  color: #dd4b39;
+  margin-top: 10px;
+  border-radius: 10px;
+}

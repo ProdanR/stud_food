@@ -1,0 +1,9 @@
+<mat-toolbar class="toolbar d-flex flex-row justify-content-between">
+
+  <ng-container *ngFor="let btn of buttons;let i=index">
+    <button mat-icon-button (click)="redirectTo(btn)">
+      <mat-icon [style.color]="selected == i ? '#353C7D' : '#999'" (click)=" selected == i? selected = i + 1:selected = i">{{btn}}</mat-icon>
+    </button>
+  </ng-container>
+
+</mat-toolbar>

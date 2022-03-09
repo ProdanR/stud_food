@@ -20,4 +20,12 @@ export class SignInComponent implements OnInit {
   signIn() {
     this.authService.signIn(this.user);
   }
+
+  signInWithGoogle() {
+    this.authService.signInWithGoogle();
+  }
+
+  signInWithFacebook() {
+    this.authService.signInWithFacebook();
+  }
 }
