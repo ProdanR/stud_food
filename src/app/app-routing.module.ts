@@ -7,6 +7,7 @@ import {ResetPasswordComponent} from "./reset-password/reset-password.component"
 import {AuthGuard} from "./_shared/guard/auth.guard";
 import {MenuComponent} from "./menu/menu.component";
 import {AdminPageComponent} from "./admin-page/admin-page.component";
+import {AccountPageMobileComponent} from "./user-account/account-page-mobile/account-page-mobile.component";
 
 
 const routes: Routes = [
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'menu',
     component: MenuComponent,
+    canActivate: [AuthGuard], data: { role: 'user' }
+  },
+  {
+    path: 'account-page-mobile',
+    component: AccountPageMobileComponent,
     canActivate: [AuthGuard], data: { role: 'user' }
   },
   {

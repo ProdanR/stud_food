@@ -23,6 +23,7 @@ export class AuthGuard implements CanActivate {
   checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
     if (this.authService.isLoggedIn()) {
       this.userDetails = JSON.parse(<any>localStorage.getItem('loggedUser'));
+      console.log(this.userDetails);
       const userRoles = this.userDetails.roles;
       if (route.data.role && !userRoles.includes(route.data.role)) {
         return false;

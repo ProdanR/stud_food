@@ -32,6 +32,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { ToolBarMobileComponent } from './tool-bar-mobile/tool-bar-mobile.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import { AccountPageMobileComponent } from './user-account/account-page-mobile/account-page-mobile.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {MatTabsModule} from "@angular/material/tabs";
     AdminPageComponent,
     AdminUsersEditComponent,
     ToolBarMobileComponent,
+    AccountPageMobileComponent,
 
   ],
     imports: [

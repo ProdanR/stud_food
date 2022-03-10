@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tool-bar-mobile',
@@ -10,7 +11,7 @@ export class ToolBarMobileComponent implements OnInit {
 
   buttons = ["restaurant_menu", "favorite", "shopping_basket", "list_alt", "account_circle"];
 
-  constructor() {
+  constructor( private router: Router) {
   }
 
   ngOnInit(): void {
@@ -35,7 +36,7 @@ export class ToolBarMobileComponent implements OnInit {
         break;
       }
       case "account_circle": {
-        console.log("account_circle")
+        this.router.navigate(['account-page-mobile']);
         break;
       }
       default: {
