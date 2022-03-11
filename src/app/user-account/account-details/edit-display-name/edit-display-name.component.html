@@ -1,0 +1,22 @@
+<div class="d-flex flex-column p-3 justify-content-between h-100">
+
+  <div class="d-flex flex-column">
+    <button mat-icon-button routerLink="..">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="text-box" style="">
+      <h1 class="title">Modify name</h1>
+      <p class="info">Add or change your full name so we can know who order from us</p>
+    </div>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input type="phoneNumber" matInput [(ngModel)]="userData.displayName">
+    </mat-form-field>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <button mat-flat-button class="button-action" (click)="updateUserDetails()" routerLink="..">Change name</button>
+  </div>
+
+</div>

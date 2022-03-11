@@ -1,0 +1,91 @@
+<div class=" bodyy d-flex flex-row flex-wrap">
+  <div class="d-flex flex-row flex-wrap justify-content-center">
+
+    <mat-card class="card-back">
+      <mat-card-content class="d-flex flex-row justify-content-between align-items-center ">
+
+        <button class="button-back" mat-icon-button routerLink="../account-page-mobile">
+          <mat-icon style="color: #000000DD; font-size: 30px;">keyboard_arrow_left</mat-icon>
+        </button>
+
+          <p style="padding-right: 2.5vw; font-weight: 500">Account details</p>
+
+      </mat-card-content>
+    </mat-card>
+
+
+    <img mat-card-sm-image src="assets/images/undraw_male_avatar_323b.svg" class="mt-3">
+
+
+    <mat-card class="example-card">
+      <mat-card-content class="d-flex flex-row justify-content-between">
+
+        <div class="d-flex p1">
+          <mat-icon>account_circle</mat-icon>
+          <div class=" p-1">
+            <span class="bold">Your full name</span>
+            <p class="gray">This is the name associated with your orders.</p>
+            <p class="bold">{{userData?.displayName}}</p>
+          </div>
+        </div>
+
+        <button mat-icon-button class="icon-button" routerLink="./edit-display-name">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="example-card">
+      <mat-card-content class="d-flex flex-row justify-content-between">
+
+        <div class="d-flex p1">
+          <mat-icon>email</mat-icon>
+          <div class=" p-1">
+            <span class="bold">E-mail address</span>
+            <p class="gray">This is the e-mail address associated with your account.</p>
+            <p class="bold">{{userData?.email}}</p>
+          </div>
+        </div>
+
+
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="example-card" [ngStyle]="{'margin-bottom': !userData?.studentNumber ? '85px' : '0px'}">
+      <mat-card-content class="d-flex flex-row justify-content-between">
+
+        <div class="d-flex p1">
+          <mat-icon> phone</mat-icon>
+          <div class=" p-1">
+            <span class="bold">Mobile number</span>
+            <p class="gray">This is the number we use for any problems related to your orders.</p>
+            <p class="bold" *ngIf="!userData?.phoneNumber"> _ _ _ _ _ _ _ _ _ _</p>
+            <p class="bold">{{userData?.phoneNumber}}</p>
+          </div>
+        </div>
+
+        <button mat-icon-button class="icon-button" routerLink="./edit-phone-number">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="userData?.studentNumber && userData?.hasDiscount" class="example-card" style="margin-bottom: 85px">
+      <mat-card-content class="d-flex flex-row justify-content-between">
+
+        <div class="d-flex p1">
+          <mat-icon>verified_user</mat-icon>
+          <div class=" p-1">
+            <span class="bold">Student number</span>
+            <p class="gray">This is your student number that validate your food discount this year.</p>
+            <p class="bold">{{userData?.studentNumber}}</p>
+          </div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

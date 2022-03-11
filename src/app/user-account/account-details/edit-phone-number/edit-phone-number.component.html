@@ -1,0 +1,24 @@
+<div class="d-flex flex-column p-3 justify-content-between h-100">
+
+  <div class="d-flex flex-column">
+    <button mat-icon-button routerLink="..">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="text-box" style="">
+      <h1 class="title">Modify mobile number</h1>
+      <p class="info">Your mobile number is very important for us to keep in touch with you and talk about any
+        problem.<br>If you don't have your number in your
+        profile or have another one please let us know!</p>
+    </div>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input type="phoneNumber" matInput [(ngModel)]="userData.phoneNumber">
+    </mat-form-field>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <button mat-flat-button class="button-action" (click)="updateUserDetails()" routerLink="..">Change phone number</button>
+  </div>
+
+</div>

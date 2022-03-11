@@ -33,6 +33,9 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { ToolBarMobileComponent } from './tool-bar-mobile/tool-bar-mobile.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import { AccountPageMobileComponent } from './user-account/account-page-mobile/account-page-mobile.component';
+import { AccountDetailsComponent } from './user-account/account-details/account-details.component';
+import { EditPhoneNumberComponent } from './user-account/account-details/edit-phone-number/edit-phone-number.component';
+import { EditDisplayNameComponent } from './user-account/account-details/edit-display-name/edit-display-name.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { AccountPageMobileComponent } from './user-account/account-page-mobile/a
     AdminUsersEditComponent,
     ToolBarMobileComponent,
     AccountPageMobileComponent,
+    AccountDetailsComponent,
+    EditPhoneNumberComponent,
+    EditDisplayNameComponent,
 
   ],
     imports: [

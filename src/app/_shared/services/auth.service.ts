@@ -163,18 +163,6 @@ export class AuthService {
     return false
   }
 
-  getCurrentUser() {
-    return this.afAuth.authState.subscribe(data => {
-      this.afs.collection('users').ref
-        .where('uid', '==', data?.uid)
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.docs.forEach((doc) => {
-            return doc.data();
-          });
-        });
-    })
-  }
 
 
 }

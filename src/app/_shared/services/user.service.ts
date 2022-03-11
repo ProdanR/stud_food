@@ -17,6 +17,13 @@ export class UserService {
     return this.usersRef;
   }
 
+  getCurrentUser(){
+    const userDetails = JSON.parse(<any>localStorage.getItem('loggedUser'));
+    console.log(userDetails);
+    const userRef= this.db.collection('/users').doc('7DtxXfZHtNQ5uEfKe5pbFjEeDJJ3');
+    return userRef;
+  }
+
   updateUser(user){
     const userRef = this.usersRef.doc(user.id);
     return userRef.set(user, {

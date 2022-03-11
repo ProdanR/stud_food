@@ -1,4 +1,4 @@
-<app-top-tool-bar ></app-top-tool-bar>
+<app-top-tool-bar *ngIf="(!authService.isLoggedIn() && isMobileDevice()) || !isMobileDevice()"></app-top-tool-bar>
 
 <router-outlet></router-outlet>
 <app-tool-bar-mobile *ngIf="authService.isLoggedIn() && isMobileDevice()"></app-tool-bar-mobile>

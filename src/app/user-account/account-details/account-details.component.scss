@@ -1,0 +1,44 @@
+.bodyy {
+  background: #f3f2f7;
+}
+
+.example-card {
+  width: 90%;
+  margin-top: 25px;
+  box-shadow: none;
+
+}
+
+mat-icon{
+  color: #999999FF;
+}
+
+.bold{
+  font-size: 16px;
+  font-weight: bold;
+}
+.gray{
+  margin-top: 5px;
+  color: #999999FF;
+}
+
+ .icon-button{
+
+   .mat-icon{
+     vertical-align: top !important;
+     color: #000000DD;
+     background-color: #f3f2f7;
+     border-radius: 20px;
+     font-size: 17px;
+   }
+}
+
+
+.card-back{
+  width: 100vw;
+  height: 60px;
+  box-shadow: none;
+  margin-top: 1px;
+  padding-top: 10px
+}
+

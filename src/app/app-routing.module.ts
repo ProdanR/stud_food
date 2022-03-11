@@ -8,6 +8,9 @@ import {AuthGuard} from "./_shared/guard/auth.guard";
 import {MenuComponent} from "./menu/menu.component";
 import {AdminPageComponent} from "./admin-page/admin-page.component";
 import {AccountPageMobileComponent} from "./user-account/account-page-mobile/account-page-mobile.component";
+import {AccountDetailsComponent} from "./user-account/account-details/account-details.component";
+import {EditPhoneNumberComponent} from "./user-account/account-details/edit-phone-number/edit-phone-number.component";
+import {EditDisplayNameComponent} from "./user-account/account-details/edit-display-name/edit-display-name.component";
 
 
 const routes: Routes = [
@@ -39,6 +42,24 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: { role: 'user' }
   },
   {
+    path: 'account-details',
+    children: [
+      {
+        path: '',
+        component: AccountDetailsComponent,
+      },
+      {
+        path: 'edit-phone-number',
+        component: EditPhoneNumberComponent,
+      },
+      {
+        path: 'edit-display-name',
+        component: EditDisplayNameComponent,
+      }
+    ],
+    canActivate: [AuthGuard], data: { role: 'user' }
+  },
+  {
     path: 'admin-page',
     component: AdminPageComponent,
     canActivate: [AuthGuard], data: { role: 'admin' }
@@ -46,7 +67,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [ RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'top'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
