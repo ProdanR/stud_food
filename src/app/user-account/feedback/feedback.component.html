@@ -1,0 +1,22 @@
+<div class="d-flex flex-column p-3 justify-content-between h-100">
+
+  <div class="d-flex flex-column">
+    <button mat-icon-button routerLink="/account-page-mobile">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="text-box" style="">
+      <h1 class="title">Feedback</h1>
+      <p class="info">If something was wrong with the application or the food, please let us know by an anonymous message.</p>
+    </div>
+
+    <mat-form-field  appearance="fill">
+      <textarea style="height: 40vh" matInput [(ngModel)]="feedback.message"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <button mat-flat-button class="button-action" (click)="addFeedbackToFirebase()" routerLink="/account-page-mobile">Send feedback</button>
+  </div>
+
+</div>

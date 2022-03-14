@@ -37,6 +37,7 @@ import { AccountDetailsComponent } from './user-account/account-details/account-
 import { EditPhoneNumberComponent } from './user-account/account-details/edit-phone-number/edit-phone-number.component';
 import { EditDisplayNameComponent } from './user-account/account-details/edit-display-name/edit-display-name.component';
 import { OpeningHoursComponent } from './user-account/opening-hours/opening-hours.component';
+import { FeedbackComponent } from './user-account/feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { OpeningHoursComponent } from './user-account/opening-hours/opening-hour
     EditPhoneNumberComponent,
     EditDisplayNameComponent,
     OpeningHoursComponent,
+    FeedbackComponent,
 
   ],
     imports: [
