@@ -11,6 +11,7 @@ import {AccountPageMobileComponent} from "./user-account/account-page-mobile/acc
 import {AccountDetailsComponent} from "./user-account/account-details/account-details.component";
 import {EditPhoneNumberComponent} from "./user-account/account-details/edit-phone-number/edit-phone-number.component";
 import {EditDisplayNameComponent} from "./user-account/account-details/edit-display-name/edit-display-name.component";
+import {OpeningHoursComponent} from "./user-account/opening-hours/opening-hours.component";
 
 
 const routes: Routes = [
@@ -42,6 +43,11 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: { role: 'user' }
   },
   {
+    path:'opening-hours',
+    component: OpeningHoursComponent,
+    canActivate: [AuthGuard], data: { role: 'user' }
+  },
+  {
     path: 'account-details',
     children: [
       {
@@ -68,7 +74,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes, {
-    scrollPositionRestoration: 'top'
+    scrollPositionRestoration: 'top',
   })],
   exports: [RouterModule]
 })

@@ -20,12 +20,12 @@ export class UserService {
   getCurrentUser(){
     const userDetails = JSON.parse(<any>localStorage.getItem('loggedUser'));
     console.log(userDetails);
-    const userRef= this.db.collection('/users').doc('7DtxXfZHtNQ5uEfKe5pbFjEeDJJ3');
+    const userRef= this.db.collection('/users').doc(userDetails.uid);
     return userRef;
   }
 
   updateUser(user){
-    const userRef = this.usersRef.doc(user.id);
+    const userRef = this.usersRef.doc(user.uid);
     return userRef.set(user, {
       merge: true
     })

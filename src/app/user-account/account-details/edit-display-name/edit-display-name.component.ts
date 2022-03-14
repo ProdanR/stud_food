@@ -23,6 +23,7 @@ export class EditDisplayNameComponent implements OnInit {
   }
 
   updateUserDetails() {
+    console.log(this.userData);
     this.userService.updateUser(this.userData);
   }
 

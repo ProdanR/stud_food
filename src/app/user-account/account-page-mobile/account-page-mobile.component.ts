@@ -34,4 +34,6 @@ export class AccountPageMobileComponent implements OnInit {
   signOut() {
     this.authService.signOut();
   }
+
+
 }

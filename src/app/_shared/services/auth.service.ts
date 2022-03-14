@@ -137,19 +137,27 @@ export class AuthService {
   }
 
   saveUserDataToFirebase(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    const userData: any = {
-      id: user.uid,
-      displayName: user.displayName,
-      phoneNumber: user.phoneNumber,
-      email: user.email,
-      roles: ["user"],
-      hasDiscount: false,
-      moneyInApp: 0
-    }
-    return userRef.set(userData, {
-      merge: true
+
+    const userRef: AngularFirestoreDocument<any> = this.afs.collection("users").doc(user.uid);
+
+    userRef.get().subscribe((doc) => {
+      if (!doc.exists) {
+        const userData: any = {
+          uid: user.uid,
+          displayName: user.displayName,
+          phoneNumber: user.phoneNumber,
+          email: user.email,
+          roles: ["user"],
+          hasDiscount: false,
+          moneyInApp: 0
+        }
+        userRef.set(userData, {
+          merge: true
+        })
+      }
     })
+
+
   }
 
 
@@ -162,7 +170,6 @@ export class AuthService {
     }
     return false
   }
-
 
 
 }
