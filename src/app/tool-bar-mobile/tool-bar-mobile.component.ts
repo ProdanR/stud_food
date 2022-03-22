@@ -20,6 +20,7 @@ export class ToolBarMobileComponent implements OnInit {
   redirectTo(btn: string) {
     switch (btn) {
       case "restaurant_menu": {
+        this.router.navigate(['menu']);
         console.log("restaurant_menu")
         break;
       }

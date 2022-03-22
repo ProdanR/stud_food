@@ -38,6 +38,7 @@ import { EditPhoneNumberComponent } from './user-account/account-details/edit-ph
 import { EditDisplayNameComponent } from './user-account/account-details/edit-display-name/edit-display-name.component';
 import { OpeningHoursComponent } from './user-account/opening-hours/opening-hours.component';
 import { FeedbackComponent } from './user-account/feedback/feedback.component';
+import { AddMoneyInAppComponent } from './user-account/add-money-in-app/add-money-in-app.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { FeedbackComponent } from './user-account/feedback/feedback.component';
     EditDisplayNameComponent,
     OpeningHoursComponent,
     FeedbackComponent,
+    AddMoneyInAppComponent,
 
   ],
     imports: [

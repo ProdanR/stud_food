@@ -13,6 +13,7 @@ import {EditPhoneNumberComponent} from "./user-account/account-details/edit-phon
 import {EditDisplayNameComponent} from "./user-account/account-details/edit-display-name/edit-display-name.component";
 import {OpeningHoursComponent} from "./user-account/opening-hours/opening-hours.component";
 import {FeedbackComponent} from "./user-account/feedback/feedback.component";
+import {AddMoneyInAppComponent} from "./user-account/add-money-in-app/add-money-in-app.component";
 
 
 const routes: Routes = [
@@ -51,6 +52,11 @@ const routes: Routes = [
   {
     path:'feedback',
     component: FeedbackComponent,
+    canActivate: [AuthGuard], data: { role: 'user' }
+  },
+  {
+    path:'add-money-in-app',
+    component: AddMoneyInAppComponent,
     canActivate: [AuthGuard], data: { role: 'user' }
   },
   {
