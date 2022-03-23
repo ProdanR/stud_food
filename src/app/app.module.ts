@@ -39,6 +39,7 @@ import { EditDisplayNameComponent } from './user-account/account-details/edit-di
 import { OpeningHoursComponent } from './user-account/opening-hours/opening-hours.component';
 import { FeedbackComponent } from './user-account/feedback/feedback.component';
 import { AddMoneyInAppComponent } from './user-account/add-money-in-app/add-money-in-app.component';
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -60,30 +61,31 @@ import { AddMoneyInAppComponent } from './user-account/add-money-in-app/add-mone
     AddMoneyInAppComponent,
 
   ],
-    imports: [
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatBadgeModule,
-        MatButtonModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatCheckboxModule,
-        FormsModule,
-        MatSnackBarModule,
-        MatChipsModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatSlideToggleModule,
-        MatTabsModule
-    ],
+  imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatBadgeModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatSnackBarModule,
+    MatChipsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatSlideToggleModule,
+    MatTabsModule,
+    MatListModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

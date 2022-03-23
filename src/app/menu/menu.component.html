@@ -1,65 +1,52 @@
-<!--<div class="d-flex flex-row ">-->
-<!--<button (click)="scrollLeft(list)"><</button>-->
-
-<!--<mat-chip-list>-->
-<!--  <div #list style="all: inherit" class="list">-->
-<!--  <mat-chip *ngFor="let category of categories" class="matchip">-->
-<!--    {{category}}-->
-<!--  </mat-chip>-->
-<!--  </div>-->
-<!--</mat-chip-list>-->
-<!--<button (click)="scrollRight(list)">></button>-->
-<!--</div>-->
+<div>
+  <div style="position: sticky; z-index: 999; top: 0px">
+    <mat-card class="search-card">
+      <mat-card-content class="d-flex flex-row justify-content-center">
+        <mat-form-field appearance="fill">
+          <mat-icon style="color: #353C7D; font-weight: bold" matPrefix>search</mat-icon>
+          <input type="tel" matInput placeholder="Search in our menu">
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
 
 
-<!--<div style="width: 100%; background-color: #f8f8f8" class="d-flex flex-column">-->
-<!--  <ng-container *ngFor="let category of categories" class="d-flex justify-content-start flex-row">-->
-<!--    <div>-->
-<!--      <h1>{{category}}</h1>-->
-<!--    </div>-->
-<!--    <ng-container *ngFor="let product of products" class="d-flex align-items-center flex-wrap" style="width: 100%">-->
-<!--      <div>-->
-<!--        <mat-card class="example-card">-->
-<!--          <mat-card-title-group>-->
-<!--            <mat-card-title>Shiba Inu</mat-card-title>-->
-<!--            <mat-card-subtitle>this is the description o f the vesft nsdifasdfb ds g gfsdfgsdfgsd fg sdg sdf gsdfgsdfg-->
-<!--              sd fgsd g sdfg sdfgsd gfjsdf asjidfajsfd ih-->
-<!--            </mat-card-subtitle>-->
+    <mat-chip-list  #chipListCategory class="d-flex flex-row flex-nowrap category-list" id="chipListCateg">
+      <ng-container *ngFor="let category of categories">
+        <mat-chip style="background: white" (click)="scrollTo(category)" [ngStyle]="{'background': selectedCategory===category ? '#353C7D' : 'white', 'color':selectedCategory===category ? 'white':'black' }">
+          {{category}}
+        </mat-chip>
+      </ng-container>
+    </mat-chip-list>
 
-<!--            <img mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"-->
-<!--                 style="border-radius: 10px">-->
-<!--          </mat-card-title-group>-->
-<!--          <mat-card-content>-->
-<!--            <mat-card-footer>20lei</mat-card-footer>-->
-<!--          </mat-card-content>-->
-<!--        </mat-card>-->
-<!--      </div>-->
-<!--    </ng-container>-->
-<!--  </ng-container>-->
-<!--</div>-->
+  </div>
 
+  <!--<div style="margin-top: 100px"></div>-->
+  <div style="width: 100%; background-color: #f3f2f7" class="container">
+    <ng-container *ngFor="let category of categories" class="d-flex justify-content-center flex-row">
+      <div id="{{category}}" style="max-width: 1361px;" class="d-flex align-content-center flex-wrap">
+        <h1>{{category}}</h1>
+        <div class="d-flex justify-content-start flex-wrap">
+          <ng-container *ngFor="let product of products">
 
-<div style="width: 100%; background-color: #f8f8f8" class="container">
-  <ng-container *ngFor="let category of categories" class="d-flex justify-content-center flex-row">
-    <div style="max-width: 1361px" class="d-flex align-content-center flex-wrap">
-      <h1>{{category}}</h1>
-      <div class="d-flex justify-content-start flex-wrap">
-        <ng-container *ngFor="let product of products">
+            <mat-card class="example-card">
+              <mat-card-title-group>
+                <mat-card-title>Shiba Inu</mat-card-title>
+                <mat-card-subtitle>this is the description o f the vesft nsdifasdfb ds g gfsdfgsdfgsd fg sdg sdf
+                  gsdfgsdfg
+                  sd fgsd g sdfg sdfgsd gfjsdf asjidfajsfd ih
+                </mat-card-subtitle>
 
-          <mat-card class="example-card">
-            <mat-card-title-group>
-              <mat-card-title>Shiba Inu</mat-card-title>
-              <mat-card-subtitle>this is the description o f the vesft nsdifasdfb ds g gfsdfgsdfgsd fg sdg sdf gsdfgsdfg sd fgsd g sdfg sdfgsd gfjsdf asjidfajsfd ih</mat-card-subtitle>
+                <img mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                     style="border-radius: 10px">
+              </mat-card-title-group>
+              <mat-card-content>
+                <mat-card-footer>20lei</mat-card-footer>
+              </mat-card-content>
+            </mat-card>
 
-              <img mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" style="border-radius: 10px">
-            </mat-card-title-group>
-            <mat-card-content>
-              <mat-card-footer>20lei</mat-card-footer>
-            </mat-card-content>
-          </mat-card>
-
-        </ng-container>
+          </ng-container>
+        </div>
       </div>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
 </div>
