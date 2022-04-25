@@ -25,21 +25,23 @@ mat-icon {
   margin-bottom: 10vh;
 }
 
-::ng-deep .mat-form-field-wrapper .mat-form-field-underline {
-  width: 0px;
-  background: #f3f2f7;
-}
+.edit-phone-form {
+  ::ng-deep .mat-form-field-wrapper .mat-form-field-underline {
+    width: 0px;
+    background: #f3f2f7;
+  }
 
-::ng-deep .mat-form-field-wrapper .mat-form-field-flex {
-  background-color: #f3f2f7;
-  border-radius: 40px !important;
+  ::ng-deep .mat-form-field-wrapper .mat-form-field-flex {
+    background-color: #f3f2f7;
+    border-radius: 40px !important;
 
-  .mat-form-field-infix {
-    margin-left: 1em;
-    border-top: 0px;
+    .mat-form-field-infix {
+      margin-left: 1em;
+      border-top: 0px;
 
-    .mat-input-element {
-      font-weight: 500;
+      .mat-input-element {
+        font-weight: 500;
+      }
     }
   }
 }

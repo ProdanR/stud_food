@@ -1,43 +1,17 @@
-//
-//::ng-deep .mat-chip-list-wrapper {
-//  display: flex;
-//  flex-wrap: nowrap !important;
-//  overflow-x: auto;
-//
-//  .mat-chip {
-//    flex: 0 0 auto;
-//  }
-//
-//
-//
-//}
-//
-//
-//
-//::ng-deep .mat-chip-list-wrapper::-webkit-scrollbar {
-//  display: none!important;
-//}
-//::ng-deep .list::-webkit-scrollbar {
-//  display: none!important;
-//}
-.example-card {
-  max-width: 400px;
-  margin: 10px;
-}
 
-h1{
+h1 {
   font-weight: 500;
   color: #444;
   font-size: 35px;
 
 }
 
-.mat-card{
+.mat-card {
   box-shadow: none;
 }
 
 
-.search-card{
+.search-card {
   width: 100vw;
   box-shadow: none;
   border-bottom: 1px solid #f3f2f7 !important;
@@ -60,56 +34,153 @@ h1{
   }
 }
 
-.category-list{
+.category-list {
   overflow-x: scroll;
   background: white;
-  box-shadow:  0px -1px 10px #d2d2d2;
+  box-shadow: 0px -1px 10px #d2d2d2;
 }
+
 .category-list::-webkit-scrollbar {
   display: none;
 }
 
-.mat-chip.mat-standard-chip::after{
-  background: none!important;
+.mat-chip.mat-standard-chip::after {
+  background: none !important;
 }
 
+.search-card {
+  ::ng-deep .mat-form-field-wrapper .mat-form-field-underline {
+    width: 0px;
+    background: #f3f2f7;
+  }
 
-::ng-deep .mat-form-field-wrapper .mat-form-field-underline {
-  width: 0px;
-  background: #f3f2f7;
-}
-::ng-deep .mat-form-field-wrapper{
-  padding-bottom: 0px!important;
-}
-::ng-deep .mat-form-field-wrapper .mat-form-field-flex {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+  }
 
-  background-color: #f3f2f7;
-  border-radius: 40px !important;
+  ::ng-deep .mat-form-field-wrapper .mat-form-field-flex {
 
-  .mat-form-field-infix {
-    margin-left: 1em;
-    border-top: 0px;
+    background-color: #f3f2f7;
+    border-radius: 40px !important;
 
-    .mat-input-element {
-      font-weight: 500;
+    .mat-form-field-infix {
+      margin-left: 1em;
+      border-top: 0px;
+
+      .mat-input-element {
+        font-weight: 500;
+      }
+    }
+  }
+
+  ::ng-deep .mat-form-field-infix {
+    input {
+      padding-bottom: 5px;
     }
   }
 }
 
-::ng-deep .mat-form-field-infix{
-  input{
-    padding-bottom: 5px;
+.category-list {
+  ::ng-deep .mat-chip-list-wrapper {
+
+    flex-wrap: nowrap !important;
+
+    .mat-chip {
+      white-space: nowrap;
+    }
+
+    .mat-standard-chip {
+      margin: 10px !important;
+    }
   }
 }
 
-::ng-deep .mat-chip-list-wrapper{
+//content
+.category-title {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #101010;
+  font-family: Effra, arial, sans-serif;
+}
 
-  flex-wrap: nowrap !important;
-  .mat-chip{
-    white-space: nowrap;
+.food-title {
+  font-size: 18px !important;
+}
+
+.image-favorite {
+  position: relative;
+
+  img {
+    display: block;
   }
-  .mat-standard-chip{
-    margin: 10px!important;
+
+  button {
+    width: 40px;
+    height: 40px;
+    background: white;
+    color: #dcdbe0;
+    position: absolute;
+    top: -10px;
+    //bottom: -10px;
+    right: -20px;
+    box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 10%), 0px 6px 10px 0px rgb(0 0 0 / 10%), 0px 1px 18px 0px rgb(0 0 0 / 10%);
+    //margin-bottom: 15px;
+    margin-right: 10px;
   }
 }
 
+.normal-price {
+  font-size: 18px;
+  font-weight: 500;
+
+  sup {
+    margin-left: -3px;
+    margin-right: 3px;
+  }
+}
+
+.discount-price {
+  color: #FF1E24;
+  font-size: 18px;
+  font-weight: 500;
+
+  sup {
+    margin-left: -3px;
+    margin-right: 3px;
+  }
+}
+
+.old-price {
+  color: #c3c3c3;
+  font-size: 14px;
+  font-weight: 400;
+
+  sup {
+    margin-left: -3px;
+    margin-right: 3px;
+  }
+}
+
+.description {
+  font-size: 13px;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 16px; /* fallback */
+  max-height: 32px; /* fallback */
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  margin-bottom: 3px;
+}
+
+//card component
+
+.food-card {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+
+}

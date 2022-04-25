@@ -40,6 +40,7 @@ import { OpeningHoursComponent } from './user-account/opening-hours/opening-hour
 import { FeedbackComponent } from './user-account/feedback/feedback.component';
 import { AddMoneyInAppComponent } from './user-account/add-money-in-app/add-money-in-app.component';
 import {MatListModule} from "@angular/material/list";
+import { ProductPageComponent } from './menu/product-page/product-page.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import {MatListModule} from "@angular/material/list";
     OpeningHoursComponent,
     FeedbackComponent,
     AddMoneyInAppComponent,
+    ProductPageComponent,
 
   ],
   imports: [

@@ -52,15 +52,3 @@
   cursor: default;
 }
 
-::ng-deep .mat-checkbox-checked .mat-checkbox-background,
-.mat-checkbox-indeterminate .mat-checkbox-background {
-  background-color: $color6 !important;
-}
-
-::ng-deep .mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
-  background-color: $color6 !important;
-}
-
-::ng-deep .mat-checkbox-inner-container {
-  margin-top: 4px !important;
-}

@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} f
 import {MatChipList} from "@angular/material/chips";
 import {interval} from "rxjs";
 import {takeWhile, tap} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-menu',
@@ -23,7 +24,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
   //STOP for scroll declarations
 
-  constructor() {
+  constructor( private router: Router) {
   }
 
   ngOnInit(): void {
@@ -118,5 +119,6 @@ export class MenuComponent implements OnInit, AfterViewInit {
   }
 
   //STOP for scroll functionality
+
 
 }

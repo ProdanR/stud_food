@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 export class AppComponent {
   router: any;
   title = 'stud-food';
-  routeDontShowMobileBar = ['/feedback', '/add-money-in-app', '/account-details/edit-phone-number', '/account-details/edit-display-name']
+  routeDontShowMobileBar = ['/feedback', '/add-money-in-app', '/account-details/edit-phone-number', '/account-details/edit-display-name', '/menu/cvv']
 
   constructor(public userService: UserService, public authService: AuthService, public _router: Router) {
   }

@@ -50,7 +50,7 @@ export class AuthService {
   async signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
-    this.saveUserDataToFirebase(credential.user);
+    this.saveUserDataToFirebaseGoogleCredentials(credential.user);
     this.saveLoggedUserToDataStorage(credential.user?.uid);
   }
 
@@ -120,7 +120,7 @@ export class AuthService {
     return false;
   }
 
-  saveUserDate(user: any) {
+  saveUserDataToFirebaseGoogleCredentials(user: any) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
     const data = {

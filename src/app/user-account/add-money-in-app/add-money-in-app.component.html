@@ -1,6 +1,6 @@
 <div class="d-flex flex-column p-3 justify-content-between h-100">
 
-  <div class="d-flex flex-column">
+  <div class="add-money-container d-flex flex-column">
     <button mat-icon-button routerLink="/account-page-mobile">
       <mat-icon>close</mat-icon>
     </button>
@@ -19,7 +19,7 @@
     </mat-form-field>
 
     <mat-chip-list aria-label="Money selection">
-      <ng-container *ngFor="let amount of moneyAmount let i=index" class="d-flex flex-column">
+      <ng-container *ngFor="let amount of moneyAmount let i=index" class="d-flex flex-column ">
         <mat-chip [style.background-color]="selected == i ? '#353C7D' : '#f3f2f7'"
                   [style.color]="selected == i ? 'white' : 'black'"
                   (click)="changeMoneyInAppToAdd(amount,i)">{{amount}}</mat-chip>

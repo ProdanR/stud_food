@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {SignInComponent} from "./sign-in/sing-in.component";
@@ -14,6 +14,7 @@ import {EditDisplayNameComponent} from "./user-account/account-details/edit-disp
 import {OpeningHoursComponent} from "./user-account/opening-hours/opening-hours.component";
 import {FeedbackComponent} from "./user-account/feedback/feedback.component";
 import {AddMoneyInAppComponent} from "./user-account/add-money-in-app/add-money-in-app.component";
+import {ProductPageComponent} from "./menu/product-page/product-page.component";
 
 
 const routes: Routes = [
@@ -36,28 +37,37 @@ const routes: Routes = [
   },
   {
     path: 'menu',
-    component: MenuComponent,
-    canActivate: [AuthGuard], data: { role: 'user' }
+    children: [
+      {
+        path: '',
+        component: MenuComponent,
+      },
+      {
+        path: 'cvv',
+        component: ProductPageComponent,
+      },
+    ],
+    canActivate: [AuthGuard], data: {role: 'user'}
   },
   {
     path: 'account-page-mobile',
     component: AccountPageMobileComponent,
-    canActivate: [AuthGuard], data: { role: 'user' }
+    canActivate: [AuthGuard], data: {role: 'user'}
   },
   {
-    path:'opening-hours',
+    path: 'opening-hours',
     component: OpeningHoursComponent,
-    canActivate: [AuthGuard], data: { role: 'user' }
+    canActivate: [AuthGuard], data: {role: 'user'}
   },
   {
-    path:'feedback',
+    path: 'feedback',
     component: FeedbackComponent,
-    canActivate: [AuthGuard], data: { role: 'user' }
+    canActivate: [AuthGuard], data: {role: 'user'}
   },
   {
-    path:'add-money-in-app',
+    path: 'add-money-in-app',
     component: AddMoneyInAppComponent,
-    canActivate: [AuthGuard], data: { role: 'user' }
+    canActivate: [AuthGuard], data: {role: 'user'}
   },
   {
     path: 'account-details',
@@ -75,19 +85,20 @@ const routes: Routes = [
         component: EditDisplayNameComponent,
       }
     ],
-    canActivate: [AuthGuard], data: { role: 'user' }
+    canActivate: [AuthGuard], data: {role: 'user'}
   },
   {
     path: 'admin-page',
     component: AdminPageComponent,
-    canActivate: [AuthGuard], data: { role: 'admin' }
+    canActivate: [AuthGuard], data: {role: 'admin'}
   }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, {
+  imports: [RouterModule.forRoot(routes, {
     scrollPositionRestoration: 'top',
   })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

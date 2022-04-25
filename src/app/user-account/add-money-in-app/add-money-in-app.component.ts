@@ -10,7 +10,7 @@ import {UserService} from "../../_shared/services/user.service";
 })
 export class AddMoneyInAppComponent implements OnInit {
 
-  moneyAmount = [10, 20, 30, 40, 50, 75, 100];
+  moneyAmount = [10, 20, 30, 40, 50, 75];
   selected = 0;
 
   userData: any;
@@ -62,9 +62,6 @@ export class AddMoneyInAppComponent implements OnInit {
           break;
         case 75:
           this.selected = 5;
-          break;
-        case 100:
-          this.selected = 6;
           break;
       }
     } else
