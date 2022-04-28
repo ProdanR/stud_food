@@ -129,7 +129,9 @@ export class AuthService {
       displayName: user.displayName,
       photoURL: user.photoURL,
       roles: ['user'],
-      moneyInApp: 0
+      hasDiscount: false,
+      moneyInApp: 0,
+      studentNumber: ''
     }
 
     // @ts-ignore
@@ -149,7 +151,8 @@ export class AuthService {
           email: user.email,
           roles: ["user"],
           hasDiscount: false,
-          moneyInApp: 0
+          moneyInApp: 0,
+          studentNumber: ''
         }
         userRef.set(userData, {
           merge: true

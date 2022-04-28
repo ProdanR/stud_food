@@ -2,19 +2,32 @@
   <button *ngIf="false" mat-icon-button class="example-icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span class="title">StudFood</span>
+  <div>
+<!--    <span class="title">StudFood</span>-->
+    <button mat-raised-button>Home</button>
+    <button mat-raised-button>Users List</button>
+    <button mat-raised-button>Product's List</button>
+    <button mat-raised-button routerLink="add-new-product">Add new product</button>
+    <button mat-raised-button>Add food category</button>
+    <button mat-raised-button>Orders</button>
+  </div>
+
   <span class="example-spacer"></span>
-  <button (click)="signOut()">logOut</button>
+
+  <div >
+
+    <button mat-raised-button (click)="signOut()">logOut</button>
+  </div>
   <!--    <button mat-icon-button class="example-icon favorite-icon" >-->
   <!--      <mat-icon>favorite</mat-icon>-->
   <!--    </button>-->
   <!--    <button mat-icon-button class="example-icon" >-->
   <!--      <mat-icon>share</mat-icon>-->
   <!--    </button>-->
-<!--  <ng-container *ngFor="let item of list" class="d-flex flex-column">-->
-<!--    <div>-->
-<!--      {{item.lastName}}-->
-<!--    </div>-->
-<!--  </ng-container>-->
+  <!--  <ng-container *ngFor="let item of list" class="d-flex flex-column">-->
+  <!--    <div>-->
+  <!--      {{item.lastName}}-->
+  <!--    </div>-->
+  <!--  </ng-container>-->
 </mat-toolbar>
 

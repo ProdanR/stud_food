@@ -6,7 +6,7 @@ import {SignInComponent} from "./sign-in/sing-in.component";
 import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 import {AuthGuard} from "./_shared/guard/auth.guard";
 import {MenuComponent} from "./menu/menu.component";
-import {AdminPageComponent} from "./admin-page/admin-page.component";
+import {AdminPageComponent} from "./admin/admin-page/admin-page.component";
 import {AccountPageMobileComponent} from "./user-account/account-page-mobile/account-page-mobile.component";
 import {AccountDetailsComponent} from "./user-account/account-details/account-details.component";
 import {EditPhoneNumberComponent} from "./user-account/account-details/edit-phone-number/edit-phone-number.component";
@@ -15,6 +15,8 @@ import {OpeningHoursComponent} from "./user-account/opening-hours/opening-hours.
 import {FeedbackComponent} from "./user-account/feedback/feedback.component";
 import {AddMoneyInAppComponent} from "./user-account/add-money-in-app/add-money-in-app.component";
 import {ProductPageComponent} from "./menu/product-page/product-page.component";
+import {AdminUsersEditComponent} from "./admin/admin-users-edit/admin-users-edit.component";
+import {AddProductComponent} from "./admin/add-product/add-product.component";
 
 
 const routes: Routes = [
@@ -87,11 +89,24 @@ const routes: Routes = [
     ],
     canActivate: [AuthGuard], data: {role: 'user'}
   },
+
+
+
   {
     path: 'admin-page',
     component: AdminPageComponent,
     canActivate: [AuthGuard], data: {role: 'admin'}
-  }
+  },
+  {
+    path: 'admin-users-list',
+    component: AdminUsersEditComponent,
+    canActivate: [AuthGuard], data: {role: 'admin'}
+  },
+  {
+    path: 'add-new-product',
+    component: AddProductComponent,
+    canActivate: [AuthGuard], data: {role: 'admin'}
+  },
 ];
 
 @NgModule({

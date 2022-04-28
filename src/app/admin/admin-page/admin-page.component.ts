@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../_shared/services/user.service";
+import {UserService} from "../../_shared/services/user.service";
 
 @Component({
   selector: 'app-admin-page',

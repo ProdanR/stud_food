@@ -24,8 +24,8 @@ import {environment} from "../environments/environment";
 import { MenuComponent } from './menu/menu.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatChipsModule} from "@angular/material/chips";
-import { AdminPageComponent } from './admin-page/admin-page.component';
-import { AdminUsersEditComponent } from './admin-users-edit/admin-users-edit.component';
+import { AdminPageComponent } from './admin/admin-page/admin-page.component';
+import { AdminUsersEditComponent } from './admin/admin-users-edit/admin-users-edit.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
@@ -44,6 +44,8 @@ import { ProductPageComponent } from './menu/product-page/product-page.component
 import {NgxPayPalModule} from "ngx-paypal";
 import { DialogPayPalButtonsComponent } from './user-account/add-money-in-app/dialog-pay-pal-buttons/dialog-pay-pal-buttons.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { AddProductComponent } from './admin/add-product/add-product.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     AddMoneyInAppComponent,
     ProductPageComponent,
     DialogPayPalButtonsComponent,
+    AddProductComponent,
 
   ],
   imports: [
@@ -92,7 +95,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatSlideToggleModule,
     MatTabsModule,
     MatListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

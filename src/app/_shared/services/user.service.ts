@@ -43,7 +43,7 @@ export class UserService {
   async addMoneyInApp(moneyToAdd) {
     const currentUser = this.getCurrentUserRef();
     let moneyInApp;
-    await currentUser.get().subscribe((data: any) =>{
+    await currentUser.get().subscribe((data: any) => {
       moneyInApp = data.data().moneyInApp
       console.log(moneyInApp);
       moneyInApp += moneyToAdd;
@@ -53,13 +53,23 @@ export class UserService {
     });
   }
 
-  addTransactionToUser(transaction,moneyInLei){
+  addTransactionToUser(transaction, moneyInLei) {
     const currentUser = this.getCurrentUserRef();
     currentUser.collection('transactions').add({
       'create_time': transaction.create_time,
       'status': transaction.status,
       'amount': moneyInLei
     }).then(r => console.log(r));
+  }
+
+  disableDiscountFromAllUsers() {
+    this.db.collection('users').ref.get().then(function(querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        doc.ref.update({
+          hasDiscount: false
+        });
+      });
+    });
   }
 }
 

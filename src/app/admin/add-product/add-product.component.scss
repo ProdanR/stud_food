@@ -1,0 +1,56 @@
+@import "./src/variables";
+
+.main-container{
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.example-card {
+  width: 500px;
+  max-width: 500px;
+  border-radius: 5%;
+  border: 1px solid #ccc;
+}
+
+.forget-password{
+  font-weight: 500;
+  color: black;
+}
+
+.login-button{
+  background: $color6;
+  color: white;
+  margin-top: 25px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.span-info{
+  margin-top: 20px;
+}
+
+.header{
+  font-weight: bold; color:#444444
+}
+
+h3 {
+  width: 100%;
+  text-align: center;
+  line-height: 0.1em;
+  margin: 20px 0 20px;
+  height:2px;
+  border-width:0;
+  color:gray;
+  background-color:gray
+}
+
+h3 span {
+  background:#fff;
+  padding:0 10px;
+}
+
+
+

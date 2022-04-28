@@ -1,5 +1,5 @@
 import {AfterContentInit, AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {UserService} from "../_shared/services/user.service";
+import {UserService} from "../../_shared/services/user.service";
 import {map} from "rxjs/operators";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
@@ -16,7 +16,7 @@ export class AdminUsersEditComponent implements OnInit {
 
   allUsers: any[] = [];
   dataSource = new MatTableDataSource(this.allUsers);
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'roles', 'moneyInApp', 'hasDiscount','edit','delete'];
+  displayedColumns: string[] = ['fullName', 'email','studentNumber', 'moneyInApp', 'hasDiscount','edit'];
 
   constructor(private userService: UserService) {
   }
@@ -34,7 +34,7 @@ export class AdminUsersEditComponent implements OnInit {
       )
     ).subscribe(data => {
       this.allUsers = data;
-      this.allUsers=[...data,...data];
+      this.allUsers=[...data];
       this.dataSource.data = this.allUsers;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
@@ -46,19 +46,13 @@ export class AdminUsersEditComponent implements OnInit {
     this.userService.updateUser(user);
   }
 
-  deleteUser(user) {
 
+  disableDiscountFromAllUsers() {
+    this.userService.disableDiscountFromAllUsers();
   }
 
-  computeRoles(user, role: string, haveRole: boolean) {
-    console.log(user);
-    if(!haveRole){
-      user.roles.push(role);
-    }
-    else{
-      const index= user.roles.indexOf(role);
-      user.roles.splice(index,1);
-    }
-    // console.log(user);
+  doFilter(target: any) {
+    console.log(target.value);
+    this.dataSource.filter = target.value.trim().toLocaleLowerCase();
   }
 }

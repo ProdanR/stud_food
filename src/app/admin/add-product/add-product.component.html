@@ -1,0 +1,74 @@
+<div class="main-container">
+  <mat-card class="example-card p-5">
+
+    <mat-card-content>
+      <form #addNewProductForm="ngForm" class="d-flex flex-column">
+        <!-- Title Field -->
+        <mat-form-field appearance="legacy">
+          <mat-label>Product Title</mat-label>
+          <input [(ngModel)]="product.title" matInput name="title" type="text" required>
+        </mat-form-field>
+
+        <!-- Price Field -->
+        <div class="d-flex flex-wrap justify-content-between">
+          <mat-form-field appearance="legacy">
+            <mat-label>Normal Price</mat-label>
+            <input [(ngModel)]="product.normalPrice" matInput name="normalPrice" type="number"
+                   required>
+          </mat-form-field>
+          <mat-form-field appearance="legacy">
+            <mat-label>Discount Price</mat-label>
+            <input  [(ngModel)]="product.discountPrice" matInput name="discountPrice" type="number"
+                   required>
+          </mat-form-field>
+        </div>
+
+        <!-- Description Field -->
+        <mat-form-field appearance="legacy">
+          <mat-label>Description</mat-label>
+          <textarea  [(ngModel)]="product.description" matInput name="description"
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+
+        <!-- Category Field Select-->
+        <mat-form-field appearance="legacy">
+          <mat-label>Food Category</mat-label>
+          <mat-select required  [(ngModel)]="product.category" name="category">
+                        <mat-option *ngFor="let category of allCategories" [value]="category"  >
+                          {{category.name}}
+                        </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!--Weight Field -->
+        <mat-form-field appearance="legacy">
+          <mat-label>Weight</mat-label>
+          <input [(ngModel)]="product.weight" matInput name="weight" type="text">
+        </mat-form-field>
+
+        <!--Add Category Field -->
+        <div class="d-flex justify-content-between align-items-center">
+          <mat-form-field appearance="legacy">
+            <mat-label>New Category</mat-label>
+            <input [(ngModel)]="newCategory" matInput name="newCategory" type="text">
+          </mat-form-field>
+          <button mat-raised-button (click)="addNewCategory()"> Add new category</button>
+        </div>
+
+        <!--Photo Field -->
+        <mat-label>Choose food photo (Recomended dimension: 60x60)</mat-label>
+          <input label="Choose food photo" type="file" (change)="onFileChosen($event)">
+
+        <button mat-flat-button class="login-button" (click)="addNewProductForm.valid ? addNewProduct():null">Add new product</button>
+
+
+      </form>
+
+
+    </mat-card-content>
+
+  </mat-card>
+</div>
