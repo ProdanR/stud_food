@@ -2,6 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../_shared/services/auth.service";
 import {UserService} from "../../_shared/services/user.service";
+import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+import {DialogPayPalButtonsComponent} from "./dialog-pay-pal-buttons/dialog-pay-pal-buttons.component";
+import {MatDialog} from "@angular/material/dialog";
+
+declare function stripeCheckout(): any;
 
 @Component({
   selector: 'app-add-money-in-app',
@@ -16,7 +21,7 @@ export class AddMoneyInAppComponent implements OnInit {
   userData: any;
   moneyInAppToAdd: any = 10;
 
-  constructor(public router: Router, private authService: AuthService, private userService: UserService) {
+  constructor(public router: Router, private authService: AuthService, private userService: UserService, public dialog: MatDialog) {
 
   }
 
@@ -27,8 +32,15 @@ export class AddMoneyInAppComponent implements OnInit {
   }
 
 
-  goToPayment() {
+  goToPaymentDialog() {
+    const dialogRef = this.dialog.open(DialogPayPalButtonsComponent, {
+      width: '250px',
+      data: {value: this.moneyInAppToAdd},
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   changeMoneyInAppToAdd(amount: any, sel: any) {
@@ -72,4 +84,6 @@ export class AddMoneyInAppComponent implements OnInit {
   isFieldValid() {
     return this.moneyInAppToAdd>=10;
   }
+
+
 }

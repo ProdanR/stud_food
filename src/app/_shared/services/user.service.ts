@@ -13,26 +13,53 @@ export class UserService {
     this.usersRef = db.collection('/users');
   }
 
-   getAllUsers() {
+  getAllUsers() {
     return this.usersRef;
   }
 
-  getCurrentUser(){
+  getCurrentUserRef() {
     const userDetails = JSON.parse(<any>localStorage.getItem('loggedUser'));
     console.log(userDetails);
-    const userRef= this.db.collection('/users').doc(userDetails.uid);
-    return userRef;
+    const userRef = this.db.collection('/users').doc(userDetails.uid);
+    return userRef
   }
 
-  updateUser(user){
+  getCurrentUser() {
+    const currentUser = this.getCurrentUserRef();
+    return currentUser;
+  }
+
+  updateUser(user) {
     const userRef = this.usersRef.doc(user.uid);
     return userRef.set(user, {
       merge: true
     })
   }
 
-  deleteUser(user){
+  deleteUser(user) {
   }
 
+
+  async addMoneyInApp(moneyToAdd) {
+    const currentUser = this.getCurrentUserRef();
+    let moneyInApp;
+    await currentUser.get().subscribe((data: any) =>{
+      moneyInApp = data.data().moneyInApp
+      console.log(moneyInApp);
+      moneyInApp += moneyToAdd;
+      currentUser.update({
+        moneyInApp: moneyInApp
+      });
+    });
+  }
+
+  addTransactionToUser(transaction,moneyInLei){
+    const currentUser = this.getCurrentUserRef();
+    currentUser.collection('transactions').add({
+      'create_time': transaction.create_time,
+      'status': transaction.status,
+      'amount': moneyInLei
+    }).then(r => console.log(r));
+  }
 }
 

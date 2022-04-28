@@ -41,6 +41,9 @@ import { FeedbackComponent } from './user-account/feedback/feedback.component';
 import { AddMoneyInAppComponent } from './user-account/add-money-in-app/add-money-in-app.component';
 import {MatListModule} from "@angular/material/list";
 import { ProductPageComponent } from './menu/product-page/product-page.component';
+import {NgxPayPalModule} from "ngx-paypal";
+import { DialogPayPalButtonsComponent } from './user-account/add-money-in-app/dialog-pay-pal-buttons/dialog-pay-pal-buttons.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -61,9 +64,11 @@ import { ProductPageComponent } from './menu/product-page/product-page.component
     FeedbackComponent,
     AddMoneyInAppComponent,
     ProductPageComponent,
+    DialogPayPalButtonsComponent,
 
   ],
   imports: [
+    NgxPayPalModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -86,7 +91,8 @@ import { ProductPageComponent } from './menu/product-page/product-page.component
     MatPaginatorModule,
     MatSlideToggleModule,
     MatTabsModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
