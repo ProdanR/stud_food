@@ -18,6 +18,7 @@ import {ProductPageComponent} from "./menu/product-page/product-page.component";
 import {AdminUsersEditComponent} from "./admin/admin-users-edit/admin-users-edit.component";
 import {AddProductComponent} from "./admin/add-product/add-product.component";
 import {ProductsListComponent} from "./admin/products-list/products-list.component";
+import {OrderCategoriesComponent} from "./admin/order-categories/order-categories.component";
 
 
 const routes: Routes = [
@@ -113,7 +114,11 @@ const routes: Routes = [
     component: AddProductComponent,
     canActivate: [AuthGuard], data: {role: 'admin'}
   },
-
+  {
+    path: 'categories-order',
+    component: OrderCategoriesComponent,
+    canActivate: [AuthGuard], data: {role: 'admin'}
+  },
 ];
 
 @NgModule({

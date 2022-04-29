@@ -1,0 +1,9 @@
+<div class="main-container">
+  <mat-card class="example-card p-5">
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let category of allCategories" cdkDrag>{{category.name}}</div>
+    </div>
+    <button mat-flat-button class="submit-button" (click)="setNewCategoriesOrder()">Set new categories order</button>
+  </mat-card>
+</div>
+

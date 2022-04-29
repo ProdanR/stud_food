@@ -31,44 +31,41 @@
 
 
       <div class="d-flex flex-wrap">
-        <ng-container *ngFor="let product of products">
+        <ng-container *ngFor="let product of productsByCategory[category]">
 
-          <mat-card class="food-card" >
+          <mat-card class="food-card">
 
-            <!--            <mat-card-title-group >-->
-            <!--       -->
-            <!--            </mat-card-title-group>-->
-
-            <mat-card-content class="d-flex justify-content-between" >
+            <mat-card-content class="d-flex justify-content-between">
               <div class="d-flex justify-content-between flex-column" routerLink="./cvv">
 
                 <div>
-                  <mat-card-title class="food-title">Shiba Inu</mat-card-title>
+                  <mat-card-title class="food-title">{{product.title}}</mat-card-title>
                   <mat-card-subtitle style="margin-bottom: 10px">
-                    <span class="description">Asta e cea mai tare si incurabila descriere pe care o poti citi vreodata dfsf asdf asdfasdfsdfasdf asdf asdfasdf a</span>
-                    <p>400g</p>
+                    <span class="description">{{product.description}}</span>
+                    <p>{{product.weight}}g</p>
                   </mat-card-subtitle>
                 </div>
 
-                <!--                <div style="margin-bottom: -4px">-->
-                <!--                  <span class="normal-price">20-->
-                <!--                  <sup>40</sup>Lei</span>-->
-                <!--                </div>-->
+                <div *ngIf="!currentUser.hasDiscount" style="margin-bottom: -4px">
+                  <span class="normal-price">{{getDecimalPart(product.normalPrice)}}
+                    <sup>{{getFractionalPart(product.normalPrice)}}</sup>Lei</span>
+                </div>
 
-                <div>
+                <div *ngIf="currentUser.hasDiscount">
                   <span class="discount-price">
-                    20 <sup>40</sup>Lei
+                    {{getDecimalPart(product.discountPrice)}} <sup>{{getFractionalPart(product.discountPrice)}}</sup>Lei
                     <span class="old-price">
                       <del>
-                        20 <sup>40</sup>Lei
+                        {{getDecimalPart(product.normalPrice)}} <sup>{{getFractionalPart(product.normalPrice)}}</sup>Lei
                       </del>
                     </span>
                   </span>
                 </div>
+
               </div>
 
               <div class="image-favorite">
-                <img mat-card-md-image src="https://tazzcdn.akamaized.net/uploads/menu/4357/orig/eightees-pub-ianuarie-2021-1313.jpg">
+                <img mat-card-md-image src="{{product.photoUrl}}">
                 <button mat-mini-fab>
                   <mat-icon>favorite</mat-icon>
                 </button>

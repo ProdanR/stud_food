@@ -47,6 +47,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import {MatSelectModule} from "@angular/material/select";
 import { ProductsListComponent } from './admin/products-list/products-list.component';
+import { OrderCategoriesComponent } from './admin/order-categories/order-categories.component';
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -70,37 +72,39 @@ import { ProductsListComponent } from './admin/products-list/products-list.compo
     DialogPayPalButtonsComponent,
     AddProductComponent,
     ProductsListComponent,
+    OrderCategoriesComponent,
 
   ],
-    imports: [
-        NgxPayPalModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatBadgeModule,
-        MatButtonModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatCheckboxModule,
-        FormsModule,
-        MatSnackBarModule,
-        MatChipsModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatSlideToggleModule,
-        MatTabsModule,
-        MatListModule,
-        MatDialogModule,
-        MatSelectModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    NgxPayPalModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatBadgeModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatSnackBarModule,
+    MatChipsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatSlideToggleModule,
+    MatTabsModule,
+    MatListModule,
+    MatDialogModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    DragDropModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
