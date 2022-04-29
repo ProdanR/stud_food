@@ -15,7 +15,21 @@ export class ProductService {
     this.productsRef = db.collection('/products');
   }
 
+  getAllProducts(){
+    return this.productsRef;
+  }
 
+  editProduct(product) {
+    const productRef = this.productsRef.doc(product.id);
+    productRef.set(product, {
+      merge: true
+    })
+  }
+
+  deleteProduct(productId){
+    const productRef = this.productsRef.doc(productId);
+    productRef.delete();
+  }
 
   addNewProduct(product:any, file:any) {
     const filePath = `products/${file.name}`;
@@ -39,6 +53,7 @@ export class ProductService {
       category: product.category.name,
       category_id: product.category.id,
       weight: product.weight,
+      available: false,
       photoUrl: downloadURL
     })
   }
@@ -52,5 +67,16 @@ export class ProductService {
   }
   getAllCategories() {
     return this.categoriesRef;
+  }
+
+
+  makeAllProductsUnavailable() {
+    this.productsRef.ref.get().then(function(querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        doc.ref.update({
+          available: false
+        });
+      });
+    });
   }
 }

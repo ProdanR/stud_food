@@ -17,6 +17,7 @@ import {AddMoneyInAppComponent} from "./user-account/add-money-in-app/add-money-
 import {ProductPageComponent} from "./menu/product-page/product-page.component";
 import {AdminUsersEditComponent} from "./admin/admin-users-edit/admin-users-edit.component";
 import {AddProductComponent} from "./admin/add-product/add-product.component";
+import {ProductsListComponent} from "./admin/products-list/products-list.component";
 
 
 const routes: Routes = [
@@ -103,10 +104,16 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: {role: 'admin'}
   },
   {
+    path: 'products-list',
+    component: ProductsListComponent,
+    canActivate: [AuthGuard], data: {role: 'admin'}
+  },
+  {
     path: 'add-new-product',
     component: AddProductComponent,
     canActivate: [AuthGuard], data: {role: 'admin'}
   },
+
 ];
 
 @NgModule({

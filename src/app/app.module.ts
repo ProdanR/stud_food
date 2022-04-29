@@ -16,7 +16,7 @@ import {MatInputModule} from "@angular/material/input";
 import { SignUpComponent } from './sign-up/sign-up.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireModule} from "@angular/fire/compat";
@@ -46,6 +46,7 @@ import { DialogPayPalButtonsComponent } from './user-account/add-money-in-app/di
 import {MatDialogModule} from "@angular/material/dialog";
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import {MatSelectModule} from "@angular/material/select";
+import { ProductsListComponent } from './admin/products-list/products-list.component';
 
 @NgModule({
   declarations: [
@@ -68,36 +69,38 @@ import {MatSelectModule} from "@angular/material/select";
     ProductPageComponent,
     DialogPayPalButtonsComponent,
     AddProductComponent,
+    ProductsListComponent,
 
   ],
-  imports: [
-    NgxPayPalModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatBadgeModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    FormsModule,
-    MatSnackBarModule,
-    MatChipsModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatSlideToggleModule,
-    MatTabsModule,
-    MatListModule,
-    MatDialogModule,
-    MatSelectModule
-  ],
+    imports: [
+        NgxPayPalModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatBadgeModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCheckboxModule,
+        FormsModule,
+        MatSnackBarModule,
+        MatChipsModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatSlideToggleModule,
+        MatTabsModule,
+        MatListModule,
+        MatDialogModule,
+        MatSelectModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
