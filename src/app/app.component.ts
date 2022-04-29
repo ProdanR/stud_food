@@ -11,12 +11,16 @@ import {Router} from "@angular/router";
 export class AppComponent {
   router: any;
   title = 'stud-food';
-  routeDontShowMobileBar = ['/feedback', '/add-money-in-app', '/account-details/edit-phone-number', '/account-details/edit-display-name', '/menu/cvv']
+  routeDontShowMobileBar = ['/feedback', '/add-money-in-app', '/account-details/edit-phone-number', '/account-details/edit-display-name', '/menu-item']
 
   constructor(public userService: UserService, public authService: AuthService, public _router: Router) {
   }
 
   isRouteToDontShow() {
+    if (this._router.url.startsWith('/menu-item/')){
+      return false;
+    }
+
     if (this.routeDontShowMobileBar.includes(this._router.url)) {
       return false;
     }

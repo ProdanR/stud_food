@@ -49,6 +49,8 @@ import {MatSelectModule} from "@angular/material/select";
 import { ProductsListComponent } from './admin/products-list/products-list.component';
 import { OrderCategoriesComponent } from './admin/order-categories/order-categories.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import { GetDecimalPartPipe } from './_shared/pipes/get-decimal-part.pipe';
+import { GetFractionalPartPipe } from './_shared/pipes/get-fractional-part.pipe';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     AddProductComponent,
     ProductsListComponent,
     OrderCategoriesComponent,
+    GetDecimalPartPipe,
+    GetFractionalPartPipe,
 
   ],
   imports: [

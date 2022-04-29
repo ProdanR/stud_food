@@ -39,20 +39,19 @@ const routes: Routes = [
     path: 'reset-password',
     component: ResetPasswordComponent
   },
+
   {
     path: 'menu',
-    children: [
-      {
-        path: '',
-        component: MenuComponent,
-      },
-      {
-        path: 'cvv',
-        component: ProductPageComponent,
-      },
-    ],
+    component: MenuComponent,
     canActivate: [AuthGuard], data: {role: 'user'}
   },
+  {
+    path: 'menu-item/:id',
+    component: ProductPageComponent,
+    canActivate: [AuthGuard], data: {role: 'user'}
+  },
+
+
   {
     path: 'account-page-mobile',
     component: AccountPageMobileComponent,
@@ -91,7 +90,6 @@ const routes: Routes = [
     ],
     canActivate: [AuthGuard], data: {role: 'user'}
   },
-
 
 
   {

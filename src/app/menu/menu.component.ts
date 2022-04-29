@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
   allProducts: any[] = [];
   productsByCategory: any[] = new Array();
 
-  currentUser:any;
+  currentUser: any;
 
   //START for scroll declarations
   categoriesScroolBreakPoints = [];
@@ -75,14 +75,19 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
 
   private splitProductsByCategory() {
+    let itemsProcessed = 0;
     this.categories.forEach(category => {
+      itemsProcessed++;
       this.productsByCategory[category] = [];
+      if (itemsProcessed === this.categories.length) {
+        this.allProducts.forEach(product => {
+          this.productsByCategory[product.category].push(product);
+        });
+        this.getcategoriesScroolBreakPoints();
+        this.getOffsetWidthChipList();
+      }
     });
-    this.allProducts.forEach(product => {
-      this.productsByCategory[product.category].push(product);
-    });
-    this.getcategoriesScroolBreakPoints();
-    this.getOffsetWidthChipList();
+
   }
 
   //START for scroll functionality
@@ -173,17 +178,6 @@ export class MenuComponent implements OnInit, AfterViewInit {
   }
 
   //STOP for scroll functionality
-
-
-  getDecimalPart(price: any) {
-    return Math.trunc(price);
-  }
-
-  getFractionalPart(price: any) {
-    let int_part = Math.trunc(price);
-    let float_part = (price - int_part).toFixed(2).substring(2);
-    return float_part;
-  }
 
 
 }

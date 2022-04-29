@@ -38,6 +38,11 @@ export class ProductService {
     productRef.delete();
   }
 
+  getProductById(productId){
+    const productRef = this.productsRef.doc(productId);
+    return productRef;
+  }
+
   addNewProduct(product: any, file: any) {
     const filePath = `products/${file.name}`;
     const storageRef = this.storage.ref(filePath);
@@ -66,7 +71,15 @@ export class ProductService {
     this._snackBar.open("Product added successfully", "", this.configSnackBar);
   }
 
-
+  makeAllProductsUnavailable() {
+    this.productsRef.ref.get().then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        doc.ref.update({
+          available: false
+        });
+      });
+    })
+  }
   //category
   addNewCategory(category: any) {
     this.categoriesRef.add({
@@ -80,15 +93,7 @@ export class ProductService {
   }
 
 
-  makeAllProductsUnavailable() {
-    this.productsRef.ref.get().then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        doc.ref.update({
-          available: false
-        });
-      });
-    })
-  }
+
 
   setNewCategoriesOrder(allCategories: any[]) {
     allCategories.forEach(category => {
