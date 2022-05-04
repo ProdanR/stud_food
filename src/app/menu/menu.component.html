@@ -1,3 +1,4 @@
+
 <div>
   <div style="position: sticky; z-index: 999; top: 0px">
     <mat-card class="search-card">
@@ -10,7 +11,7 @@
     </mat-card>
 
 
-    <mat-chip-list #chipListCategory class="d-flex flex-row flex-nowrap category-list" id="chipListCateg">
+    <mat-chip-list *ngIf="productsReady" #chipListCategory class="d-flex flex-row flex-nowrap category-list" id="chipListCateg">
       <ng-container *ngFor="let category of categories">
         <mat-chip style="background: white" (click)="scrollTo(category)"
                   [ngStyle]="{'background': selectedCategory===category ? '#353C7D' : 'white', 'color':selectedCategory===category ? 'white':'black' }">
@@ -18,10 +19,61 @@
         </mat-chip>
       </ng-container>
     </mat-chip-list>
+
+    <mat-chip-list  *ngIf="!productsReady" class="d-flex flex-row flex-nowrap category-list">
+      <mat-chip class="loading-chip" style="width: 80px"> </mat-chip>
+      <mat-chip class="loading-chip" style="width: 90px"> </mat-chip>
+      <mat-chip class="loading-chip" style="width: 70px"> </mat-chip>
+      <mat-chip class="loading-chip" style="width: 100px"> </mat-chip>
+    </mat-chip-list>
   </div>
 
 
-  <div style="width: 100%; background-color: #f3f2f7" class="container">
+
+  <div *ngIf="!productsReady" style="width: 100%; background-color: #f3f2f7" class="container p-3">
+    <mat-card class="food-card">
+      <mat-card-content class="d-flex justify-content-between align-items-center">
+          <div>
+            <mat-card-title class="card__title loading"></mat-card-title>
+            <mat-card-subtitle  class="card__description loading m-0">
+            </mat-card-subtitle>
+          </div>
+        <div class="card__image loading" ></div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="food-card">
+      <mat-card-content class="d-flex justify-content-between align-items-center">
+        <div>
+          <mat-card-title class="card__title loading"></mat-card-title>
+          <mat-card-subtitle  class="card__description loading m-0">
+          </mat-card-subtitle>
+        </div>
+        <div class="card__image loading" ></div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="food-card">
+      <mat-card-content class="d-flex justify-content-between align-items-center">
+        <div>
+          <mat-card-title class="card__title loading"></mat-card-title>
+          <mat-card-subtitle  class="card__description loading m-0">
+          </mat-card-subtitle>
+        </div>
+        <div class="card__image loading" ></div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="food-card">
+      <mat-card-content class="d-flex justify-content-between align-items-center">
+        <div>
+          <mat-card-title class="card__title loading"></mat-card-title>
+          <mat-card-subtitle  class="card__description loading m-0">
+          </mat-card-subtitle>
+        </div>
+        <div class="card__image loading" ></div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="productsReady" style="width: 100%; background-color: #f3f2f7" class="container">
 
 
     <ng-container *ngFor="let category of categories" class="d-flex justify-content-start flex-row">

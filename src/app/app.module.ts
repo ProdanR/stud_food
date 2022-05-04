@@ -51,6 +51,7 @@ import { OrderCategoriesComponent } from './admin/order-categories/order-categor
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { GetDecimalPartPipe } from './_shared/pipes/get-decimal-part.pipe';
 import { GetFractionalPartPipe } from './_shared/pipes/get-fractional-part.pipe';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,13 @@ import { GetFractionalPartPipe } from './_shared/pipes/get-fractional-part.pipe'
     MatDialogModule,
     MatSelectModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

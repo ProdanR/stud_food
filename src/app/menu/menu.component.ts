@@ -1,10 +1,12 @@
-import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, Inject, OnInit, ViewChild} from '@angular/core';
 import {MatChipList} from "@angular/material/chips";
 import {interval} from "rxjs";
 import {map, takeWhile, tap} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {ProductService} from "../_shared/services/product.service";
 import {UserService} from "../_shared/services/user.service";
+import {AuthService} from "../_shared/services/auth.service";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-menu',
@@ -16,6 +18,9 @@ export class MenuComponent implements OnInit, AfterViewInit {
   allProducts: any[] = [];
   productsByCategory: any[] = new Array();
 
+  productsReady=false;
+  showLoading=[1,2,3,4];
+
   currentUser: any;
 
   //START for scroll declarations
@@ -26,8 +31,9 @@ export class MenuComponent implements OnInit, AfterViewInit {
   offsetWidthChipList = [];
   chipListElement: any;
   firstScroll = true;
-
   //STOP for scroll declarations
+
+
 
   constructor(private router: Router, private productService: ProductService, private userService: UserService) {
     this.getCurrentUser();
@@ -83,6 +89,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
         this.allProducts.forEach(product => {
           this.productsByCategory[product.category].push(product);
         });
+        this.productsReady=true;
         this.getcategoriesScroolBreakPoints();
         this.getOffsetWidthChipList();
       }
@@ -178,6 +185,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
   }
 
   //STOP for scroll functionality
+
 
 
 }

@@ -57,8 +57,9 @@ export class AuthService {
   async signInWithFacebook() {
     const provider = new firebase.auth.FacebookAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
-    this.saveUserDataToFirebase(credential.user);
-    this.saveLoggedUserToDataStorage(credential.user?.uid);
+    await this.saveUserDataToFirebase(credential.user);
+
+
   }
 
   signUp(user: User) {
@@ -101,6 +102,8 @@ export class AuthService {
     console.log(uid);
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${uid}`);
     userRef.get().subscribe(doc => {
+      console.log(doc);
+      console.log(doc.data());
       localStorage.setItem('loggedUser', JSON.stringify(doc.data()));
       JSON.parse(<string>localStorage.getItem('loggedUser'));
       console.log(JSON.parse(<any>localStorage.getItem('loggedUser')));
@@ -158,6 +161,7 @@ export class AuthService {
           merge: true
         })
       }
+      this.saveLoggedUserToDataStorage(user?.uid);
     })
 
 
