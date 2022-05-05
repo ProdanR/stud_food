@@ -22,10 +22,20 @@ export class ProductService {
     this.productsRef = db.collection('/products');
   }
 
+  //get products
   getAllProducts() {
     return this.productsRef;
   }
 
+  getProductById(productId) {
+    const productRef = this.productsRef.doc(productId);
+    return productRef;
+  }
+
+  //get products
+
+
+  //edit products
   editProduct(product) {
     const productRef = this.productsRef.doc(product.id);
     productRef.set(product, {
@@ -33,30 +43,39 @@ export class ProductService {
     })
   }
 
+  //edit products
+
+
+  //delete product
   deleteProduct(productId) {
     const productRef = this.productsRef.doc(productId);
     productRef.delete();
   }
 
-  getProductById(productId){
-    const productRef = this.productsRef.doc(productId);
-    return productRef;
-  }
+  //delete product
 
+
+  //start add new product
   addNewProduct(product: any, file: any) {
     const filePath = `products/${file.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, file);
-    uploadTask.snapshotChanges().pipe(
-      finalize(() => {
+
+    uploadTask.then(
+      res => {
+        console.log(res);
         storageRef.getDownloadURL().subscribe(downloadURL => {
+          console.log(downloadURL);
           this.addProductToDatabase(product, downloadURL);
         });
-      })
+      }, err => {
+        console.log(err);
+      }
     );
   }
 
   private addProductToDatabase(product: any, downloadURL: any) {
+    console.log(product);
     this.productsRef.add({
       title: product.title,
       description: product.description,
@@ -71,6 +90,9 @@ export class ProductService {
     this._snackBar.open("Product added successfully", "", this.configSnackBar);
   }
 
+  //end add new product
+
+
   makeAllProductsUnavailable() {
     this.productsRef.ref.get().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
@@ -80,7 +102,18 @@ export class ProductService {
       });
     })
   }
-  //category
+
+  addOrRemoveFromFavourite(user, productId) {
+
+    const userRef = this.db.collection('/users').doc(user.id);
+
+    userRef.update({
+      favoriteProducts: user.favoriteProducts
+    });
+  }
+
+
+  //start category
   addNewCategory(category: any) {
     this.categoriesRef.add({
       name: category,
@@ -92,9 +125,6 @@ export class ProductService {
     return this.categoriesRef;
   }
 
-
-
-
   setNewCategoriesOrder(allCategories: any[]) {
     allCategories.forEach(category => {
       const categoryRef = this.categoriesRef.doc(category.id);
@@ -102,4 +132,6 @@ export class ProductService {
     })
     this._snackBar.open("Categories order changed successfully", "", this.configSnackBar);
   }
+
+  //end category
 }

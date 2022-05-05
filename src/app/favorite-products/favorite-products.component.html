@@ -1,0 +1,15 @@
+<div [ngStyle]="{'height':favoriteProducts.length>=4?'auto':'100%'}">
+  <div style="position: sticky; z-index: 999; top: 0px">
+    <mat-card class="search-card d-flex justify-content-center align-items-center">
+      <h1 class="header-title">Your favorite food</h1>
+    </mat-card>
+  </div>
+
+  <div style="width: 100%; background-color: #f3f2f7; height: 100%" class="container ">
+    <div class="d-flex flex-column flex-wrap pt-2">
+      <ng-container *ngFor="let product of favoriteProducts">
+        <app-product-card [product]="product" [currentUser]="currentUser"></app-product-card>
+      </ng-container>
+    </div>
+  </div>
+</div>

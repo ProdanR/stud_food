@@ -13,7 +13,7 @@ import {DOCUMENT} from "@angular/common";
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit, AfterViewInit {
+export class MenuComponent implements OnInit {
   categories = [];
   allProducts: any[] = [];
   productsByCategory: any[] = new Array();
@@ -82,16 +82,21 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
   private splitProductsByCategory() {
     let itemsProcessed = 0;
+
     this.categories.forEach(category => {
       itemsProcessed++;
       this.productsByCategory[category] = [];
+
       if (itemsProcessed === this.categories.length) {
         this.allProducts.forEach(product => {
           this.productsByCategory[product.category].push(product);
         });
         this.productsReady=true;
-        this.getcategoriesScroolBreakPoints();
-        this.getOffsetWidthChipList();
+        setTimeout(() => {
+          this.getcategoriesScroolBreakPoints();
+          this.getOffsetWidthChipList();
+        }, 1000);
+
       }
     });
 
@@ -123,6 +128,8 @@ export class MenuComponent implements OnInit, AfterViewInit {
   }
 
   getOffsetWidthChipList() {
+    console.log(this.categoriesScroolBreakPoints);
+    this.chipListElement = document.getElementById(this.chipListCategory._uid);
     // @ts-ignore
     let chips = this.chipListCategory.chips._results;
     this.offsetWidthChipList = chips.map(chip => {
@@ -130,13 +137,6 @@ export class MenuComponent implements OnInit, AfterViewInit {
       return chip._elementRef.nativeElement.offsetLeft;
     })
     console.log(this.offsetWidthChipList);
-  }
-
-  ngAfterViewInit(): void {
-    this.getcategoriesScroolBreakPoints();
-    this.getOffsetWidthChipList();
-    console.log(this.categoriesScroolBreakPoints);
-    this.chipListElement = document.getElementById(this.chipListCategory._uid);
   }
 
   @HostListener('window:scroll', ['$event']) onScrollEvent($event) {

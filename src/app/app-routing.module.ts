@@ -19,6 +19,7 @@ import {AdminUsersEditComponent} from "./admin/admin-users-edit/admin-users-edit
 import {AddProductComponent} from "./admin/add-product/add-product.component";
 import {ProductsListComponent} from "./admin/products-list/products-list.component";
 import {OrderCategoriesComponent} from "./admin/order-categories/order-categories.component";
+import {FavoriteProductsComponent} from "./favorite-products/favorite-products.component";
 
 
 const routes: Routes = [
@@ -50,7 +51,11 @@ const routes: Routes = [
     component: ProductPageComponent,
     canActivate: [AuthGuard], data: {role: 'user'}
   },
-
+  {
+    path: 'favorite-products',
+    component: FavoriteProductsComponent,
+    canActivate: [AuthGuard], data: {role: 'user'}
+  },
 
   {
     path: 'account-page-mobile',

@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "deploy:hosting": "firebase deploy --only hosting",
     "test": "ng test"
   },
   "private": true,

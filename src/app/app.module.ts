@@ -52,6 +52,8 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import { GetDecimalPartPipe } from './_shared/pipes/get-decimal-part.pipe';
 import { GetFractionalPartPipe } from './_shared/pipes/get-fractional-part.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ProductCardComponent } from './menu/product-card/product-card.component';
+import { FavoriteProductsComponent } from './favorite-products/favorite-products.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     OrderCategoriesComponent,
     GetDecimalPartPipe,
     GetFractionalPartPipe,
+    ProductCardComponent,
+    FavoriteProductsComponent,
 
   ],
   imports: [

@@ -1,4 +1,3 @@
-
 <div>
   <div style="position: sticky; z-index: 999; top: 0px">
     <mat-card class="search-card">
@@ -11,7 +10,8 @@
     </mat-card>
 
 
-    <mat-chip-list *ngIf="productsReady" #chipListCategory class="d-flex flex-row flex-nowrap category-list" id="chipListCateg">
+    <mat-chip-list *ngIf="productsReady" #chipListCategory class="d-flex flex-row flex-nowrap category-list"
+                   id="chipListCateg">
       <ng-container *ngFor="let category of categories">
         <mat-chip style="background: white" (click)="scrollTo(category)"
                   [ngStyle]="{'background': selectedCategory===category ? '#353C7D' : 'white', 'color':selectedCategory===category ? 'white':'black' }">
@@ -20,145 +20,77 @@
       </ng-container>
     </mat-chip-list>
 
-    <mat-chip-list  *ngIf="!productsReady" class="d-flex flex-row flex-nowrap category-list">
-      <mat-chip class="loading-chip" style="width: 80px"> </mat-chip>
-      <mat-chip class="loading-chip" style="width: 90px"> </mat-chip>
-      <mat-chip class="loading-chip" style="width: 70px"> </mat-chip>
-      <mat-chip class="loading-chip" style="width: 100px"> </mat-chip>
+    <mat-chip-list *ngIf="!productsReady"  class="d-flex flex-row flex-nowrap category-list">
+      <mat-chip class="loading-chip" style="width: 80px"></mat-chip>
+      <mat-chip class="loading-chip" style="width: 90px"></mat-chip>
+      <mat-chip class="loading-chip" style="width: 70px"></mat-chip>
+      <mat-chip class="loading-chip" style="width: 100px"></mat-chip>
     </mat-chip-list>
   </div>
 
-
-
-  <div *ngIf="!productsReady" style="width: 100%; background-color: #f3f2f7" class="container p-3">
-    <mat-card class="food-card">
-      <mat-card-content class="d-flex justify-content-between align-items-center">
+  <div *ngIf="!productsReady" style="width: 100%; background-color: #f3f2f7; " class="container p-3">
+    <ng-container  class="d-flex justify-content-start flex-row ">
+      <mat-card class="food-card">
+        <mat-card-content class="d-flex justify-content-between align-items-center">
           <div>
             <mat-card-title class="card__title loading"></mat-card-title>
-            <mat-card-subtitle  class="card__description loading m-0">
+            <mat-card-subtitle class="card__description loading m-0">
             </mat-card-subtitle>
           </div>
-        <div class="card__image loading" ></div>
-      </mat-card-content>
-    </mat-card>
-    <mat-card class="food-card">
-      <mat-card-content class="d-flex justify-content-between align-items-center">
-        <div>
-          <mat-card-title class="card__title loading"></mat-card-title>
-          <mat-card-subtitle  class="card__description loading m-0">
-          </mat-card-subtitle>
-        </div>
-        <div class="card__image loading" ></div>
-      </mat-card-content>
-    </mat-card>
-    <mat-card class="food-card">
-      <mat-card-content class="d-flex justify-content-between align-items-center">
-        <div>
-          <mat-card-title class="card__title loading"></mat-card-title>
-          <mat-card-subtitle  class="card__description loading m-0">
-          </mat-card-subtitle>
-        </div>
-        <div class="card__image loading" ></div>
-      </mat-card-content>
-    </mat-card>
-    <mat-card class="food-card">
-      <mat-card-content class="d-flex justify-content-between align-items-center">
-        <div>
-          <mat-card-title class="card__title loading"></mat-card-title>
-          <mat-card-subtitle  class="card__description loading m-0">
-          </mat-card-subtitle>
-        </div>
-        <div class="card__image loading" ></div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <div *ngIf="productsReady" style="width: 100%; background-color: #f3f2f7" class="container">
-
-
-    <ng-container *ngFor="let category of categories" class="d-flex justify-content-start flex-row">
-      <div id="{{category}}" class="d-flex ">
-        <p class="category-title">{{category}}</p>
-      </div>
-
-
-      <div class="d-flex flex-wrap">
-        <ng-container *ngFor="let product of productsByCategory[category]">
-
-          <mat-card class="food-card">
-
-            <mat-card-content class="d-flex justify-content-between">
-              <div class="d-flex justify-content-between flex-column" [routerLink]="['/menu-item', product.id]">
-
-                <div>
-                  <mat-card-title class="food-title">{{product.title}}</mat-card-title>
-                  <mat-card-subtitle style="margin-bottom: 10px">
-                    <span class="description">{{product.description}}</span>
-                    <p>{{product.weight}}g</p>
-                  </mat-card-subtitle>
-                </div>
-
-                <div *ngIf="!currentUser.hasDiscount" style="margin-bottom: -4px">
-                  <span class="normal-price">{{product.normalPrice|getDecimalPart}}
-                    <sup>{{product.normalPrice|getFractionalPart}}</sup>Lei</span>
-                </div>
-
-                <div *ngIf="currentUser.hasDiscount">
-                  <span class="discount-price">
-                    {{product.discountPrice| getDecimalPart}} <sup>{{product.discountPrice|getFractionalPart}}</sup>Lei
-                    <span class="old-price">
-                      <del>
-                        {{product.normalPrice|getDecimalPart}} <sup>{{product.normalPrice|getFractionalPart}}</sup>Lei
-                      </del>
-                    </span>
-                  </span>
-                </div>
-
-              </div>
-
-              <div class="image-favorite">
-                <img mat-card-md-image src="{{product.photoUrl}}">
-                <button mat-mini-fab>
-                  <mat-icon>favorite</mat-icon>
-                </button>
-              </div>
-
-            </mat-card-content>
-          </mat-card>
-        </ng-container>
-      </div>
-
+          <div class="card__image loading"></div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="food-card">
+        <mat-card-content class="d-flex justify-content-between align-items-center">
+          <div>
+            <mat-card-title class="card__title loading"></mat-card-title>
+            <mat-card-subtitle class="card__description loading m-0">
+            </mat-card-subtitle>
+          </div>
+          <div class="card__image loading"></div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="food-card">
+        <mat-card-content class="d-flex justify-content-between align-items-center">
+          <div>
+            <mat-card-title class="card__title loading"></mat-card-title>
+            <mat-card-subtitle class="card__description loading m-0">
+            </mat-card-subtitle>
+          </div>
+          <div class="card__image loading"></div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="food-card">
+        <mat-card-content class="d-flex justify-content-between align-items-center">
+          <div>
+            <mat-card-title class="card__title loading"></mat-card-title>
+            <mat-card-subtitle class="card__description loading m-0">
+            </mat-card-subtitle>
+          </div>
+          <div class="card__image loading"></div>
+        </mat-card-content>
+      </mat-card>
     </ng-container>
 
 
   </div>
 
+  <div *ngIf="productsReady" style="width: 100%; background-color: #f3f2f7" class="container">
+
+      <ng-container *ngFor="let category of categories" class="d-flex justify-content-start flex-row">
+        <div id="{{category}}" class="d-flex ">
+          <p class="category-title">{{category}}</p>
+        </div>
+
+
+        <div class="d-flex flex-column flex-wrap">
+
+            <app-product-card *ngFor="let product of productsByCategory[category]" [product]="product" [currentUser]="currentUser"></app-product-card>
+
+        </div>
+
+      </ng-container>
+
+  </div>
+
 </div>
-<!--<ng-container *ngFor="let category of categories" class="d-flex justify-content-center flex-row">-->
-
-<!--  <div id="{{category}}" class="d-flex align-content-center flex-wrap">-->
-<!--    <h1>{{category}}</h1>-->
-
-<!--    <div class="d-flex justify-content-start flex-wrap">-->
-<!--      <ng-container *ngFor="let product of products">-->
-
-<!--        <mat-card class="food-card">-->
-<!--          <mat-card-title-group>-->
-<!--            <mat-card-title>Shiba Inu</mat-card-title>-->
-<!--            <mat-card-subtitle>this is the description o f the vesft nsdifasdfb ds g gfsdfgsdfgsd fg sdg sdf-->
-<!--              gsdfgsdfg-->
-<!--              sd fgsd g sdfg sdfgsd gfjsdf asjidfajsfd ih-->
-<!--            </mat-card-subtitle>-->
-
-<!--            <img mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"-->
-<!--                 style="border-radius: 10px">-->
-<!--          </mat-card-title-group>-->
-<!--          <mat-card-content>-->
-<!--            <mat-card-footer>20lei</mat-card-footer>-->
-<!--          </mat-card-content>-->
-<!--        </mat-card>-->
-
-<!--      </ng-container>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</ng-container>-->

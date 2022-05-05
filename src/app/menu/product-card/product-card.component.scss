@@ -1,0 +1,111 @@
+
+h1 {
+  font-weight: 500;
+  color: #444;
+  font-size: 35px;
+
+}
+
+.mat-card {
+  box-shadow: none;
+}
+
+
+
+
+
+//content
+.category-title {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #101010;
+  font-family: Effra, arial, sans-serif;
+}
+
+.food-title {
+  font-size: 18px !important;
+}
+
+.image-favorite {
+  position: relative;
+
+  img {
+    display: block;
+    border-radius: 15px;
+    object-fit: cover;
+  }
+
+  button {
+    width: 40px;
+    height: 40px;
+    background: white;
+    color: #dcdbe0;
+    position: absolute;
+    top: -10px;
+    //bottom: -10px;
+    right: -20px;
+    box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 10%), 0px 6px 10px 0px rgb(0 0 0 / 10%), 0px 1px 18px 0px rgb(0 0 0 / 10%);
+    //margin-bottom: 15px;
+    margin-right: 10px;
+  }
+}
+
+.normal-price {
+  font-size: 18px;
+  font-weight: 500;
+
+  sup {
+    margin-left: -3px;
+    margin-right: 3px;
+  }
+}
+
+.discount-price {
+  color: #FF1E24;
+  font-size: 18px;
+  font-weight: 500;
+
+  sup {
+    margin-left: -3px;
+    margin-right: 3px;
+  }
+}
+
+.old-price {
+  color: #c3c3c3;
+  font-size: 14px;
+  font-weight: 400;
+
+  sup {
+    margin-left: -3px;
+    margin-right: 3px;
+  }
+}
+
+.description {
+  padding-right: 20px;
+  font-size: 13px;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 16px; /* fallback */
+  max-height: 32px; /* fallback */
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  margin-bottom: 3px;
+}
+
+//card component
+
+.food-card {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+
+}
+
+
+

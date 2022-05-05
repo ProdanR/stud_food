@@ -1,0 +1,41 @@
+
+<mat-card class="food-card">
+
+  <mat-card-content class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between flex-column" [routerLink]="['/menu-item', product.id]">
+
+      <div>
+        <mat-card-title class="food-title">{{product.title}}</mat-card-title>
+        <mat-card-subtitle style="margin-bottom: 10px">
+          <span class="description">{{product.description}}</span>
+          <p>{{product.weight}}g</p>
+        </mat-card-subtitle>
+      </div>
+
+      <div *ngIf="!currentUser.hasDiscount" style="margin-bottom: -4px">
+                  <span class="normal-price">{{product.normalPrice|getDecimalPart}}
+                    <sup>{{product.normalPrice|getFractionalPart}}</sup>Lei</span>
+      </div>
+
+      <div *ngIf="currentUser.hasDiscount">
+                  <span class="discount-price">
+                    {{product.discountPrice| getDecimalPart}} <sup>{{product.discountPrice|getFractionalPart}}</sup>Lei
+                    <span class="old-price">
+                      <del>
+                        {{product.normalPrice|getDecimalPart}} <sup>{{product.normalPrice|getFractionalPart}}</sup>Lei
+                      </del>
+                    </span>
+                  </span>
+      </div>
+
+    </div>
+
+    <div class="image-favorite">
+      <img mat-card-md-image src="{{product.photoUrl}}">
+      <button mat-mini-fab (click)="addOrRemoveFromFavourite()">
+        <mat-icon [ngStyle]="{'color':isFavoriteProduct()?'#FF1E24':'#dcdbe0'}">favorite</mat-icon>
+      </button>
+    </div>
+
+  </mat-card-content>
+</mat-card>

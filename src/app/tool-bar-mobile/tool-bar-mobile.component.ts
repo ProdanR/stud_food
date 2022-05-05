@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-tool-bar-mobile',
@@ -25,6 +25,7 @@ export class ToolBarMobileComponent implements OnInit {
         break;
       }
       case "favorite": {
+        this.router.navigate(['favorite-products']);
         console.log("favorite")
         break;
       }

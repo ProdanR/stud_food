@@ -52,6 +52,6 @@ export class AddProductComponent implements OnInit {
 
   onFileChosen($event: any) {
     this.fileToUpload = ($event.target).files[0];
-    console.log(this.fileToUpload.file);
+    console.log(this.fileToUpload);
   }
 }

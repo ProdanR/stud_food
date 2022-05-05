@@ -43,8 +43,9 @@ export class ProductPageComponent implements OnInit {
   private getProductById(productId: any) {
     console.log(productId);
     this.productService.getProductById(productId).snapshotChanges().subscribe(data => {
-      console.log(data);
+
       this.product = data.payload.data();
+      console.log(data.payload);
       this.productLoaded = true;
       this.totalPrice=this.currentUser.hasDiscount? this.product.discountPrice: this.product.normalPrice;
       this.priceToIncreaseDecrease=this.totalPrice;
