@@ -125,7 +125,7 @@ export class AuthService {
 
   saveUserDataToFirebaseGoogleCredentials(user: any) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-
+    const cart = this.getEmptyCart()
     const data = {
       uid: user.uid,
       email: user.email,
@@ -134,19 +134,38 @@ export class AuthService {
       roles: ['user'],
       hasDiscount: false,
       moneyInApp: 0,
-      studentNumber: ''
+      studentNumber: '',
+      favoriteProducts: [],
+      cart: cart
     }
 
     // @ts-ignore
     return userRef.set(data, {merge: true})
   }
 
+  private getEmptyCart() {
+    const cart = {
+      eatWhere: '',
+      payMethod: '',
+      specialMentions: '',
+      totalCount: 0,
+      totalPrice: 0,
+      products: []
+    }
+    return cart;
+  }
+
   saveUserDataToFirebase(user: any) {
 
     const userRef: AngularFirestoreDocument<any> = this.afs.collection("users").doc(user.uid);
 
+
+
     userRef.get().subscribe((doc) => {
+
+
       if (!doc.exists) {
+        const cart = this.getEmptyCart()
         const userData: any = {
           uid: user.uid,
           displayName: user.displayName,
@@ -155,7 +174,9 @@ export class AuthService {
           roles: ["user"],
           hasDiscount: false,
           moneyInApp: 0,
-          studentNumber: ''
+          studentNumber: '',
+          favoriteProducts: [],
+          cart: cart
         }
         userRef.set(userData, {
           merge: true

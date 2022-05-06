@@ -15,12 +15,12 @@ export class ProductPageComponent implements OnInit {
   productLoaded = false;
 
   productCount = 1;
-  totalPrice=0;
+  totalPrice = 0;
   priceToIncreaseDecrease;
 
-  currentUser:any;
+  currentUser: any;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService,private userService: UserService) {
+  constructor(private route: ActivatedRoute, private productService: ProductService, private userService: UserService) {
     this.screenHeigh = document.documentElement.clientHeight;
     this.getCurrentUser();
   }
@@ -28,6 +28,7 @@ export class ProductPageComponent implements OnInit {
   private getCurrentUser() {
     this.userService.getCurrentUser().snapshotChanges().subscribe(data => {
       this.currentUser = data.payload.data();
+
     });
   }
 
@@ -47,20 +48,45 @@ export class ProductPageComponent implements OnInit {
       this.product = data.payload.data();
       console.log(data.payload);
       this.productLoaded = true;
-      this.totalPrice=this.currentUser.hasDiscount? this.product.discountPrice: this.product.normalPrice;
-      this.priceToIncreaseDecrease=this.totalPrice;
+      this.totalPrice = this.currentUser.hasDiscount ? this.product.discountPrice : this.product.normalPrice;
+      this.priceToIncreaseDecrease = this.totalPrice;
     });
   }
 
   increaseProductCount() {
-    this.productCount=this.productCount+1;
-    this.totalPrice+=this.priceToIncreaseDecrease;
+    this.productCount = this.productCount + 1;
+    this.totalPrice += this.priceToIncreaseDecrease;
   }
 
   decreaseProductCount() {
     if (this.productCount > 1) {
       this.productCount = this.productCount - 1;
-      this.totalPrice-=this.priceToIncreaseDecrease;
+      this.totalPrice -= this.priceToIncreaseDecrease;
     }
+  }
+
+  addProductToCart() {
+
+    this.createNewUserCart();
+
+    this.productService.addProductToCart(this.currentUser.cart,this.currentUser);
+  }
+
+  private createNewUserCart() {
+    let productToAdd: any={};
+
+    productToAdd.id = this.productId;
+    productToAdd.title= this.product.title;
+    productToAdd.image= this.product.photoUrl;
+    productToAdd.count= this.productCount;
+    productToAdd.price= this.priceToIncreaseDecrease;
+    productToAdd.totalPrice= this.totalPrice;
+    productToAdd.category= this.product.category;
+    productToAdd.category_id= this.product.category_id;
+
+    this.currentUser.cart.products.push(productToAdd);
+    this.currentUser.cart.totalPrice+=this.totalPrice
+    this.currentUser.cart.totalCount= this.currentUser.cart.totalCount+this.productCount;
+
   }
 }

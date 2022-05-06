@@ -34,7 +34,7 @@
 
 
   </div>
-  <button mat-flat-button class="add-to-cart-button">
+  <button mat-flat-button class="add-to-cart-button" (click)="addProductToCart()">
     <div class="d-flex justify-content-between">
       <span>Add to cart</span><span>{{totalPrice | getDecimalPart}}<sup>{{totalPrice | getFractionalPart}}</sup> Lei</span>
     </div>

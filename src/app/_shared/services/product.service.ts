@@ -3,6 +3,7 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {finalize} from "rxjs/operators";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class ProductService {
 
   configSnackBar = new MatSnackBarConfig();
 
-  constructor(private db: AngularFirestore, private storage: AngularFireStorage, private _snackBar: MatSnackBar) {
+  constructor(private db: AngularFirestore, private storage: AngularFireStorage, private _snackBar: MatSnackBar, private router: Router) {
     this.configSnackBar.duration = 2000;
     this.configSnackBar.verticalPosition = 'top';
     this.configSnackBar.panelClass = ['my_snackBar'];
@@ -105,11 +106,21 @@ export class ProductService {
 
   addOrRemoveFromFavourite(user, productId) {
 
-    const userRef = this.db.collection('/users').doc(user.id);
+    const userRef = this.db.collection('/users').doc(user.uid);
 
     userRef.update({
       favoriteProducts: user.favoriteProducts
     });
+  }
+
+  addProductToCart(cart: any, user: any) {
+    const userRef = this.db.collection('/users').doc(user.uid);
+    console.log(cart);
+    userRef.update({
+      cart: cart
+    }).then(() => {
+      this.router.navigate(['menu']);
+    })
   }
 
 
@@ -134,4 +145,6 @@ export class ProductService {
   }
 
   //end category
+
+
 }
