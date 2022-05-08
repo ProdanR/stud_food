@@ -1,0 +1,76 @@
+<div style="height: auto; background: #f3f2f7">
+
+  <div style="position: sticky; z-index: 999; top: 0px">
+    <mat-card class="search-card d-flex justify-content-center align-items-center">
+      <h1 class="header-title">My Cart</h1>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!haveProductsInCart()" class="d-flex flex-column justify-content-center align-items-center"
+       style="height: 90%">
+    <img src="assets/images/undraw_empty_cart_co35.svg" class="empty-card-image">
+    <h2>Your cart is empty</h2>
+    <button mat-flat-button class="go-to-shopping" routerLink="/menu">Go to shopping</button>
+  </div>
+
+  <div *ngIf="haveProductsInCart()" class="d-flex flex-column justify-content-center align-items-center">
+    <ng-container *ngFor="let productToBuy of productsToBuy">
+      <app-cart-product-card style="width: 90%" [currentUser]="currentUser" [productsToBuy]="productsToBuy"
+                             [productToBuy]="productToBuy"></app-cart-product-card>
+    </ng-container>
+
+    <mat-card class="example-card">
+      <mat-card-content class="d-flex flex-row justify-content-between align-items-center">
+        <div>
+          <h3 style="font-weight: 500">Where will you eat?</h3>
+          <mat-card-subtitle>You can choose to eat in our restaurant or you can take it away. You have to come to get
+            your food.
+          </mat-card-subtitle>
+        </div>
+        <img mat-card-sm-image src="assets/images/undraw_eating_together_re_ux62.svg">
+
+      </mat-card-content>
+      <mat-radio-group [(ngModel)]="eatWhere" name="eatWhere" class="d-flex flex-row radio-buttons">
+        <mat-radio-button value="TakeAway">Take it away</mat-radio-button>
+        <mat-radio-button value="Restaurant" style="margin-left: 30px">Eat at restaurant</mat-radio-button>
+      </mat-radio-group>
+    </mat-card>
+
+    <mat-card class="example-card">
+      <mat-card-content class="d-flex flex-row justify-content-between align-items-center">
+        <div>
+          <h3 style="font-weight: 500">How will you pay?</h3>
+          <mat-card-subtitle>You can pay using money from the app or you can pay cash in the restaurant.
+          </mat-card-subtitle>
+        </div>
+        <img mat-card-sm-image src="assets/images/undraw_transfer_money_re_6o1h.svg">
+
+      </mat-card-content>
+
+      <mat-radio-group [(ngModel)]="payMethod" name="payMethod" class="d-flex flex-row radio-buttons">
+        <mat-radio-button value="FromApp">Pay from the app</mat-radio-button>
+        <mat-radio-button value="Cash" style="margin-left: 30px">Pay cash</mat-radio-button>
+      </mat-radio-group>
+    </mat-card>
+
+    <mat-card class="example-card">
+      <mat-card-content class="d-flex flex-column justify-content-start special-mention">
+        <h3 style="font-weight: 500">Special mentions for your order</h3>
+        <mat-form-field appearance="fill">
+          <textarea rows="3" matInput [(ngModel)]="specialMentions" name="specialMentions"></textarea>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+    <button mat-flat-button class="place-order-button"  (click)="(payMethod!==null && eatWhere!==null)?placeOrder():showError()">
+      <div class="d-flex justify-content-between">
+        <span>Place order</span><span>{{this.currentUser?.cart.totalPrice  | getDecimalPart}}<sup>{{this.currentUser?.cart.totalPrice  | getFractionalPart}}</sup> Lei</span>
+      </div>
+    </button>
+
+  </div>
+
+
+
+</div>
+

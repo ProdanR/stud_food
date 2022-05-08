@@ -113,13 +113,11 @@ export class ProductService {
     });
   }
 
-  addProductToCart(cart: any, user: any) {
+  updateCart(cart: any, user: any) {
     const userRef = this.db.collection('/users').doc(user.uid);
     console.log(cart);
-    userRef.update({
+    return userRef.update({
       cart: cart
-    }).then(() => {
-      this.router.navigate(['menu']);
     })
   }
 

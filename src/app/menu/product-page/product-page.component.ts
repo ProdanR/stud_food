@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ProductService} from "../../_shared/services/product.service";
 import {UserService} from "../../_shared/services/user.service";
 
@@ -20,7 +20,7 @@ export class ProductPageComponent implements OnInit {
 
   currentUser: any;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private userService: UserService) {
+  constructor(private router: Router, private route: ActivatedRoute, private productService: ProductService, private userService: UserService) {
     this.screenHeigh = document.documentElement.clientHeight;
     this.getCurrentUser();
   }
@@ -69,24 +69,33 @@ export class ProductPageComponent implements OnInit {
 
     this.createNewUserCart();
 
-    this.productService.addProductToCart(this.currentUser.cart,this.currentUser);
+    this.productService.updateCart(this.currentUser.cart, this.currentUser).then(() => {
+      this.router.navigate(['menu']);
+    });
   }
 
   private createNewUserCart() {
-    let productToAdd: any={};
+    let productToAdd: any = {};
 
-    productToAdd.id = this.productId;
-    productToAdd.title= this.product.title;
-    productToAdd.image= this.product.photoUrl;
-    productToAdd.count= this.productCount;
-    productToAdd.price= this.priceToIncreaseDecrease;
-    productToAdd.totalPrice= this.totalPrice;
-    productToAdd.category= this.product.category;
-    productToAdd.category_id= this.product.category_id;
+    if (this.currentUser.cart.products.filter(product => product.id === this.productId).length !== 0) {
+      const productIndex = this.currentUser.cart.products.map(product => {return product.id;}).indexOf(this.productId);
+      this.currentUser.cart.products[productIndex].count = this.currentUser.cart.products[productIndex].count + this.productCount;
+      this.currentUser.cart.products[productIndex].totalPrice = this.currentUser.cart.products[productIndex].totalPrice + this.totalPrice;
+      this.currentUser.cart.totalPrice =this.currentUser.cart.totalPrice + this.totalPrice;
+      this.currentUser.cart.totalCount = this.currentUser.cart.totalCount + this.productCount;
+    } else {
+      productToAdd.id = this.productId;
+      productToAdd.title = this.product.title;
+      productToAdd.image = this.product.photoUrl;
+      productToAdd.count = this.productCount;
+      productToAdd.price = this.priceToIncreaseDecrease;
+      productToAdd.totalPrice = this.totalPrice;
+      productToAdd.category = this.product.category;
+      productToAdd.category_id = this.product.category_id;
 
-    this.currentUser.cart.products.push(productToAdd);
-    this.currentUser.cart.totalPrice+=this.totalPrice
-    this.currentUser.cart.totalCount= this.currentUser.cart.totalCount+this.productCount;
-
+      this.currentUser.cart.products.push(productToAdd);
+      this.currentUser.cart.totalPrice += this.totalPrice
+      this.currentUser.cart.totalCount = this.currentUser.cart.totalCount + this.productCount;
+    }
   }
 }

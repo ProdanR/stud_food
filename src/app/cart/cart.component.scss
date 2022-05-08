@@ -1,0 +1,89 @@
+.empty-card-image{
+  width: 50%;
+  height: auto;
+}
+
+.go-to-shopping{
+  width: 80vw;
+  background: #353C7D;
+  color: white;
+  margin-top: 25px;
+  height: 50px;
+  border-radius: 50px;
+  margin-bottom: 10vh;
+}
+
+.search-card {
+  width: 100vw;
+  height: 57.75px;
+  box-shadow: none;
+  border-bottom: 1px solid #f3f2f7 !important;
+  border-radius: unset;
+  margin-top: 1px;
+  padding: 5px;
+}
+.header-title{
+  font-weight: 600;
+  color: #353C7D;
+}
+
+.example-card {
+  width: 90%;
+  margin-bottom: 8px;
+  margin-top: 10px;
+  border-radius: 15px;
+  box-shadow: none;
+
+}
+
+.radio-buttons{
+  ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+    border-color:#353C7D;
+  }
+
+  ::ng-deep.mat-radio-button.mat-accent .mat-radio-inner-circle{
+    color:#353C7D;
+    background-color:#353C7D ;
+  }
+
+  ::ng-deep.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color:#353C7D;
+  }
+}
+
+.special-mention {
+  ::ng-deep .mat-form-field-wrapper{
+    padding: 0px;
+  }
+  ::ng-deep .mat-form-field-wrapper .mat-form-field-underline {
+    width: 0px;
+    background: #f3f2f7;
+
+  }
+
+  ::ng-deep .mat-form-field-wrapper .mat-form-field-flex {
+    background-color: #f3f2f7;
+    border-radius: 10px !important;
+
+    .mat-form-field-infix {
+      margin-left: 1em;
+      border-top: 0px;
+
+      .mat-input-element {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.place-order-button{
+  position: sticky;
+  bottom: 60px;
+  width: 100%;
+  border-radius: 0px;
+  color: white;
+  background: #353C7D;
+  height: 60px;
+  z-index: 1001;
+
+}

@@ -20,6 +20,7 @@ import {AddProductComponent} from "./admin/add-product/add-product.component";
 import {ProductsListComponent} from "./admin/products-list/products-list.component";
 import {OrderCategoriesComponent} from "./admin/order-categories/order-categories.component";
 import {FavoriteProductsComponent} from "./favorite-products/favorite-products.component";
+import {CartComponent} from "./cart/cart.component";
 
 
 const routes: Routes = [
@@ -54,6 +55,11 @@ const routes: Routes = [
   {
     path: 'favorite-products',
     component: FavoriteProductsComponent,
+    canActivate: [AuthGuard], data: {role: 'user'}
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
     canActivate: [AuthGuard], data: {role: 'user'}
   },
 

@@ -37,4 +37,10 @@ export class FavoriteProductsComponent implements OnInit {
       });
     })
   }
+
+  haveProductsAtFavorite() {
+    if(this.favoriteProducts.length==0)
+      return false;
+    return true;
+  }
 }

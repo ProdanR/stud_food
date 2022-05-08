@@ -1,0 +1,54 @@
+.example-card {
+  width: 100%;
+  margin-bottom: 8px;
+  margin-top: 10px;
+  border-radius: 15px;
+  box-shadow: none;
+}
+
+img {
+  display: block;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.product-title{
+  font-weight: 600;
+}
+
+.cantity-button{
+  box-shadow: none !important;
+  background: white;
+  color: rgb(153, 153, 153);
+  width: 25px;
+  height: 25px;
+  border: 2px solid #e2e1e5;
+
+}
+.count{
+  margin-top: 2px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: 500
+}
+
+.cdk-drag:not(.cdk-drag-dragging) {
+  transition: transform 800ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.delete-icon{
+  transform: scale(2);
+  color: white;
+}
+
+
+.box{
+  transform: scale(0.99);
+  position: absolute;
+
+  opacity: 0.8;  /* for demo purpose  */
+}
+.stack-top{
+  z-index: 9;
+}
+

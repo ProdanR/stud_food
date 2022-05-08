@@ -54,6 +54,9 @@ import { GetFractionalPartPipe } from './_shared/pipes/get-fractional-part.pipe'
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ProductCardComponent } from './menu/product-card/product-card.component';
 import { FavoriteProductsComponent } from './favorite-products/favorite-products.component';
+import { CartComponent } from './cart/cart.component';
+import { CartProductCardComponent } from './cart/cart-product-card/cart-product-card.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -82,44 +85,47 @@ import { FavoriteProductsComponent } from './favorite-products/favorite-products
     GetFractionalPartPipe,
     ProductCardComponent,
     FavoriteProductsComponent,
+    CartComponent,
+    CartProductCardComponent,
 
   ],
-  imports: [
-    NgxPayPalModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatBadgeModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    FormsModule,
-    MatSnackBarModule,
-    MatChipsModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatSlideToggleModule,
-    MatTabsModule,
-    MatListModule,
-    MatDialogModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    DragDropModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
-  ],
+    imports: [
+        NgxPayPalModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatBadgeModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCheckboxModule,
+        FormsModule,
+        MatSnackBarModule,
+        MatChipsModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatSlideToggleModule,
+        MatTabsModule,
+        MatListModule,
+        MatDialogModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        DragDropModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production,
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        }),
+        MatRadioModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
