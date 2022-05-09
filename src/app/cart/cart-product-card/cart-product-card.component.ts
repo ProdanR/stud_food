@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProductService} from "../../_shared/services/product.service";
 import {CdkDragDrop, CdkDragEnd, CdkDragStart} from "@angular/cdk/drag-drop";
+import {UserService} from "../../_shared/services/user.service";
 
 @Component({
   selector: 'app-cart-product-card',
@@ -13,7 +14,7 @@ export class CartProductCardComponent implements OnInit {
   @Input() currentUser;
   dragPosition= {x: 0, y: 0};
 
-  constructor(private productService: ProductService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -31,7 +32,7 @@ export class CartProductCardComponent implements OnInit {
 
     this.currentUser.cart.totalCount=this.currentUser.cart.totalCount-1;
     this.currentUser.cart.totalPrice=this.currentUser.cart.totalPrice-productToBuy.price;
-    this.productService.updateCart(this.currentUser.cart, this.currentUser);
+    this.userService.updateCart(this.currentUser.cart, this.currentUser);
   }
 
   increaseProductCount(productToBuy: any) {
@@ -43,7 +44,7 @@ export class CartProductCardComponent implements OnInit {
     this.currentUser.cart.totalCount=this.currentUser.cart.totalCount+1;
     this.currentUser.cart.totalPrice=this.currentUser.cart.totalPrice+productToBuy.price;
     console.log(this.currentUser.cart);
-    this.productService.updateCart(this.currentUser.cart, this.currentUser);
+    this.userService.updateCart(this.currentUser.cart, this.currentUser);
   }
 
   checkAndDelete($event: CdkDragEnd) {
@@ -68,6 +69,6 @@ export class CartProductCardComponent implements OnInit {
     console.log(this.productToBuy);
 
     console.log(this.currentUser.cart);
-    this.productService.updateCart(this.currentUser.cart, this.currentUser);
+    this.userService.updateCart(this.currentUser.cart, this.currentUser);
   }
 }

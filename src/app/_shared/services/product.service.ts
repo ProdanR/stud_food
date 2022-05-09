@@ -104,23 +104,6 @@ export class ProductService {
     })
   }
 
-  addOrRemoveFromFavourite(user, productId) {
-
-    const userRef = this.db.collection('/users').doc(user.uid);
-
-    userRef.update({
-      favoriteProducts: user.favoriteProducts
-    });
-  }
-
-  updateCart(cart: any, user: any) {
-    const userRef = this.db.collection('/users').doc(user.uid);
-    console.log(cart);
-    return userRef.update({
-      cart: cart
-    })
-  }
-
 
   //start category
   addNewCategory(category: any) {

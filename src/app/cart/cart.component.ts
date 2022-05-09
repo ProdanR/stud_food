@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {ProductService} from "../_shared/services/product.service";
 import {UserService} from "../_shared/services/user.service";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {MetadataService} from "../_shared/services/metadata.service";
+import {OrderService} from "../_shared/services/order.service";
 
 @Component({
   selector: 'app-cart',
@@ -14,17 +16,23 @@ export class CartComponent implements OnInit {
   productsToBuy: any[] = [];
   eatWhere: any = null;
   payMethod: any = null;
-  specialMentions: any;
+  specialMentions='';
+
+  private metadata: any;
 
   configSnackBar = new MatSnackBarConfig();
+  private screenHeigh: number;
 
 
-  constructor(private router: Router, private _snackBar: MatSnackBar, private productService: ProductService, private userService: UserService) {
+
+  constructor(private router: Router, private _snackBar: MatSnackBar, private productService: ProductService, private userService: UserService, private metadataService: MetadataService, private orderService: OrderService) {
+    this.screenHeigh = document.documentElement.clientHeight;
     this.configSnackBar.duration = 2000;
     this.configSnackBar.verticalPosition = 'top';
     this.configSnackBar.panelClass = ['my_snackBar'];
 
     this.getCurrentUser();
+    this.getMetadata();
   }
 
   ngOnInit(): void {
@@ -55,7 +63,7 @@ export class CartComponent implements OnInit {
 
     this.currentUser.cart.totalCount = this.currentUser.cart.totalCount - 1;
     this.currentUser.cart.totalPrice = this.currentUser.cart.totalPrice - productToBuy.price;
-    this.productService.updateCart(this.currentUser.cart, this.currentUser);
+    this.userService.updateCart(this.currentUser.cart, this.currentUser);
   }
 
   increaseProductCount(productToBuy: any) {
@@ -67,19 +75,52 @@ export class CartComponent implements OnInit {
     this.currentUser.cart.totalCount = this.currentUser.cart.totalCount + 1;
     this.currentUser.cart.totalPrice = this.currentUser.cart.totalPrice + productToBuy.price;
     console.log(this.currentUser.cart);
-    this.productService.updateCart(this.currentUser.cart, this.currentUser);
+    this.userService.updateCart(this.currentUser.cart, this.currentUser);
   }
 
   placeOrder() {
-    if(this.currentUser.moneyInApp<this.currentUser.cart.totalPrice && this.payMethod=='FromApp'){
+    if (this.currentUser.moneyInApp < this.currentUser.cart.totalPrice && this.payMethod == 'FromApp') {
       this._snackBar.open("Not enough money in the app", "", this.configSnackBar);
+    } else
+    if(this.currentUser.phoneNumber==undefined || this.currentUser.phoneNumber==null){
+      this._snackBar.open("Please add your phone number!", "", this.configSnackBar);
     }
     else{
-      console.log('ok');
+      this.createAndPlaceOrder();
     }
+  }
+
+  private createAndPlaceOrder() {
+    let order:any = {};
+    let client:any = {};
+
+    console.log(this.currentUser);
+    client.uid=this.currentUser.uid;
+    client.fullName=this.currentUser.displayName;
+    client.phoneNumber= this.currentUser.phoneNumber;
+
+    order.products=this.currentUser.cart.products;
+    order.client=client;
+    order.totalPrice=this.currentUser.cart.totalPrice;
+    order.specialMentions=this.specialMentions;
+    order.eatWhere=this.eatWhere;
+    order.payMethod=this.payMethod;
+    order.status='CREATED';
+    order.date=new Date();
+    order.orderNumber=this.metadata.orderCountNumber;
+    this.orderService.placeOrder(order);
+    this.userService.saveCurrentOrder(order);
+    this.metadataService.incrementOrderCountNumber(this.metadata);
   }
 
   showError() {
     this._snackBar.open("Please select Pay Method and Where to Eat", "", this.configSnackBar);
+  }
+
+  private getMetadata() {
+    this.metadataService.getMetadata().snapshotChanges().subscribe(data => {
+      this.metadata=data[0].payload.doc.data();
+      this.metadata.id=data[0].payload.doc.id;
+    });
   }
 }

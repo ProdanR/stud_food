@@ -71,5 +71,30 @@ export class UserService {
       });
     });
   }
+
+  //products-cart
+  addOrRemoveFromFavourite(user, productId) {
+    const userRef = this.db.collection('/users').doc(user.uid);
+
+    userRef.update({
+      favoriteProducts: user.favoriteProducts
+    });
+  }
+
+  updateCart(cart: any, user: any) {
+    const userRef = this.db.collection('/users').doc(user.uid);
+    console.log(cart);
+    return userRef.update({
+      cart: cart
+    })
+  }
+
+
+  saveCurrentOrder(order: any) {
+    const userRef = this.db.collection('/users').doc(order.client.uid);
+    userRef.update({
+      currentOrder: order
+    })
+  }
 }
 

@@ -69,7 +69,7 @@ export class ProductPageComponent implements OnInit {
 
     this.createNewUserCart();
 
-    this.productService.updateCart(this.currentUser.cart, this.currentUser).then(() => {
+    this.userService.updateCart(this.currentUser.cart, this.currentUser).then(() => {
       this.router.navigate(['menu']);
     });
   }

@@ -1,4 +1,4 @@
-<div style="height: auto; background: #f3f2f7">
+<div [ngStyle]="{'height':productsToBuy.length>=1?'auto':'100%'}" style="background: #f3f2f7">
 
   <div style="position: sticky; z-index: 999; top: 0px">
     <mat-card class="search-card d-flex justify-content-center align-items-center">

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProductService} from "../../_shared/services/product.service";
+import {UserService} from "../../_shared/services/user.service";
 
 @Component({
   selector: 'app-product-card',
@@ -9,7 +10,7 @@ import {ProductService} from "../../_shared/services/product.service";
 export class ProductCardComponent implements OnInit {
   @Input() product;
   @Input() currentUser;
-  constructor(private productService: ProductService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +23,7 @@ export class ProductCardComponent implements OnInit {
       this.currentUser.favoriteProducts.push(this.product.id);
     }
 
-    this.productService.addOrRemoveFromFavourite(this.currentUser, this.product.id);
+    this.userService.addOrRemoveFromFavourite(this.currentUser, this.product.id);
   }
 
   isFavoriteProduct() {
