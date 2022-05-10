@@ -23,7 +23,7 @@ export class OrderService {
 
   placeOrder(order: any) {
 
-    this.ordersRef.add({
+    return this.ordersRef.add({
       products: order.products,
       client: order.client,
       totalPrice: order.totalPrice,
@@ -33,14 +33,11 @@ export class OrderService {
       orderNumber: order.orderNumber,
       status: order.status,
       date: order.date
-    }).then( r=>{
-      this.emptyUserCart(order);
-      this._snackBar.open("Order placed successfully", "", this.configSnackBar);}
-    );
+    });
 
   }
 
-  private emptyUserCart(order: any) {
+   emptyUserCart(order: any) {
     const user=order.client
     const cart = {
       eatWhere: '',

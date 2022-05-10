@@ -57,6 +57,7 @@ import { FavoriteProductsComponent } from './favorite-products/favorite-products
 import { CartComponent } from './cart/cart.component';
 import { CartProductCardComponent } from './cart/cart-product-card/cart-product-card.component';
 import {MatRadioModule} from "@angular/material/radio";
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import {MatRadioModule} from "@angular/material/radio";
     FavoriteProductsComponent,
     CartComponent,
     CartProductCardComponent,
+    OrdersComponent,
 
   ],
     imports: [

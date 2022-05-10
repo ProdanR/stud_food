@@ -90,10 +90,10 @@ export class UserService {
   }
 
 
-  saveCurrentOrder(order: any) {
-    const userRef = this.db.collection('/users').doc(order.client.uid);
+  addCurrentOrders(orders: any, userId:any) {
+    const userRef = this.db.collection('/users').doc(userId);
     userRef.update({
-      currentOrder: order
+      currentOrders: orders
     })
   }
 }

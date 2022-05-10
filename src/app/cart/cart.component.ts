@@ -108,11 +108,15 @@ export class CartComponent implements OnInit {
     order.status='CREATED';
     order.date=new Date();
     order.orderNumber=this.metadata.orderCountNumber;
-    this.orderService.placeOrder(order);
-    this.userService.saveCurrentOrder(order);
+    this.orderService.placeOrder(order).then( docRef=>{
+      this.orderService.emptyUserCart(order);
+      order.id=docRef.id;
+      this._snackBar.open("Order placed successfully", "", this.configSnackBar);
+      this.currentUser.currentOrders.push(order);
+      this.userService.addCurrentOrders(this.currentUser.currentOrders, this.currentUser.uid);
+    });
     this.metadataService.incrementOrderCountNumber(this.metadata);
   }
-
   showError() {
     this._snackBar.open("Please select Pay Method and Where to Eat", "", this.configSnackBar);
   }
