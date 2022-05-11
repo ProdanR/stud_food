@@ -1,5 +1,5 @@
-<!--<div [ngStyle]="{'height':favoriteProducts.length>=4?'auto':'100%'}">-->
-<div [ngStyle]="{'height':'100%'}">
+
+<div [ngStyle]="{'height':currentOrders.length>=4?'auto':'100%'}">
   <div style="position: sticky; z-index: 999; top: 0px">
     <mat-card class="title-card d-flex justify-content-center align-items-center">
       <h1 class="header-title">My orders</h1>
@@ -9,37 +9,16 @@
 
   <div style="width: 100%; background-color: #f3f2f7; height: 100%" class="container ">
 
-    <div class="pt-2">
-      <mat-card class="food-card">
-        <mat-card-content class="d-flex flex-column">
+    <div class="d-flex flex-column flex-wrap pt-2">
 
-          <div class="d-flex flex-row justify-content-between align-items-center">
-            <div>
-              <div class="bold">
-                <span>Date: 08 May 2022 at 17:24</span>
-                <p>Status: <span [style.color]="getStatusColor('SENT')">SENT</span></p>
-              </div>
-              <div class="d-flex flex-column details">
-                <span>1 x Soup Cream</span>
-                <span>2 x Chicken Burger</span>
-                <span>2 x Chicken Burger</span>
-
-              </div>
-              <p class="more-products">+ another products</p>
-            </div>
-            <img mat-card-md-image src="assets/images/order_sent_status.svg">
-          </div>
+        <app-order-card  *ngFor="let order of currentOrders" [order]="order" ></app-order-card>
 
 
-          <div class="d-flex justify-content-between flex-row align-items-center">
-            <!--            <span>{{totalPrice | getDecimalPart}}<sup>{{totalPrice | getFractionalPart}}</sup> Lei</span>-->
-            <span class="bold">{{20}}<sup>{{40}}</sup> Lei</span>
-            <button mat-flat-button color="primary">See details</button>
-          </div>
-
-        </mat-card-content>
-      </mat-card>
     </div>
+
+
+
+
     <!--    <div *ngIf="!haveProductsAtFavorite()" class="d-flex flex-column justify-content-center align-items-center"-->
     <!--         style="height: 90%">-->
     <!--      <img src="assets/images/undraw_heartbroken_cble.svg" class="empty-favorite">-->

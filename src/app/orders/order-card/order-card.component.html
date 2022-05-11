@@ -1,0 +1,25 @@
+<mat-card class="food-card">
+  <mat-card-content class="d-flex flex-column">
+
+    <div class="d-flex flex-row justify-content-between align-items-center">
+      <div>
+        <div class="bold">
+          <span>Date: {{dateToDisplay.toLocaleDateString("ro-RO")}} at {{this.dateToDisplay.toLocaleTimeString(["ro-RO"], {hour: '2-digit', minute:'2-digit'})}}</span>
+          <p>Status: <span [style.color]="getStatusColor(order.status)">{{order.status}}</span></p>
+        </div>
+        <div class="d-flex flex-column details">
+          <span *ngFor="let product of slicedData(order.products)">{{product.count}} x {{product.title}}</span>
+        </div>
+        <p *ngIf="order.products.length>3" class="more-products">+ another products</p>
+      </div>
+      <img mat-card-md-image src="assets/images/{{getStatusImage(order.status)}}">
+    </div>
+
+
+    <div class="d-flex justify-content-between flex-row align-items-center">
+      <span class="bold">{{order.totalPrice | getDecimalPart}}<sup>{{order.totalPrice | getFractionalPart}}</sup> Lei</span>
+      <button mat-flat-button class="button-action">See details</button>
+    </div>
+
+  </mat-card-content>
+</mat-card>

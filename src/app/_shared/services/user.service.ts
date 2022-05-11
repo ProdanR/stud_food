@@ -96,5 +96,15 @@ export class UserService {
       currentOrders: orders
     })
   }
+
+  addOrderToUserOrderHistory(order, userId) {
+    const userRef = this.db.collection('/users').doc(userId).collection('/orders').doc(order.id).set({
+      order:order
+    });
+  }
+
+  getOrderHistory(uid) {
+    return this.usersRef.doc(uid).collection('/orders');
+  }
 }
 

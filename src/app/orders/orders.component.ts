@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import {ProductService} from "../_shared/services/product.service";
+import {UserService} from "../_shared/services/user.service";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-orders',
@@ -6,21 +10,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
+  currentUser:any;
+  currentOrders:any=[];
+  orderHistory:any=[];
 
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor(private router: Router, private productService: ProductService, private userService: UserService) {
+    this.getCurrentUser();
+
   }
 
-  getStatusColor(orderStatus: string) {
-    switch (orderStatus) {
-      case 'SENT':
-        return '#00B0FF'
-        break;
-      case 'MISSING PRODUCT':
-        return '#F9A826'
-        break;
-    }
-    return '#000000';
+  ngOnInit(): void {
+
+  }
+
+  private getCurrentUser() {
+    this.userService.getCurrentUser().snapshotChanges().subscribe(data => {
+      this.currentUser = data.payload.data();
+      this.currentOrders = this.currentUser.currentOrders;
+      this.currentOrders.sort((a: any, b: any) => (a.date < b.date) ? 1 : -1)
+      this.getOrderHistory();
+    });
+  }
+
+  private getOrderHistory() {
+    this.userService.getOrderHistory(this.currentUser.uid).snapshotChanges().pipe(
+      map((changes: any) =>
+        changes.map(c =>
+          ({id: c.payload.doc.id, ...c.payload.doc.data()})
+        )
+      )
+    ).subscribe(data => {
+      this.orderHistory=data;
+      this.orderHistory.sort((a: any, b: any) => (a.date < b.date) ? 1 : -1);
+    });
   }
 }
