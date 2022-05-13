@@ -40,6 +40,12 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!localStorage.getItem('foo')) {
+      localStorage.setItem('foo', 'no reload')
+      location.reload()
+    } else {
+      localStorage.removeItem('foo')
+    }
     this.getAllCategories();
     this.getAllProducts();
   }

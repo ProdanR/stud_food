@@ -12,7 +12,7 @@ import {map} from "rxjs/operators";
 export class OrdersComponent implements OnInit {
   currentUser:any;
   currentOrders:any=[];
-  orderHistory:any=[];
+  userOrders:any=[];
 
 
   constructor(private router: Router, private productService: ProductService, private userService: UserService) {
@@ -27,8 +27,8 @@ export class OrdersComponent implements OnInit {
   private getCurrentUser() {
     this.userService.getCurrentUser().snapshotChanges().subscribe(data => {
       this.currentUser = data.payload.data();
-      this.currentOrders = this.currentUser.currentOrders;
-      this.currentOrders.sort((a: any, b: any) => (a.date < b.date) ? 1 : -1)
+      // this.currentOrders = this.currentUser.currentOrders;
+      // this.currentOrders.sort((a: any, b: any) => (a.date < b.date) ? 1 : -1)
       this.getOrderHistory();
     });
   }
@@ -41,8 +41,9 @@ export class OrdersComponent implements OnInit {
         )
       )
     ).subscribe(data => {
-      this.orderHistory=data;
-      this.orderHistory.sort((a: any, b: any) => (a.date < b.date) ? 1 : -1);
+      this.userOrders=data;
+      this.userOrders.sort((a: any, b: any) => (a.order.date < b.order.date) ? 1 : -1);
+      console.log(this.userOrders)
     });
   }
 }

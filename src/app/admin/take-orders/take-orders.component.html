@@ -1,0 +1,48 @@
+<div class="d-flex flex-row justify-content-evenly p-3 ">
+  <div style="background: #f3f2f7; width:0%" class=" flex-grow-1  mx-2"
+       cdkDropList
+       #sentList="cdkDropList"
+       [cdkDropListData]="sentOrders"
+       [cdkDropListConnectedTo]="[inProgressList]"
+       (cdkDropListDropped)="drop($event)"
+        id="SENT">
+    <h2 style="color: #00B0FF">SENT</h2>
+    <app-take-orders-card [orders]="sentOrders" [allOrders]="allOrdersThatCanHaveMissingProduct" ></app-take-orders-card >
+  </div>
+
+  <div style="background: #f3f2f7; width:0%" class="flex-grow-1  mx-2"
+       cdkDropList
+       #inProgressList="cdkDropList"
+       [cdkDropListData]="inProgressOrders"
+       [cdkDropListConnectedTo]="[finishedList]"
+       (cdkDropListDropped)="drop($event)"
+       id="IN PROGRESS">
+    <h2 style="color: #BF0089 ">IN PROGRESS</h2>
+    <app-take-orders-card [orders]="inProgressOrders"  [allOrders]="allOrdersThatCanHaveMissingProduct" ></app-take-orders-card>
+  </div>
+
+  <div style="background: #f3f2f7; width:0%" class="flex-grow-1  mx-2"
+       cdkDropList
+       #finishedList="cdkDropList"
+       [cdkDropListData]="finishedOrders"
+       [cdkDropListConnectedTo]="[inProgressList,deliveredList]"
+       (cdkDropListDropped)="drop($event)"
+       id="FINISHED">
+    <h2 style="color: #00BFA6 ">FINISHED</h2>
+    <app-take-orders-card [orders]="finishedOrders"  [allOrders]="allOrdersThatCanHaveMissingProduct" ></app-take-orders-card>
+  </div>
+
+  <div style="background: #f3f2f7; width:0%" class="flex-grow-1  mx-2"
+       cdkDropList
+       #deliveredList="cdkDropList"
+       [cdkDropListData]="deliveredOrders"
+       [cdkDropListConnectedTo]="[finishedList]"
+       (cdkDropListDropped)="drop($event)"
+       id="DELIVERED">
+
+    <h2><span style="color: #00BF2E">DELIVERED</span></h2>
+
+
+    <app-take-orders-card [orders]="deliveredOrders"  [allOrders]="allOrdersThatCanHaveMissingProduct" ></app-take-orders-card>
+  </div>
+</div>

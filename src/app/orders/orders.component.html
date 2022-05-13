@@ -1,5 +1,5 @@
 
-<div [ngStyle]="{'height':currentOrders.length>=4?'auto':'100%'}">
+<div [ngStyle]="{'height':userOrders.length>=4?'auto':'100%'}">
   <div style="position: sticky; z-index: 999; top: 0px">
     <mat-card class="title-card d-flex justify-content-center align-items-center">
       <h1 class="header-title">My orders</h1>
@@ -11,7 +11,7 @@
 
     <div class="d-flex flex-column flex-wrap pt-2">
 
-        <app-order-card  *ngFor="let order of currentOrders" [order]="order" ></app-order-card>
+        <app-order-card  *ngFor="let order of userOrders" [order]="order.order" ></app-order-card>
 
 
     </div>

@@ -102,6 +102,7 @@ export class CartComponent implements OnInit {
     order.products=this.currentUser.cart.products;
     order.client=client;
     order.totalPrice=this.currentUser.cart.totalPrice;
+    order.totalCount=this.currentUser.cart.totalCount;
     order.specialMentions=this.specialMentions;
     order.eatWhere=this.eatWhere;
     order.payMethod=this.payMethod;
@@ -112,11 +113,11 @@ export class CartComponent implements OnInit {
       this.orderService.emptyUserCart(order);
       order.id=docRef.id;
       this._snackBar.open("Order placed successfully", "", this.configSnackBar);
-      this.currentUser.currentOrders.push(order);
-      this.userService.addCurrentOrders(this.currentUser.currentOrders, this.currentUser.uid);
-
+      // this.currentUser.currentOrders.push(order);
+      // this.userService.addCurrentOrders(this.currentUser.currentOrders, this.currentUser.uid);
+      this.userService.addOrderToUser(order, this.currentUser.uid);
       //asta va fi pus doar in vom avea un status final CANCELED, DELIVERE, (FINISED)
-      this.userService.addOrderToUserOrderHistory(order, this.currentUser.uid);
+      // this.userService.addOrderToUserOrderHistory(order, this.currentUser.uid);
     });
     this.metadataService.incrementOrderCountNumber(this.metadata);
   }

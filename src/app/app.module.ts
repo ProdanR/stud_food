@@ -59,6 +59,8 @@ import { CartProductCardComponent } from './cart/cart-product-card/cart-product-
 import {MatRadioModule} from "@angular/material/radio";
 import { OrdersComponent } from './orders/orders.component';
 import { OrderCardComponent } from './orders/order-card/order-card.component';
+import { TakeOrdersComponent } from './admin/take-orders/take-orders.component';
+import { TakeOrdersCardComponent } from './admin/take-orders/take-orders-card/take-orders-card.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +93,8 @@ import { OrderCardComponent } from './orders/order-card/order-card.component';
     CartProductCardComponent,
     OrdersComponent,
     OrderCardComponent,
+    TakeOrdersComponent,
+    TakeOrdersCardComponent,
 
   ],
     imports: [

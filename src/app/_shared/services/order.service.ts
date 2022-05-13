@@ -21,12 +21,25 @@ export class OrderService {
     this.ordersRef = db.collection('/orders');
   }
 
-  placeOrder(order: any) {
+  getAllOrders(){
+    return this.ordersRef;
+  }
 
+  getTodaysOrders(){
+    let today = new Date();
+    today.setHours(0,0,0,0);
+    let timestampToday=today.getTime()/1000
+
+    return this.db.collection('/orders',ref => ref.where('date', '>=', today));
+  }
+
+  placeOrder(order: any) {
+    console.log(order);
     return this.ordersRef.add({
       products: order.products,
       client: order.client,
       totalPrice: order.totalPrice,
+      totalCount: order.totalCount,
       specialMentions: order.specialMentions,
       eatWhere: order.eatWhere,
       payMethod: order.payMethod,
@@ -48,5 +61,14 @@ export class OrderService {
       products: []
     }
     this.userService.updateCart(cart,user);
+  }
+
+  setOrderStatus(order: any, newStatus: any) {
+    const prderRef = this.ordersRef.doc(order.id);
+
+    prderRef.update({
+      status: newStatus
+    });
+
   }
 }

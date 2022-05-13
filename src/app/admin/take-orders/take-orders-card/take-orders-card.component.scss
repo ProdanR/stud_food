@@ -1,0 +1,60 @@
+.special-mention {
+  ::ng-deep .mat-form-field-wrapper{
+    padding: 0px;
+  }
+  ::ng-deep .mat-form-field-wrapper .mat-form-field-underline {
+    width: 0px;
+    background: #f3f2f7;
+
+  }
+
+  ::ng-deep .mat-form-field-wrapper .mat-form-field-flex {
+    background-color: #f3f2f7;
+    border-radius: 10px !important;
+
+    .mat-form-field-infix {
+      margin-left: 1em;
+      border-top: 0px;
+
+      .mat-input-element {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+.missing-items-button{
+  width: 100%;
+  display: block;
+  border-radius: 0px;
+}
+
+::ng-deep .mat-card{
+  padding-bottom: 0px;
+  border-radius: 0px !important;
+}

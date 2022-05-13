@@ -97,14 +97,25 @@ export class UserService {
     })
   }
 
-  addOrderToUserOrderHistory(order, userId) {
-    const userRef = this.db.collection('/users').doc(userId).collection('/orders').doc(order.id).set({
-      order:order
-    });
-  }
+
 
   getOrderHistory(uid) {
     return this.usersRef.doc(uid).collection('/orders');
   }
+
+  addOrderToUser(order: any, uid) {
+    const userRef = this.db.collection('/users').doc(uid).collection('/orders').doc(order.id).set({
+      order:order
+    });
+  }
+
+  changeOrderStatus(order:any, newStatus){
+    order.status=newStatus;
+    const orderToChange= this.usersRef.doc(order.client.uid).collection('/orders').doc(order.id).update({
+      order:order
+    });
+
+  }
+
 }
 

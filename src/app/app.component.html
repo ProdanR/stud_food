@@ -2,5 +2,7 @@
 <app-top-tool-bar *ngIf="(authService.isLoggedIn()) && (authService.isLoggedIn() && !isMobileDevice())"></app-top-tool-bar>
 
 <router-outlet></router-outlet>
-<app-tool-bar-mobile *ngIf="authService.isLoggedIn() && isMobileDevice()  && isRouteToDontShow()" ></app-tool-bar-mobile>
+<app-tool-bar-mobile *ngIf="(authService.isLoggedIn()) && isMobileDevice()  && isRouteToDontShow()" >
+  {{isLoggedIn}}
+</app-tool-bar-mobile>
 

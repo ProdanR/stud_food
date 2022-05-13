@@ -22,6 +22,7 @@ import {OrderCategoriesComponent} from "./admin/order-categories/order-categorie
 import {FavoriteProductsComponent} from "./favorite-products/favorite-products.component";
 import {CartComponent} from "./cart/cart.component";
 import {OrdersComponent} from "./orders/orders.component";
+import {TakeOrdersComponent} from "./admin/take-orders/take-orders.component";
 
 
 const routes: Routes = [
@@ -132,6 +133,11 @@ const routes: Routes = [
   {
     path: 'categories-order',
     component: OrderCategoriesComponent,
+    canActivate: [AuthGuard], data: {role: 'admin'}
+  },
+  {
+    path: 'take-orders',
+    component: TakeOrdersComponent,
     canActivate: [AuthGuard], data: {role: 'admin'}
   },
 ];

@@ -52,6 +52,7 @@ export class AuthService {
     const credential = await this.afAuth.signInWithPopup(provider);
     this.saveUserDataToFirebaseGoogleCredentials(credential.user);
     this.saveLoggedUserToDataStorage(credential.user?.uid);
+
   }
 
   async signInWithFacebook() {
@@ -197,6 +198,11 @@ export class AuthService {
       }
     }
     return false
+  }
+
+  getCurrentUser(){
+    let user = this.afAuth.currentUser;
+    return user;
   }
 
 

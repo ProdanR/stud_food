@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {UserService} from "./_shared/services/user.service";
 import {AuthService} from "./_shared/services/auth.service";
 import {Router} from "@angular/router";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,19 @@ export class AppComponent {
   router: any;
   title = 'stud-food';
   routeDontShowMobileBar = ['/feedback', '/add-money-in-app', '/account-details/edit-phone-number', '/account-details/edit-display-name', '/menu-item']
+  isLoggedIn=true;
 
-  constructor(public userService: UserService, public authService: AuthService, public _router: Router) {
+  constructor(public userService: UserService, public authService: AuthService, public _router: Router, public afAuth: AngularFireAuth) {
+    afAuth.onAuthStateChanged(user=>  {
+      if (user!=null) {
+        this.isLoggedIn=true;
+      } else {
+        this.isLoggedIn=false;
+      }
+      console.log("CEVAAAAAAA " + this.isLoggedIn);
+    });
   }
+
 
   isRouteToDontShow() {
     if (this._router.url.startsWith('/menu-item/')){
@@ -37,4 +48,6 @@ export class AppComponent {
       return false;
     }
   }
+
+
 }
