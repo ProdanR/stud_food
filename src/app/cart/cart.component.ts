@@ -5,6 +5,7 @@ import {UserService} from "../_shared/services/user.service";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import {MetadataService} from "../_shared/services/metadata.service";
 import {OrderService} from "../_shared/services/order.service";
+import {MessagingService} from "../_shared/notification-messaging/messaging.service";
 
 @Component({
   selector: 'app-cart',
@@ -25,7 +26,7 @@ export class CartComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private _snackBar: MatSnackBar, private productService: ProductService, private userService: UserService, private metadataService: MetadataService, private orderService: OrderService) {
+  constructor(private router: Router, private _snackBar: MatSnackBar, private productService: ProductService, private userService: UserService, private metadataService: MetadataService, private orderService: OrderService, private messagingSerive: MessagingService) {
     this.screenHeigh = document.documentElement.clientHeight;
     this.configSnackBar.duration = 2000;
     this.configSnackBar.verticalPosition = 'top';
@@ -36,6 +37,7 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.messagingSerive.requestPermisionIfDoesntExist();
   }
 
   private getCurrentUser() {
@@ -98,6 +100,7 @@ export class CartComponent implements OnInit {
     client.uid=this.currentUser.uid;
     client.fullName=this.currentUser.displayName;
     client.phoneNumber= this.currentUser.phoneNumber;
+    client.notificationToken=this.currentUser.notificationToken;
 
     order.products=this.currentUser.cart.products;
     order.client=client;
@@ -109,6 +112,7 @@ export class CartComponent implements OnInit {
     order.status='SENT';
     order.date=new Date();
     order.orderNumber=this.metadata.orderCountNumber;
+
     this.orderService.placeOrder(order).then( docRef=>{
       this.orderService.emptyUserCart(order);
       order.id=docRef.id;

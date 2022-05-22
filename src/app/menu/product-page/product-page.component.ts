@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ProductService} from "../../_shared/services/product.service";
 import {UserService} from "../../_shared/services/user.service";
+import {MessagingService} from "../../_shared/notification-messaging/messaging.service";
 
 @Component({
   selector: 'app-product-page',
@@ -20,7 +21,7 @@ export class ProductPageComponent implements OnInit {
 
   currentUser: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private productService: ProductService, private userService: UserService) {
+  constructor(private router: Router, private route: ActivatedRoute, private productService: ProductService, private userService: UserService,) {
     this.screenHeigh = document.documentElement.clientHeight;
     this.getCurrentUser();
   }
@@ -56,6 +57,7 @@ export class ProductPageComponent implements OnInit {
   increaseProductCount() {
     this.productCount = this.productCount + 1;
     this.totalPrice += this.priceToIncreaseDecrease;
+
   }
 
   decreaseProductCount() {

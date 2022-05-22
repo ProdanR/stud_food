@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {User} from "../model/user";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import firebase from "firebase/compat/app";
+import {MessagingService} from "../notification-messaging/messaging.service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class AuthService {
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
               private router: Router,
-              private _snackBar: MatSnackBar) {
+              private _snackBar: MatSnackBar,
+              private messagingService:MessagingService) {
 
     this.configSnackBar.duration = 2000;
     this.configSnackBar.verticalPosition = 'top';
@@ -59,7 +61,7 @@ export class AuthService {
     const provider = new firebase.auth.FacebookAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
     await this.saveUserDataToFirebase(credential.user);
-
+    this.saveLoggedUserToDataStorage(credential.user?.uid);
 
   }
 
@@ -127,7 +129,9 @@ export class AuthService {
   saveUserDataToFirebaseGoogleCredentials(user: any) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
     const cart = this.getEmptyCart()
+    const notificationToken= this.messagingService.userToken;
     const data = {
+      notificationToken: notificationToken,
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
@@ -158,16 +162,12 @@ export class AuthService {
 
   saveUserDataToFirebase(user: any) {
 
-    const userRef: AngularFirestoreDocument<any> = this.afs.collection("users").doc(user.uid);
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const cart = this.getEmptyCart()
+    const notificationToken= this.messagingService.userToken;
 
-
-
-    userRef.get().subscribe((doc) => {
-
-
-      if (!doc.exists) {
-        const cart = this.getEmptyCart()
-        const userData: any = {
+        const data: any = {
+          notificationToken: notificationToken,
           uid: user.uid,
           displayName: user.displayName,
           phoneNumber: user.phoneNumber,
@@ -179,12 +179,8 @@ export class AuthService {
           favoriteProducts: [],
           cart: cart
         }
-        userRef.set(userData, {
-          merge: true
-        })
-      }
-      this.saveLoggedUserToDataStorage(user?.uid);
-    })
+    return userRef.set(data, {merge: true})
+
 
 
   }

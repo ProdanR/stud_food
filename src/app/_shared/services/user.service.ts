@@ -117,5 +117,11 @@ export class UserService {
 
   }
 
+  updateNotificationToken(uid, token: any) {
+    const userRef = this.db.collection('/users').doc(uid);
+    userRef.update({
+      notificationToken: token
+    })
+  }
 }
 

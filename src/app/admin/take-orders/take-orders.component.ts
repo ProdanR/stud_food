@@ -3,6 +3,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag
 import {OrderService} from "../../_shared/services/order.service";
 import {map} from "rxjs/operators";
 import {UserService} from "../../_shared/services/user.service";
+import {MessagingService} from "../../_shared/notification-messaging/messaging.service";
 
 @Component({
   selector: 'app-take-orders',
@@ -21,7 +22,7 @@ export class TakeOrdersComponent implements OnInit {
   finishedOrders:any[]=[];
   deliveredOrders:any[]=[];
 
-  constructor(private orderService: OrderService, private  userService: UserService) {
+  constructor(private orderService: OrderService, private  userService: UserService, private messagingService: MessagingService) {
     this.getAllOrders()
   }
 
@@ -51,11 +52,14 @@ export class TakeOrdersComponent implements OnInit {
   }
 
   drop(event: any) {
+
     console.log(event.previousContainer.data[event.previousIndex]);
     console.log(event);
     let order= event.previousContainer.data[event.previousIndex];
     const newStatus=event.container.id;
     order.date=new Date();
+    order.status=newStatus;
+    this.messagingService.sendNotification(order).add(sth=> console.log(sth));
     this.orderService.setOrderStatus(order,newStatus);
     this.userService.changeOrderStatus(order,newStatus);
     if (event.previousContainer === event.container) {

@@ -61,6 +61,9 @@ import { OrdersComponent } from './orders/orders.component';
 import { OrderCardComponent } from './orders/order-card/order-card.component';
 import { TakeOrdersComponent } from './admin/take-orders/take-orders.component';
 import { TakeOrdersCardComponent } from './admin/take-orders/take-orders-card/take-orders-card.component';
+import {AngularFireMessaging, AngularFireMessagingModule} from "@angular/fire/compat/messaging";
+import {MessagingService} from "./_shared/notification-messaging/messaging.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -132,7 +135,9 @@ import { TakeOrdersCardComponent } from './admin/take-orders/take-orders-card/ta
             // or after 30 seconds (whichever comes first).
             registrationStrategy: 'registerWhenStable:30000'
         }),
-        MatRadioModule
+        MatRadioModule,
+        AngularFireMessagingModule,
+        HttpClientModule
     ],
   providers: [],
   bootstrap: [AppComponent]

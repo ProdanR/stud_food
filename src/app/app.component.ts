@@ -1,22 +1,27 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "./_shared/services/user.service";
 import {AuthService} from "./_shared/services/auth.service";
 import {Router} from "@angular/router";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {MessagingService} from "./_shared/notification-messaging/messaging.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   router: any;
   title = 'stud-food';
   routeDontShowMobileBar = ['/feedback', '/add-money-in-app', '/account-details/edit-phone-number', '/account-details/edit-display-name', '/menu-item']
   isLoggedIn=true;
 
-  constructor(public userService: UserService, public authService: AuthService, public _router: Router, public afAuth: AngularFireAuth) {
-    afAuth.onAuthStateChanged(user=>  {
+  constructor(public userService: UserService, public authService: AuthService, public _router: Router, public afAuth: AngularFireAuth,private messagingService: MessagingService) {
+
+  }
+
+  ngOnInit(): void {
+    this.afAuth.onAuthStateChanged(user=>  {
       if (user!=null) {
         this.isLoggedIn=true;
       } else {
@@ -24,7 +29,10 @@ export class AppComponent {
       }
       console.log("CEVAAAAAAA " + this.isLoggedIn);
     });
+    //this.messagingService.requestPermisionIfDoesntExist();
+    // this.messagingService.listen();
   }
+
 
 
   isRouteToDontShow() {
@@ -48,6 +56,7 @@ export class AppComponent {
       return false;
     }
   }
+
 
 
 }
