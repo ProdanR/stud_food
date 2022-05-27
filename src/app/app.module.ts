@@ -65,6 +65,7 @@ import {AngularFireMessaging, AngularFireMessagingModule} from "@angular/fire/co
 import {MessagingService} from "./_shared/notification-messaging/messaging.service";
 import {HttpClientModule} from "@angular/common/http";
 import { SearchProductComponent } from './menu/search-product/search-product.component';
+import { OrderDetailsComponent } from './orders/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { SearchProductComponent } from './menu/search-product/search-product.com
     TakeOrdersComponent,
     TakeOrdersCardComponent,
     SearchProductComponent,
+    OrderDetailsComponent,
 
   ],
     imports: [

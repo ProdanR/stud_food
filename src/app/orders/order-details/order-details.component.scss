@@ -1,0 +1,47 @@
+.title-card {
+  width: 100vw;
+  height: 57.75px;
+  box-shadow: none;
+  border-bottom: 3px solid #f3f2f7 !important;
+  border-radius: unset;
+  margin-top: 1px;
+  padding: 5px;
+}
+.header-title{
+  font-weight: 600;
+  color: #353C7D;
+
+}
+
+.example-card{
+  box-shadow: none;
+  border-radius: 15px;
+}
+
+img {
+  display: block;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.count-product{
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  padding: 4px;
+
+  background:  #f3f2f7;
+  text-align: center;
+  font-weight: 500;
+  //font: 32px Arial, sans-serif;
+
+
+}
+
+.add-to-cart-button{
+  border-radius: 0px;
+  color: white;
+  background: #353C7D;
+  height: 70px;
+  z-index: 1000;
+}

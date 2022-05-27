@@ -39,6 +39,9 @@ export class AppComponent implements OnInit{
     if (this._router.url.startsWith('/menu-item/')){
       return false;
     }
+    if (this._router.url.startsWith('/order-details')){
+      return false;
+    }
 
     if (this.routeDontShowMobileBar.includes(this._router.url)) {
       return false;

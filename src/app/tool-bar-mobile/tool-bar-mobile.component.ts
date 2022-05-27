@@ -46,26 +46,29 @@ export class ToolBarMobileComponent implements OnInit, OnDestroy{
     console.log(url);
     if(url==='/menu'){
       this.router.navigate(['/menu']);
-      this.selected='/menu'
+      this.selected='/menu';
     }
     if(url==='/favorite-products'){
       this.router.navigate(['/favorite-products']);
-      this.selected='/favorite-products'
+      this.selected='/favorite-products';
     }
     if(url==='/cart'){
       this.router.navigate(['/cart']);
-      this.selected='/cart'
+      this.selected='/cart';
     }
     if(url==='/orders'){
       this.router.navigate(['/orders']);
-      this.selected='/orders'
+      this.selected='/orders';
     }
     if(url==='/account-page-mobile'){
       this.router.navigate(['/account-page-mobile']);
-      this.selected='/account-page-mobile'
+      this.selected='/account-page-mobile';
     }
     if(url==='/account-details'){
-      this.selected='/account-page-mobile'
+      this.selected='/account-page-mobile';
+    }
+    if(url.startsWith('/order-details')){
+      this.selected='/orders';
     }
   }
 

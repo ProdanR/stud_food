@@ -11,7 +11,7 @@
 
     <div class="d-flex flex-column flex-wrap pt-2">
 
-        <app-order-card  *ngFor="let order of userOrders" [order]="order.order" ></app-order-card>
+        <app-order-card  *ngFor="let order of userOrders" [order]="order.order" [routerLink]="['/order-details', order?.id]"></app-order-card>
 
 
     </div>

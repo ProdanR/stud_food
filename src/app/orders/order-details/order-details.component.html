@@ -1,0 +1,67 @@
+<div [ngStyle]="{'height':order.products.length>=3?'auto':this.screenHeigh + 'px'}" style="background-color: #f3f2f7">
+
+  <div style="position: sticky; z-index: 999; top: 0px">
+    <mat-card class="title-card d-flex justify-content-center align-items-center">
+      <h1 class="header-title">Order details</h1>
+    </mat-card>
+  </div>
+  <div class="d-flex justify-content-between flex-column h-100">
+    <div>
+      <mat-card class="example-card">
+        <div class="d-flex flex-row justify-content-between align-items-center">
+          <div>
+            <div class="d-flex flex-column">
+              <p style="font-weight: 500"> STATUS: <span
+                [style.color]="getStatusColor(order.status)">{{order.status}}</span></p>
+              <span>Date: {{dateToDisplay.toLocaleDateString("ro-RO")}}
+                at {{this.dateToDisplay.toLocaleTimeString(["ro-RO"], {hour: '2-digit', minute: '2-digit'})}}</span>
+              <span>Total to pay: {{order.totalPrice|getDecimalPart}}<sup>{{order.totalPrice|getFractionalPart}}</sup> Lei</span>
+              <span>Order number: {{order.orderNumber}}</span>
+              <div class="d-flex  flex-row justify-content-between">
+                <mat-icon [style.color]="order.eatWhere=='TakeAway'?  getStatusColor(order.status):'#eae9ee'">shop
+                </mat-icon>
+                <mat-icon [style.color]="order.eatWhere=='TakeAway'?  '#eae9ee':getStatusColor(order.status)">
+                  store_mall_directory
+                </mat-icon>
+                <mat-icon [style.color]="order.payMethod=='Cash'?  '#eae9ee':getStatusColor(order.status)">credit_card
+                </mat-icon>
+                <mat-icon [style.color]="order.payMethod=='Cash'?  getStatusColor(order.status):'#eae9ee'">money
+                </mat-icon>
+              </div>
+            </div>
+          </div>
+          <img mat-card-md-image style="margin-right: 18px" src="assets/images/{{getStatusImage(order.status)}}">
+        </div>
+      </mat-card>
+
+      <div style="width: 100%;" class="container ">
+
+        <div class="d-flex flex-column flex-wrap pb-3 ">
+          <p style="font-weight: 500; font-size: 16px; margin-top: 15px">{{order.totalCount}} ordered products:</p>
+
+          <mat-card class="example-card mt-2" *ngFor="let product of order.products">
+            <mat-card-content class="d-flex flex-row align-items-center">
+              <img style="margin-right: 10px; width: 60px; height: 60px" src="{{product.image}}">
+              <div class="d-flex flex-column " style="font-weight: 500">
+                <p>{{product.title}}</p>
+                <div class="d-flex flex-row align-items-center">
+                  <div class="count-product">{{product.count}}</div>
+                  <span style="color:#c1c0c2; margin-left: 5px; margin-right: 5px; margin-top: 2px;  ">x</span>
+                  <span style=" margin-top: 4px;">{{product.price|getDecimalPart}}
+                    <sup>{{product.price|getFractionalPart}}</sup> Lei</span>
+                </div>
+              </div>
+            </mat-card-content>
+
+
+          </mat-card>
+
+        </div>
+
+      </div>
+    </div>
+    <button *ngIf="order.status=='SENT'" mat-flat-button class="add-to-cart-button" >
+      Cancel the order
+    </button>
+  </div>
+</div>

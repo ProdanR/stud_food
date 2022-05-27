@@ -29,7 +29,6 @@ export class ProductPageComponent implements OnInit {
   private getCurrentUser() {
     this.userService.getCurrentUser().snapshotChanges().subscribe(data => {
       this.currentUser = data.payload.data();
-
     });
   }
 

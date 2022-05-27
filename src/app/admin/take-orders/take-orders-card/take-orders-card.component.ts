@@ -103,6 +103,7 @@ export class TakeOrdersCardComponent implements OnInit {
 
   cancelOrder(order: any) {
     const newStatus = "CANCELED";
+    order.date=new Date();
     this.orderService.setOrderStatus(order, newStatus);
     this.userService.changeOrderStatus(order, newStatus);
   }

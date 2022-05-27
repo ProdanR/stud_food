@@ -57,7 +57,9 @@ export class TakeOrdersComponent implements OnInit {
     console.log(event);
     let order= event.previousContainer.data[event.previousIndex];
     const newStatus=event.container.id;
+    console.log(order.date);
     order.date=new Date();
+    console.log(order.date);
     order.status=newStatus;
     this.messagingService.sendNotification(order).add(sth=> console.log(sth));
     this.orderService.setOrderStatus(order,newStatus);

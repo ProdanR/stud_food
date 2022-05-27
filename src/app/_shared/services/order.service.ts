@@ -25,6 +25,11 @@ export class OrderService {
     return this.ordersRef;
   }
 
+  getOrderById(orderId: any){
+    const orderRef = this.ordersRef.doc(orderId);
+    return orderRef;
+  }
+
   getTodaysOrders(){
     let today = new Date();
     today.setHours(0,0,0,0);
@@ -67,8 +72,8 @@ export class OrderService {
     const prderRef = this.ordersRef.doc(order.id);
 
     prderRef.update({
-      status: newStatus
+      status: newStatus,
+      date: order.date
     });
-
   }
 }
