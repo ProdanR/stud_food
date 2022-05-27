@@ -6,14 +6,14 @@
     </mat-card>
   </div>
 
-  <div *ngIf="!haveProductsInCart()" class="d-flex flex-column justify-content-center align-items-center"
+  <div *ngIf="!haveProductsInCart() && isReady" class="d-flex flex-column justify-content-center align-items-center"
        style="height: 90%">
     <img src="assets/images/undraw_empty_cart_co35.svg" class="empty-card-image">
     <h2>Your cart is empty</h2>
     <button mat-flat-button class="go-to-shopping" routerLink="/menu">Go to shopping</button>
   </div>
 
-  <div *ngIf="haveProductsInCart()" class="d-flex flex-column justify-content-center align-items-center">
+  <div *ngIf="haveProductsInCart() && isReady" class="d-flex flex-column justify-content-center align-items-center">
     <ng-container *ngFor="let productToBuy of productsToBuy">
       <app-cart-product-card style="width: 90%" [currentUser]="currentUser" [productsToBuy]="productsToBuy"
                              [productToBuy]="productToBuy"></app-cart-product-card>

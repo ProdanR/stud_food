@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FeedbackService} from "../../_shared/services/feedback.service";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-feedback',
@@ -9,7 +10,7 @@ import {FeedbackService} from "../../_shared/services/feedback.service";
 export class FeedbackComponent implements OnInit {
   feedback: any={};
 
-  constructor(private feedbackService: FeedbackService) { }
+  constructor(private feedbackService: FeedbackService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -19,5 +20,7 @@ export class FeedbackComponent implements OnInit {
     this.feedback.date=new Date().toString();
     console.log(this.feedback);
     this.feedbackService.addFeedback(this.feedback);
+    this.router.navigate(['/account-page-mobile']);
+
   }
 }

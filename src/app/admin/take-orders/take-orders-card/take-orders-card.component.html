@@ -7,6 +7,7 @@
 
         <div class="d-flex flex-column bold">
           <span style="font-weight: 600">OrderNr: {{order.orderNumber}}</span>
+          <span style="font-weight: 600">Pay: {{order.totalPrice}}</span>
           <p style="font-weight: 500">Time:{{getOrderTime(order)}}</p>
 
         </div>
@@ -55,5 +56,9 @@
     </mat-card-content>
 
   </mat-card>
-  <button mat-flat-button color="primary" class="missing-items-button" (click)="setUnavailableProductsAndOrdersStatus()"> Missing Items</button>
+  <div class="d-flex flex-row">
+    <button mat-flat-button color="primary" class="missing-items-button flex-grow-1" (click)="setUnavailableProductsAndOrdersStatus()"> Missing Items</button>
+    <button mat-flat-button color="warn" class="missing-items-button flex-grow-1" (click)="cancelOrder(order)"> Cancel Order</button>
+  </div>
+
 </div>

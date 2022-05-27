@@ -100,4 +100,10 @@ export class TakeOrdersCardComponent implements OnInit {
     };
     return cart;
   }
+
+  cancelOrder(order: any) {
+    const newStatus = "CANCELED";
+    this.orderService.setOrderStatus(order, newStatus);
+    this.userService.changeOrderStatus(order, newStatus);
+  }
 }

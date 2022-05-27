@@ -1,8 +1,15 @@
 <div class="d-flex flex-column" [ngStyle]="{'height': this.screenHeigh + 'px'}">
   <div class="image-container">
+    <button mat-mini-fab (click)="goToMenu()">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
     <img *ngIf="productLoaded" src="{{product?.photoUrl}}">
     <img *ngIf="!productLoaded" src="assets/images/loading.gif">
   </div>
+<!--  <div class="image-favorite">-->
+<!--    <img mat-card-md-image src="{{product.photoUrl}}">-->
+
+<!--  </div>-->
   <div class="d-flex p-3 flex-column h-100 justify-content-between">
 
     <div>

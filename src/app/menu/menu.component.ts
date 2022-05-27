@@ -18,8 +18,8 @@ export class MenuComponent implements OnInit {
   allProducts: any[] = [];
   productsByCategory: any[] = new Array();
 
-  productsReady=false;
-  showLoading=[1,2,3,4];
+  productsReady = false;
+  showLoading = [1, 2, 3, 4];
 
   currentUser: any;
 
@@ -31,8 +31,8 @@ export class MenuComponent implements OnInit {
   offsetWidthChipList = [];
   chipListElement: any;
   firstScroll = true;
-  //STOP for scroll declarations
 
+  //STOP for scroll declarations
 
 
   constructor(private router: Router, private productService: ProductService, private userService: UserService) {
@@ -40,12 +40,12 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!localStorage.getItem('foo')) {
-      localStorage.setItem('foo', 'no reload')
-      location.reload()
-    } else {
-      localStorage.removeItem('foo')
-    }
+    // if (!localStorage.getItem('foo')) {
+    //   localStorage.setItem('foo', 'no reload')
+    //   location.reload()
+    // } else {
+    //   localStorage.removeItem('foo')
+    // }
     this.getAllCategories();
     this.getAllProducts();
   }
@@ -88,6 +88,9 @@ export class MenuComponent implements OnInit {
 
   private splitProductsByCategory() {
     let itemsProcessed = 0;
+    let productsProcessed = 0;
+    let nonEmptyCategories: any[] = [];
+
 
     this.categories.forEach(category => {
       itemsProcessed++;
@@ -95,15 +98,26 @@ export class MenuComponent implements OnInit {
 
       if (itemsProcessed === this.categories.length) {
         this.allProducts.forEach(product => {
+          productsProcessed++;
           this.productsByCategory[product.category].push(product);
+          if (!nonEmptyCategories.includes(product.category)) {
+            nonEmptyCategories.push(product.category);
+          }
+          if (productsProcessed == this.allProducts.length) {
+            this.categories = this.categories.filter(x => nonEmptyCategories.includes(x));
+            this.selectedCategory = this.categories[0];
+            console.log(this.categories);
+            this.productsReady = true;
+            setTimeout(() => {
+              this.getcategoriesScroolBreakPoints();
+              this.getOffsetWidthChipList();
+            }, 1000);
+          }
         });
-        this.productsReady=true;
-        setTimeout(() => {
-          this.getcategoriesScroolBreakPoints();
-          this.getOffsetWidthChipList();
-        }, 1000);
+
 
       }
+
     });
 
   }
@@ -193,5 +207,7 @@ export class MenuComponent implements OnInit {
   //STOP for scroll functionality
 
 
-
+  goToSeachProduct() {
+    this.router.navigate(['search-product']);
+  }
 }

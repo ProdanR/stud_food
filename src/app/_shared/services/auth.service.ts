@@ -20,7 +20,7 @@ export class AuthService {
               private afs: AngularFirestore,
               private router: Router,
               private _snackBar: MatSnackBar,
-              private messagingService:MessagingService) {
+              private messagingService: MessagingService) {
 
     this.configSnackBar.duration = 2000;
     this.configSnackBar.verticalPosition = 'top';
@@ -52,6 +52,7 @@ export class AuthService {
   async signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
+    // if( credential.user?.uid)
     this.saveUserDataToFirebaseGoogleCredentials(credential.user);
     this.saveLoggedUserToDataStorage(credential.user?.uid);
 
@@ -128,24 +129,28 @@ export class AuthService {
 
   saveUserDataToFirebaseGoogleCredentials(user: any) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-    const cart = this.getEmptyCart()
-    const notificationToken= this.messagingService.userToken;
-    const data = {
-      notificationToken: notificationToken,
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      roles: ['user'],
-      hasDiscount: false,
-      moneyInApp: 0,
-      studentNumber: '',
-      favoriteProducts: [],
-      cart: cart
-    }
-
-    // @ts-ignore
-    return userRef.set(data, {merge: true})
+    userRef.get().subscribe((userDb) => {
+      if (!userDb.exists) {
+        const cart = this.getEmptyCart()
+        const notificationToken = this.messagingService.userToken;
+        const data = {
+          notificationToken: notificationToken,
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          roles: ['user'],
+          hasDiscount: false,
+          moneyInApp: 0,
+          studentNumber: '',
+          favoriteProducts: [],
+          cart: cart
+        }
+        // @ts-ignore
+        return userRef.set(data, {merge: true})
+      }
+      return userRef;
+    });
   }
 
   private getEmptyCart() {
@@ -163,9 +168,11 @@ export class AuthService {
   saveUserDataToFirebase(user: any) {
 
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-    const cart = this.getEmptyCart()
-    const notificationToken= this.messagingService.userToken;
 
+    userRef.get().subscribe((userDb) => {
+      if (!userDb.exists) {
+        const cart = this.getEmptyCart()
+        const notificationToken = this.messagingService.userToken;
         const data: any = {
           notificationToken: notificationToken,
           uid: user.uid,
@@ -179,7 +186,11 @@ export class AuthService {
           favoriteProducts: [],
           cart: cart
         }
-    return userRef.set(data, {merge: true})
+        return userRef.set(data, {merge: true})
+      }
+      return userRef;
+    })
+
 
 
 
@@ -196,7 +207,7 @@ export class AuthService {
     return false
   }
 
-  getCurrentUser(){
+  getCurrentUser() {
     let user = this.afAuth.currentUser;
     return user;
   }

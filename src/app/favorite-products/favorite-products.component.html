@@ -10,7 +10,8 @@
   <div style="width: 100%; background-color: #f3f2f7; height: 100%" class="container ">
 
 
-    <div *ngIf="!haveProductsAtFavorite()" class="d-flex flex-column justify-content-center align-items-center"
+    <div *ngIf="!haveProductsAtFavorite() && isReady"
+         class="d-flex flex-column justify-content-center align-items-center"
          style="height: 90%">
       <img src="assets/images/undraw_heartbroken_cble.svg" class="empty-favorite">
       <h2>You dont have favorite products</h2>

@@ -23,6 +23,7 @@ import {FavoriteProductsComponent} from "./favorite-products/favorite-products.c
 import {CartComponent} from "./cart/cart.component";
 import {OrdersComponent} from "./orders/orders.component";
 import {TakeOrdersComponent} from "./admin/take-orders/take-orders.component";
+import {SearchProductComponent} from "./menu/search-product/search-product.component";
 
 
 const routes: Routes = [
@@ -44,6 +45,11 @@ const routes: Routes = [
     component: ResetPasswordComponent
   },
 
+  {
+    path: 'search-product',
+    component: SearchProductComponent,
+    canActivate: [AuthGuard], data: {role: 'user'}
+  },
   {
     path: 'menu',
     component: MenuComponent,

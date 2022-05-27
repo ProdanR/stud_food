@@ -1,0 +1,18 @@
+<div [ngStyle]="{'height':3>=4?'auto':'100%'}" style="background: #f3f2f7">
+  <div style="position: sticky; z-index: 999; top: 0px">
+    <mat-card class="search-card">
+      <mat-card-content class="d-flex flex-row justify-content-between align-items-center">
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-icon style="color: #353C7D; font-weight: bold" matPrefix>search</mat-icon>
+          <input type="text" matInput placeholder="Search in our menu" (input)="searchProduct($event.target)">
+        </mat-form-field>
+        <span class="mx-3" style="font-weight: 500" (click)="goToMenu()">close</span>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="container p-2">
+  <app-product-card  *ngFor="let product of filtredProducts" [product]="product" [currentUser]="currentUser"></app-product-card>
+  </div>
+  <img *ngIf="filtredProducts.length==0" src="assets/images/undraw_the_search_s0xf.svg" class="empty-search" style="margin-top: 45%; margin-left: 30%">
+</div>
+

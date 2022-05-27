@@ -100,4 +100,8 @@ export class ProductPageComponent implements OnInit {
       this.currentUser.cart.totalCount = this.currentUser.cart.totalCount + this.productCount;
     }
   }
+
+  goToMenu() {
+    this.router.navigate(['menu']);
+  }
 }

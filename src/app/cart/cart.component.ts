@@ -24,6 +24,7 @@ export class CartComponent implements OnInit {
   configSnackBar = new MatSnackBarConfig();
   private screenHeigh: number;
 
+  isReady=false;
 
 
   constructor(private router: Router, private _snackBar: MatSnackBar, private productService: ProductService, private userService: UserService, private metadataService: MetadataService, private orderService: OrderService, private messagingSerive: MessagingService) {
@@ -44,6 +45,7 @@ export class CartComponent implements OnInit {
     this.userService.getCurrentUser().snapshotChanges().subscribe(data => {
       this.currentUser = data.payload.data();
       this.productsToBuy = this.currentUser.cart.products;
+      this.isReady=true;
     });
   }
 
@@ -51,33 +53,6 @@ export class CartComponent implements OnInit {
     if (this.currentUser?.cart.products.length == 0)
       return false;
     return true;
-  }
-
-
-  decreaseProductCount(productToBuy: any) {
-    const index = this.productsToBuy.indexOf(productToBuy)
-    productToBuy.count = productToBuy.count - 1;
-    productToBuy.totalPrice = productToBuy.totalPrice - productToBuy.price;
-    if (productToBuy.count === 0) {
-      this.productsToBuy.splice(index, 1);
-    } else
-      this.productsToBuy[index] = productToBuy;
-
-    this.currentUser.cart.totalCount = this.currentUser.cart.totalCount - 1;
-    this.currentUser.cart.totalPrice = this.currentUser.cart.totalPrice - productToBuy.price;
-    this.userService.updateCart(this.currentUser.cart, this.currentUser);
-  }
-
-  increaseProductCount(productToBuy: any) {
-    const index = this.productsToBuy.indexOf(productToBuy)
-    productToBuy.count = productToBuy.count + 1;
-    productToBuy.totalPrice = productToBuy.totalPrice + productToBuy.price;
-    this.productsToBuy[index] = productToBuy;
-
-    this.currentUser.cart.totalCount = this.currentUser.cart.totalCount + 1;
-    this.currentUser.cart.totalPrice = this.currentUser.cart.totalPrice + productToBuy.price;
-    console.log(this.currentUser.cart);
-    this.userService.updateCart(this.currentUser.cart, this.currentUser);
   }
 
   placeOrder() {

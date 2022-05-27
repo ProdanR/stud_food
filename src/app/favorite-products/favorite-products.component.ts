@@ -11,13 +11,14 @@ import {map} from "rxjs/operators";
 export class FavoriteProductsComponent implements OnInit {
   currentUser: any;
   favoriteProducts: any[] = [];
+  isReady = false;
 
   constructor(private userService: UserService, private productService: ProductService) {
     this.getCurrentUser();
   }
 
   private getCurrentUser() {
-    this.userService.getCurrentUser().snapshotChanges().subscribe(data => {
+    this.userService.getCurrentUser().snapshotChanges().subscribe( data => {
       this.currentUser = data.payload.data();
       this.getFavoriteProducts();
     });
@@ -28,18 +29,22 @@ export class FavoriteProductsComponent implements OnInit {
 
   private getFavoriteProducts() {
     this.favoriteProducts=[];
+    this.isReady = false;
+    if (this.currentUser.favoriteProducts.length == 0) this.isReady = true;
     this.currentUser.favoriteProducts.forEach(productId => {
       console.log(productId);
       this.productService.getProductById(productId).get().pipe(map((changes: any) =>
-          ({id: productId, ...changes.data()})
+        ({id: productId, ...changes.data()})
       )).subscribe(product => {
+        console.log(product);
         this.favoriteProducts.push(product);
+        this.isReady = true;
       });
     })
   }
 
   haveProductsAtFavorite() {
-    if(this.favoriteProducts.length==0)
+    if (this.favoriteProducts.length == 0)
       return false;
     return true;
   }
