@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {OrderService} from "../../_shared/services/order.service";
+import {UserService} from "../../_shared/services/user.service";
 
 @Component({
   selector: 'app-order-details',
@@ -8,14 +9,14 @@ import {OrderService} from "../../_shared/services/order.service";
   styleUrls: ['./order-details.component.scss']
 })
 export class OrderDetailsComponent implements OnInit {
-  orderId:any;
-  order:any={};
-  dateToDisplay:any;
+  orderId: any;
+  order: any = {};
+  dateToDisplay: any;
 
   screenHeigh;
 
-  constructor(private router: Router, private route: ActivatedRoute, private orderService:OrderService) {
-    this.screenHeigh = document.documentElement.clientHeight-60;
+  constructor(private router: Router, private route: ActivatedRoute, private orderService: OrderService, private userService: UserService) {
+    this.screenHeigh = document.documentElement.clientHeight;
   }
 
   ngOnInit(): void {
@@ -28,7 +29,9 @@ export class OrderDetailsComponent implements OnInit {
   private getOrderById(orderId: any) {
     this.orderService.getOrderById(orderId).snapshotChanges().subscribe(data => {
       this.order = data.payload.data();
-      this.dateToDisplay= new Date(this.order.date.seconds*1000);
+      this.order.id=orderId;
+      if(this.order.status=='SENT'){}
+      this.dateToDisplay = new Date(this.order.date.seconds * 1000);
     });
   }
 
@@ -81,4 +84,9 @@ export class OrderDetailsComponent implements OnInit {
     return 'order_sent_status.svg';
   }
 
+  setOrderStatusToCancel(order: any, status: string) {
+    order.date=new Date();
+    this.orderService.setOrderStatus(order,status);
+    this.userService.changeOrderStatus(order,status);
+  }
 }

@@ -11,12 +11,12 @@
     </div>
 
     <mat-form-field class="example-full-width" appearance="fill">
-      <input type="phoneNumber" matInput [(ngModel)]="userData.displayName">
+      <input  required type="text" matInput [(ngModel)]="userData.displayName" id="displayName" name="displayName" #displayName="ngModel">
     </mat-form-field>
   </div>
 
   <div class="d-flex justify-content-center">
-    <button mat-flat-button class="button-action" (click)="updateUserDetails()" routerLink="..">Change name</button>
+    <button mat-flat-button class="button-action" (click)="displayName.valid?updateUserDetails():null" routerLink="/account-details">Change name</button>
   </div>
 
 </div>

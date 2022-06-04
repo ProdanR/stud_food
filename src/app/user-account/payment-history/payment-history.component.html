@@ -1,0 +1,35 @@
+
+<div [ngStyle]="{'height':paymentHistory.length>=5?'auto':'100%'}" class=" bodyy d-flex flex-row flex-wrap">
+
+  <mat-card class="card-back">
+    <mat-card-content class="d-flex flex-row justify-content-between align-items-center ">
+
+      <button class="button-back" mat-icon-button routerLink="../account-page-mobile">
+        <mat-icon style="color: #000000DD; font-size: 30px;">keyboard_arrow_left</mat-icon>
+      </button>
+
+      <p style="padding-right: 2.5vw; font-weight: 500">Payment History</p>
+
+    </mat-card-content>
+  </mat-card>
+
+  <div style="width: 100%; background-color: #f3f2f7; height: 100%" class="container ">
+
+    <div class="d-flex flex-column flex-wrap pt-2">
+
+      <mat-card class="payment-card" style="box-shadow: none" *ngFor="let payment of paymentHistory">
+        <mat-card-content class="d-flex flex-column">
+          <p style="font-weight: 500">Date: {{payment.create_time | date}}</p>
+          <span>Status: {{payment.status}}</span>
+          <span>Amount: {{payment.amount}}</span>
+        </mat-card-content>
+      </mat-card>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>

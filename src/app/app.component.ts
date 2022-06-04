@@ -13,7 +13,7 @@ import {MessagingService} from "./_shared/notification-messaging/messaging.servi
 export class AppComponent implements OnInit{
   router: any;
   title = 'stud-food';
-  routeDontShowMobileBar = ['/feedback', '/add-money-in-app', '/account-details/edit-phone-number', '/account-details/edit-display-name', '/menu-item','/search-product']
+  routeDontShowMobileBar = ['/sign-in','/sign-up','/reset-password','/feedback', '/add-money-in-app', '/account-details/edit-phone-number', '/account-details/edit-display-name', '/menu-item','/search-product', '/payment-history']
   isLoggedIn=true;
 
   constructor(public userService: UserService, public authService: AuthService, public _router: Router, public afAuth: AngularFireAuth,private messagingService: MessagingService) {

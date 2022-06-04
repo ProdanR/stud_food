@@ -13,12 +13,12 @@
     </div>
 
     <mat-form-field class="example-full-width" appearance="fill">
-      <input type="phoneNumber" matInput [(ngModel)]="userData.phoneNumber">
+      <input required pattern="^[0-9]{10}$.*" matInput [(ngModel)]="userData.phoneNumber" id="phoneNumber" name="phoneNumber" #phoneNumber="ngModel">
     </mat-form-field>
   </div>
 
   <div class="d-flex justify-content-center">
-    <button mat-flat-button class="button-action" (click)="updateUserDetails()" routerLink="..">Change phone number</button>
+    <button mat-flat-button class="button-action" (click)="phoneNumber.valid?updateUserDetails():showError()">Change phone number</button>
   </div>
 
 </div>

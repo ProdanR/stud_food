@@ -97,7 +97,9 @@ export class UserService {
     })
   }
 
-
+  getPaymentHistory(uid) {
+    return this.usersRef.doc(uid).collection('/transactions');
+  }
 
   getOrderHistory(uid) {
     return this.usersRef.doc(uid).collection('/orders');

@@ -69,9 +69,10 @@ export class OrderService {
   }
 
   setOrderStatus(order: any, newStatus: any) {
-    const prderRef = this.ordersRef.doc(order.id);
+    window.alert(order.id);
+    const orderRef = this.ordersRef.doc(order.id);
 
-    prderRef.update({
+    orderRef.update({
       status: newStatus,
       date: order.date
     });

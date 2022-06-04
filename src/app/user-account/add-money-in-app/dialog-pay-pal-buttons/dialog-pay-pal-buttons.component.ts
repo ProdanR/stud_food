@@ -3,6 +3,7 @@ import {ICreateOrderRequest, IPayPalConfig} from "ngx-paypal";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {UserService} from "../../../_shared/services/user.service";
+import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-dialog-pay-pal-buttons',
@@ -15,12 +16,17 @@ export class DialogPayPalButtonsComponent implements OnInit {
   public moneyInLei;
   public moneyInEur;
 
+  configSnackBar = new MatSnackBarConfig();
 
   constructor(public dialogRef: MatDialogRef<DialogPayPalButtonsComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private userService: UserService,
-              public router: Router) {
+              public router: Router,
+              private _snackBar: MatSnackBar) {
     this.moneyInLei=this.data.value;
+    this.configSnackBar.duration = 2000;
+    this.configSnackBar.verticalPosition = 'top';
+    this.configSnackBar.panelClass = ['my_snackBar'];
   }
 
 
@@ -43,7 +49,7 @@ export class DialogPayPalButtonsComponent implements OnInit {
   private initConfig(): void {
     this.payPalConfig = {
       currency: 'EUR',
-      clientId: 'AelBgjALXK0XAMHAlBQVfSptbVuK98TUUDEciBQx4LW6KYxxNaAcjLH_xKwAm8sR2r-eepCHoGgT5f4s',
+      clientId: 'AYPBqnmv0jqWOGpSu_D0Qq6R3c8jrHGsTZf3w3fHmQBOSRs7jUjQj9oTV8viPA0wiPfZJkDmjX2TAGN9',
       createOrderOnClient: (data) => <ICreateOrderRequest>{
         intent: 'CAPTURE',
         purchase_units: [
@@ -85,10 +91,8 @@ export class DialogPayPalButtonsComponent implements OnInit {
         this.userService.addMoneyInApp(this.moneyInLei);
         this.router.navigate(['account-page-mobile']);
         return actions.order.capture().then( (orderData)=> {
-          // Successful capture! For dev/demo purposes:
-          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
           const transaction = orderData.purchase_units[0].payments.captures[0];
-          alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+          this._snackBar.open("Transaction successfully", "",this.configSnackBar);
           this.userService.addTransactionToUser(transaction,this.moneyInLei);
           this.dialogRef.close();
         });
@@ -101,10 +105,10 @@ export class DialogPayPalButtonsComponent implements OnInit {
         console.log('OnShipingChange', data, actions);
       },
       onCancel: (data, actions) => {
-        console.log('OnCancel', data, actions);
+        this._snackBar.open("Transaction was canceled", "",this.configSnackBar);
       },
       onError: err => {
-        console.log('OnError', err);
+        this._snackBar.open("Transaction encountered an error", "",this.configSnackBar);
       },
       onClick: (data, actions) => {
         console.log('onClick', data, actions);
@@ -112,7 +116,4 @@ export class DialogPayPalButtonsComponent implements OnInit {
     };
   }
 
-  // ngAfterViewInit(): void {
-  //   this.getResults();
-  // }
 }

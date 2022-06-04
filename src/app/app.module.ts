@@ -66,6 +66,7 @@ import {MessagingService} from "./_shared/notification-messaging/messaging.servi
 import {HttpClientModule} from "@angular/common/http";
 import { SearchProductComponent } from './menu/search-product/search-product.component';
 import { OrderDetailsComponent } from './orders/order-details/order-details.component';
+import { PaymentHistoryComponent } from './user-account/payment-history/payment-history.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { OrderDetailsComponent } from './orders/order-details/order-details.comp
     TakeOrdersCardComponent,
     SearchProductComponent,
     OrderDetailsComponent,
+    PaymentHistoryComponent,
 
   ],
     imports: [

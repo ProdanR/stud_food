@@ -25,6 +25,7 @@ import {OrdersComponent} from "./orders/orders.component";
 import {TakeOrdersComponent} from "./admin/take-orders/take-orders.component";
 import {SearchProductComponent} from "./menu/search-product/search-product.component";
 import {OrderDetailsComponent} from "./orders/order-details/order-details.component";
+import {PaymentHistoryComponent} from "./user-account/payment-history/payment-history.component";
 
 
 const routes: Routes = [
@@ -100,6 +101,11 @@ const routes: Routes = [
   {
     path: 'add-money-in-app',
     component: AddMoneyInAppComponent,
+    canActivate: [AuthGuard], data: {role: 'user'}
+  },
+  {
+    path: 'payment-history',
+    component: PaymentHistoryComponent,
     canActivate: [AuthGuard], data: {role: 'user'}
   },
   {
