@@ -6,6 +6,7 @@ import {UserService} from "../../_shared/services/user.service";
 import {map} from "rxjs/operators";
 import {ProductService} from "../../_shared/services/product.service";
 import * as _ from 'lodash'
+import {DatasourceBuilder} from "./data-builder";
 
 @Component({
   selector: 'app-products-list',
@@ -21,7 +22,10 @@ export class ProductsListComponent implements OnInit {
   displayedColumns: string[] = ['title', 'category', 'description', 'normalPrice', 'discountPrice', 'weight', 'available', 'edit', 'delete'];
 
   allCategories;
-  stateAvailable='All';
+
+  searchTitle="";
+  category="All";
+  available="All";
 
   constructor(private productService: ProductService) {
   }
@@ -43,9 +47,13 @@ export class ProductsListComponent implements OnInit {
       this.apiResponse = data;
       this.allProducts = data;
       this.allProducts = [...data];
-      this.dataSource.data = this.allProducts;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+      this.dataSource.data=new DatasourceBuilder().withTableData(this.apiResponse)
+        .withSearchTitle(this.searchTitle)
+        .withCategory(this.category)
+        .withAvailable(this.available)
+        .init();
     });
   }
 
@@ -83,40 +91,30 @@ export class ProductsListComponent implements OnInit {
   }
 
   doTitleFilter(target: any) {
-    let filtredData;
-    if (target.value.length >= 3) {
-      filtredData = _.filter(this.dataSource.filteredData, (item: any) => {
-        return item.title.toLowerCase().includes(target.value.toLowerCase());
-      });
-    } else filtredData = this.apiResponse;
-    this.dataSource = new MatTableDataSource(filtredData);
-    this.dataSource.filteredData = filtredData;
+    this.searchTitle=target.value;
+    this.dataSource.data=new DatasourceBuilder().withTableData(this.apiResponse)
+      .withSearchTitle(this.searchTitle)
+      .withCategory(this.category)
+      .withAvailable(this.available)
+      .init();
   }
 
   onCategoryChange(category: any) {
-    let filtredData;
-    if (category !== 'All') {
-      filtredData = _.filter(this.dataSource.filteredData, (item: any) => {
-        return item.category === category;
-      });
-    } else filtredData = this.apiResponse;
-    this.dataSource = new MatTableDataSource(filtredData);
-    this.dataSource.filteredData = filtredData;
+    this.category=category;
+    this.dataSource.data=new DatasourceBuilder().withTableData(this.apiResponse)
+      .withSearchTitle(this.searchTitle)
+      .withCategory(this.category)
+      .withAvailable(this.available)
+      .init();
   }
 
   onAvailableChange(state: any) {
-    this.stateAvailable=state;
-    let filtredData;
-    if (state !== 'All') {
-      filtredData = _.filter(this.dataSource.filteredData, (item: any) => {
-        if (state === 'Available')
-          return item.available === true;
-        else
-          return item.available === false;
-      });
-    } else filtredData = this.apiResponse;
-    this.dataSource = new MatTableDataSource(filtredData);
-    this.dataSource.filteredData = filtredData;
+    this.available=state;
+    this.dataSource.data=new DatasourceBuilder().withTableData(this.apiResponse)
+      .withSearchTitle(this.searchTitle)
+      .withCategory(this.category)
+      .withAvailable(this.available)
+      .init();
   }
 
 

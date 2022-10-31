@@ -52,12 +52,11 @@
           </mat-form-field>
         </mat-card-content>
       </mat-card>
-
     </mat-card-content>
 
   </mat-card>
   <div class="d-flex flex-row">
-    <button mat-flat-button color="primary" class="missing-items-button flex-grow-1" (click)="setUnavailableProductsAndOrdersStatus()"> Missing Items</button>
+    <button mat-flat-button color="primary" class="missing-items-button flex-grow-1" (click)="setUnavailableProductsAndOrdersStatus(order)"> Missing Items</button>
     <button mat-flat-button color="warn" class="missing-items-button flex-grow-1" (click)="cancelOrder(order)"> Cancel Order</button>
   </div>
 

@@ -34,7 +34,6 @@ export class TakeOrdersComponent implements OnInit {
         )
       )
     ).subscribe(orders => {
-
       this.sortOrderByStatus(orders);
     });
   }
@@ -52,7 +51,6 @@ export class TakeOrdersComponent implements OnInit {
   }
 
   drop(event: any) {
-
     console.log(event.previousContainer.data[event.previousIndex]);
     console.log(event);
     let order= event.previousContainer.data[event.previousIndex];

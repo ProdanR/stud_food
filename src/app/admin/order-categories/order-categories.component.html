@@ -1,7 +1,12 @@
 <div class="main-container">
   <mat-card class="example-card p-5">
     <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let category of allCategories" cdkDrag>{{category.name}}</div>
+      <div class="example-box" *ngFor="let category of allCategories" cdkDrag>
+        {{category.name}}
+        <button style="right: 0; width: 30px; height: 30px; border-radius: 50px; border: none; background: #FF1E24" (click)="deleteCategory(category.id)">
+          <span style="color: white">x</span>
+        </button>
+      </div>
     </div>
     <button mat-flat-button class="submit-button" (click)="setNewCategoriesOrder()">Set new categories order</button>
   </mat-card>

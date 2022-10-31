@@ -15,4 +15,23 @@ export class FeedbackService {
     return this.db.collection('/feedbacks').doc().set(feedback);
   }
 
+  getAllFeedbacks(){
+    return this.feedbacksRef;
+  }
+
+  setImportant(checked, id: any) {
+    const feedbackRef = this.feedbacksRef.doc(id);
+    feedbackRef.update({
+      important: checked
+    })
+
+  }
+
+  setSolved(checked, id: any){
+    const feedbackRef = this.feedbacksRef.doc(id);
+    feedbackRef.update({
+      solved: checked
+    })
+
+  }
 }

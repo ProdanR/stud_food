@@ -99,7 +99,7 @@
         <button mat-mini-fab matTooltip="Make all users to dont't have discount" color="primary" mat-button (click)="makeAllProductsUnavailable()">
           <mat-icon>settings_backup_restore</mat-icon>
         </button>
-        <mat-select value="All" [(ngModel)]="stateAvailable">
+        <mat-select value="All" [(ngModel)]="available">
           <mat-option value="All" (click)="onAvailableChange('All')">All</mat-option>
           <mat-option  value="Available" (click)="onAvailableChange('Available')">Available</mat-option>
           <mat-option  value="Unavailable" (click)="onAvailableChange('Unavailable')">Unavailable</mat-option>

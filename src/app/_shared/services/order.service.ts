@@ -39,7 +39,6 @@ export class OrderService {
   }
 
   placeOrder(order: any) {
-    console.log(order);
     return this.ordersRef.add({
       products: order.products,
       client: order.client,
@@ -69,12 +68,11 @@ export class OrderService {
   }
 
   setOrderStatus(order: any, newStatus: any) {
-    window.alert(order.id);
     const orderRef = this.ordersRef.doc(order.id);
-
     orderRef.update({
       status: newStatus,
       date: order.date
     });
+    this._snackBar.open("Order status changed successfully", "", this.configSnackBar);
   }
 }

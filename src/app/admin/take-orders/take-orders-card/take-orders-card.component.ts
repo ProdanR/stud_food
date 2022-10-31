@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {OrderService} from "../../../_shared/services/order.service";
 import {UserService} from "../../../_shared/services/user.service";
+import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {MessagingService} from "../../../_shared/notification-messaging/messaging.service";
+import {ProductService} from "../../../_shared/services/product.service";
 
 @Component({
   selector: 'app-take-orders-card',
@@ -13,8 +16,12 @@ export class TakeOrdersCardComponent implements OnInit {
   @Input() allOrders;
 
   missingProducts: any[] = [];
+  configSnackBar = new MatSnackBarConfig();
 
-  constructor(private orderService: OrderService, private userService: UserService) {
+  constructor(private orderService: OrderService, private userService: UserService, private _snackBar: MatSnackBar,private messagingService: MessagingService,private productService: ProductService) {
+    this.configSnackBar.duration = 2000;
+    this.configSnackBar.verticalPosition = 'top';
+    this.configSnackBar.panelClass = ['my_snackBar'];
   }
 
   ngOnInit(): void {
@@ -32,59 +39,54 @@ export class TakeOrdersCardComponent implements OnInit {
       const index = this.missingProducts.indexOf(product);
       this.missingProducts.splice(index, 1);
     }
-    console.log(this.missingProducts);
   }
 
-  setUnavailableProductsAndOrdersStatus() {
-    console.log(this.allOrders);
-    // this.missingProducts.forEach(product=>{
-    //   this.allOrders.forEach(order=>{
-    //     if(order.products.some(orderProduct=> orderProduct.id == product.id)){
-    //       console.log(order);
-    //       let index= this.allOrders.indexOf(order);
-    //       this.allOrders.splice(index,1);
-    //       order.date=new Date();
-    //       const newStatus="MISSING PRODUCT";
-    //       this.orderService.setOrderStatus(order,newStatus);
-    //       this.userService.changeOrderStatus(order,newStatus);
-    //     }
-    //   })
-    // })
+  setUnavailableProductsAndOrdersStatus(order: any) {
+    if (order.status == "FINISHED" || order.status == "DELIVERED") {
+      this._snackBar.open("Order is done so cannot have missing products", "", this.configSnackBar);
+    } else {
+      this.allOrders.forEach(order => {
+        let haveMissingProducts = false;
+        let newUserCart = this.createUserCartWithMissingProducts(order);
+        let missingProductsFromOrder: any[] = [];
+        order.products.forEach(product => {
+          this.missingProducts.forEach(missingProduct => {
+            if (missingProduct.id == product.id) {
+              haveMissingProducts = true;
+              //delete from cart and decrement totalCount
+              let index = newUserCart.products.indexOf(product);
+              newUserCart.products.splice(index, 1);
+              newUserCart.totalCount = newUserCart.totalCount = product.count;
+            }
+          })
+        });
 
-    this.allOrders.forEach(order => {
-      let haveMissingProducts = false;
-      let newUserCart = this.createUserCartWithMissingProducts(order);
-      let missingProductsFromOrder: any[] = [];
-      order.products.forEach(product => {
-        this.missingProducts.forEach(missingProduct => {
-          if (missingProduct.id == product.id) {
-            haveMissingProducts = true;
-            //delete from cart and decrement totalCount
-            let index = newUserCart.products.indexOf(product);
-            newUserCart.products.splice(index, 1);
-            newUserCart.totalCount = newUserCart.totalCount = product.count;
+        if (haveMissingProducts) {
+          order.date = new Date();
+          const newStatus = "MISSING PRODUCT";
+          console.log(newUserCart);
+          this.missingProducts.forEach(missingProduct =>{
+            this.productService.setProductToUnavailable(missingProduct.id);
+          })
+          this.orderService.setOrderStatus(order, newStatus);
+          this.userService.changeOrderStatus(order, newStatus);
+          if (newUserCart.products.length != 0) {
+            this.userService.updateCart(newUserCart, order.client);
+            if(order.payMethod=="FromApp"){
+              let moneyToIncrement= order.totalPrice;
+              this.userService.updateMoneyInApp(moneyToIncrement,order.client.uid);
+            }
+          } else {
+            if(order.payMethod=="FromApp"){
+              let moneyToIncrement= order.totalPrice;
+              this.userService.updateMoneyInApp(moneyToIncrement,order.client.uid);
+            }
           }
-
-        })
-
-      });
-      console.log(order.orderNumber);
-      if (haveMissingProducts) {
-        order.date = new Date();
-        const newStatus = "MISSING PRODUCT";
-        console.log(newUserCart);
-        // + set product to unavailable
-        this.orderService.setOrderStatus(order, newStatus);
-        this.userService.changeOrderStatus(order, newStatus);
-
-        if (newUserCart.products.length != 0) {
-          this.userService.updateCart(newUserCart, order.client);
         } else {
-          console.log("trimite notificare");
+          this._snackBar.open("Order doesn't have missing products", "", this.configSnackBar);
         }
-      }
-
-    })
+      });
+    }
 
 
   }
@@ -103,8 +105,22 @@ export class TakeOrdersCardComponent implements OnInit {
 
   cancelOrder(order: any) {
     const newStatus = "CANCELED";
-    order.date=new Date();
-    this.orderService.setOrderStatus(order, newStatus);
-    this.userService.changeOrderStatus(order, newStatus);
+    if (order.status == "SENT" || order.status == "IN PROGRESS") {
+      order.date = new Date();
+      this.orderService.setOrderStatus(order, newStatus);
+      this.userService.changeOrderStatus(order, newStatus);
+      order.status=newStatus;
+      this.messagingService.sendNotification(order).add(sth=> console.log(sth));
+
+      if(order.payMethod=="FromApp"){
+        let moneyToIncrement= order.totalPrice;
+        this.userService.updateMoneyInApp(moneyToIncrement,order.client.uid);
+      }
+
+      this._snackBar.open("Order canceled successfully", "", this.configSnackBar);
+    } else {
+      this._snackBar.open("Order is done so cannot be canceled", "", this.configSnackBar);
+    }
+
   }
 }

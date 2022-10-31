@@ -26,6 +26,7 @@ import {TakeOrdersComponent} from "./admin/take-orders/take-orders.component";
 import {SearchProductComponent} from "./menu/search-product/search-product.component";
 import {OrderDetailsComponent} from "./orders/order-details/order-details.component";
 import {PaymentHistoryComponent} from "./user-account/payment-history/payment-history.component";
+import {AdminFeedbackComponent} from "./admin/admin-feedback/admin-feedback.component";
 
 
 const routes: Routes = [
@@ -156,6 +157,11 @@ const routes: Routes = [
   {
     path: 'take-orders',
     component: TakeOrdersComponent,
+    canActivate: [AuthGuard], data: {role: 'admin'}
+  },
+  {
+    path: 'admin-feedback',
+    component: AdminFeedbackComponent,
     canActivate: [AuthGuard], data: {role: 'admin'}
   },
 ];

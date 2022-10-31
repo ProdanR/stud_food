@@ -1,4 +1,5 @@
-<mat-card class="food-card " [ngClass]="{'unavailable-product': product?.available === false}">
+<mat-card class="food-card "
+          [ngClass]="{'unavailable-product': (product?.available === false || metadata.isOpen===false)}">
 
   <mat-card-content class="d-flex justify-content-between">
     <div class="d-flex justify-content-between flex-column" [routerLink]="['/menu-item', product?.id]">
@@ -18,7 +19,7 @@
       </div>
 
       <div *ngIf="currentUser?.hasDiscount">
-                  <span class="discount-price" *ngIf="product.available">
+                  <span class="discount-price" *ngIf="product.available && metadata.isOpen">
                     {{product?.discountPrice| getDecimalPart}} <sup>{{product?.discountPrice|getFractionalPart}}</sup>Lei
                     <span class="old-price">
                       <del>
@@ -27,7 +28,8 @@
                     </span>
                   </span>
 
-        <span *ngIf="!product.available" class="normal-price" >Not available</span>
+        <span *ngIf="!product.available && metadata.isOpen" class="normal-price">Not available</span>
+        <span *ngIf="!metadata.isOpen" class="normal-price">Store closed</span>
       </div>
 
     </div>

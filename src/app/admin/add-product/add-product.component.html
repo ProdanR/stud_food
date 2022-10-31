@@ -59,10 +59,10 @@
         </div>
 
         <!--Photo Field -->
-        <mat-label>Choose food photo (Recomended dimension: 60x60)</mat-label>
+        <mat-label>Choose a photo for your product</mat-label>
           <input label="Choose food photo" type="file" (change)="onFileChosen($event)">
 
-        <button mat-flat-button class="login-button" (click)="addNewProductForm.valid ? addNewProduct():null">Add new product</button>
+        <button mat-flat-button class="login-button" (click)="addNewProductForm.valid ? addNewProduct():showError()">Add new product</button>
 
 
       </form>

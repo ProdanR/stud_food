@@ -67,6 +67,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { SearchProductComponent } from './menu/search-product/search-product.component';
 import { OrderDetailsComponent } from './orders/order-details/order-details.component';
 import { PaymentHistoryComponent } from './user-account/payment-history/payment-history.component';
+import { AdminFeedbackComponent } from './admin/admin-feedback/admin-feedback.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +105,7 @@ import { PaymentHistoryComponent } from './user-account/payment-history/payment-
     SearchProductComponent,
     OrderDetailsComponent,
     PaymentHistoryComponent,
+    AdminFeedbackComponent,
 
   ],
     imports: [

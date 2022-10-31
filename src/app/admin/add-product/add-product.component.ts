@@ -19,8 +19,10 @@ export class AddProductComponent implements OnInit {
 
   constructor(private productService:ProductService,private _snackBar: MatSnackBar) {
     this.configSnackBar.duration = 2000;
-    // this.configSnackBar.verticalPosition = 'top';
+    this.configSnackBar.verticalPosition = 'top';
     this.configSnackBar.panelClass = ['my_snackBar'];
+    this.product.description="";
+    this.product.weight="";
   }
 
   ngOnInit(): void {
@@ -53,5 +55,9 @@ export class AddProductComponent implements OnInit {
   onFileChosen($event: any) {
     this.fileToUpload = ($event.target).files[0];
     console.log(this.fileToUpload);
+  }
+
+  showError() {
+    this._snackBar.open("Please add required information", "",this.configSnackBar);
   }
 }

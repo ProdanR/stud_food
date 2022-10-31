@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import firebase from 'firebase/compat';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
+import { increment } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -125,5 +125,12 @@ export class UserService {
       notificationToken: token
     })
   }
-}
 
+  updateMoneyInApp(newAmount: any, uid) {
+
+    const userRef = this.db.collection('/users').doc(uid);
+    userRef.update({
+      moneyInApp: increment(newAmount)
+    })
+  }
+}

@@ -4,6 +4,7 @@ import {map} from "rxjs/operators";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
+import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-admin-users-edit',
@@ -17,8 +18,13 @@ export class AdminUsersEditComponent implements OnInit {
   allUsers: any[] = [];
   dataSource = new MatTableDataSource(this.allUsers);
   displayedColumns: string[] = ['fullName', 'email','studentNumber', 'moneyInApp', 'hasDiscount','edit'];
+  configSnackBar = new MatSnackBarConfig();
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,private _snackBar: MatSnackBar) {
+    this.configSnackBar.duration = 2000;
+    this.configSnackBar.verticalPosition = 'top';
+    this.configSnackBar.panelClass = ['my_snackBar'];
+
   }
 
   ngOnInit(): void {
@@ -35,6 +41,7 @@ export class AdminUsersEditComponent implements OnInit {
     ).subscribe(data => {
       this.allUsers = data;
       this.allUsers=[...data];
+      this.allUsers=this.allUsers.filter(user=>user.roles.includes("user"));
       this.dataSource.data = this.allUsers;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
@@ -44,11 +51,13 @@ export class AdminUsersEditComponent implements OnInit {
 
   updateUser(user) {
     this.userService.updateUser(user);
+    this._snackBar.open("User updated successfully", "", this.configSnackBar);
   }
 
 
   disableDiscountFromAllUsers() {
     this.userService.disableDiscountFromAllUsers();
+    this._snackBar.open("Discount disabled for all users", "", this.configSnackBar);
   }
 
   doFilter(target: any) {

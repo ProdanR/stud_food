@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProductService} from "../../_shared/services/product.service";
 import {UserService} from "../../_shared/services/user.service";
+import {MetadataService} from "../../_shared/services/metadata.service";
 
 @Component({
   selector: 'app-product-card',
@@ -10,9 +11,21 @@ import {UserService} from "../../_shared/services/user.service";
 export class ProductCardComponent implements OnInit {
   @Input() product;
   @Input() currentUser;
-  constructor(private userService: UserService) { }
+  metadata:any={};
+  constructor(private userService: UserService, private metadataService: MetadataService) {
+    this.getMetadata();
+  }
+
+
 
   ngOnInit(): void {
+  }
+
+  private getMetadata() {
+    this.metadataService.getMetadata().snapshotChanges().subscribe(data => {
+      this.metadata = data[0].payload.doc.data();
+      this.metadata.id = data[0].payload.doc.id;
+    });
   }
 
   addOrRemoveFromFavourite() {

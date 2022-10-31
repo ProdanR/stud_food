@@ -4,18 +4,18 @@
   </button>
   <div>
 <!--    <span class="title">StudFood</span>-->
-    <button mat-raised-button>Home</button>
     <button mat-raised-button routerLink="admin-users-list">Users List</button>
     <button mat-raised-button routerLink="products-list">Product's List</button>
     <button mat-raised-button routerLink="add-new-product">Add new product</button>
     <button mat-raised-button routerLink="categories-order">Categories order</button>
     <button mat-raised-button routerLink="take-orders">Orders</button>
+    <button mat-raised-button routerLink="admin-feedback">Feedbacks</button>
   </div>
 
   <span class="example-spacer"></span>
 
-  <div >
-
+  <div>
+    <button mat-raised-button (click)="setIsOpen()" style="width: 200px" [style.background-color]="this.metadata.isOpen ? '#99ff99' : '#ff9999'">{{this.metadata.isOpen?"Open":"Close"}}  (Click to {{!this.metadata.isOpen?"Open":"Closed"}} it)</button>
     <button mat-raised-button (click)="signOut()">logOut</button>
   </div>
   <!--    <button mat-icon-button class="example-icon favorite-icon" >-->

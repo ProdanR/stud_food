@@ -12,12 +12,13 @@ export class OrderDetailsComponent implements OnInit {
   orderId: any;
   order: any = {};
   dateToDisplay: any;
-
   screenHeigh;
 
   constructor(private router: Router, private route: ActivatedRoute, private orderService: OrderService, private userService: UserService) {
     this.screenHeigh = document.documentElement.clientHeight;
   }
+
+
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: any) => {
@@ -29,8 +30,9 @@ export class OrderDetailsComponent implements OnInit {
   private getOrderById(orderId: any) {
     this.orderService.getOrderById(orderId).snapshotChanges().subscribe(data => {
       this.order = data.payload.data();
-      this.order.id=orderId;
-      if(this.order.status=='SENT'){}
+      this.order.id = orderId;
+      if (this.order.status == 'SENT') {
+      }
       this.dateToDisplay = new Date(this.order.date.seconds * 1000);
     });
   }
@@ -85,8 +87,14 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   setOrderStatusToCancel(order: any, status: string) {
-    order.date=new Date();
-    this.orderService.setOrderStatus(order,status);
-    this.userService.changeOrderStatus(order,status);
+    order.date = new Date();
+    this.orderService.setOrderStatus(order, status);
+    this.userService.changeOrderStatus(order, status);
+
+    if (order.payMethod == "FromApp") {
+      let newAmount = order.totalPrice;
+        this.userService.updateMoneyInApp(newAmount, order.client.uid);
+
+    }
   }
 }

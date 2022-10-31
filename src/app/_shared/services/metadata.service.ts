@@ -22,4 +22,11 @@ export class MetadataService {
       orderCountNumber: newOrderCountNumber
     })
   }
+
+  closeOpenTheRestaurant(metadata: any){
+    this.metadataRef.doc(metadata.id).update({
+      isOpen: metadata.isOpen,
+      orderCountNumber: 0
+    })
+  }
 }

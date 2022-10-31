@@ -52,10 +52,8 @@ export class AuthService {
   async signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
-    // if( credential.user?.uid)
     this.saveUserDataToFirebaseGoogleCredentials(credential.user);
     this.saveLoggedUserToDataStorage(credential.user?.uid);
-
   }
 
   async signInWithFacebook() {
@@ -63,7 +61,6 @@ export class AuthService {
     const credential = await this.afAuth.signInWithPopup(provider);
     await this.saveUserDataToFirebase(credential.user);
     this.saveLoggedUserToDataStorage(credential.user?.uid);
-
   }
 
   signUp(user: User) {
@@ -112,9 +109,9 @@ export class AuthService {
       JSON.parse(<string>localStorage.getItem('loggedUser'));
       console.log(JSON.parse(<any>localStorage.getItem('loggedUser')));
       if (doc.data().roles.indexOf('admin') !== -1) {
-        this.router.navigate(['admin-page']);
+        this.router.navigate(['/admin-page']);
       } else {
-        this.router.navigate(['menu']);
+        this.router.navigate(['/menu']);
       }
     });
   }
@@ -190,8 +187,6 @@ export class AuthService {
       }
       return userRef;
     })
-
-
 
 
   }

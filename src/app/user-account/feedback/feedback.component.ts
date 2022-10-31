@@ -17,7 +17,8 @@ export class FeedbackComponent implements OnInit {
 
   addFeedbackToFirebase() {
     this.feedback.important=false;
-    this.feedback.date=new Date().toString();
+    this.feedback.solved=false;
+    this.feedback.date=new Date();
     console.log(this.feedback);
     this.feedbackService.addFeedback(this.feedback);
     this.router.navigate(['/account-page-mobile']);

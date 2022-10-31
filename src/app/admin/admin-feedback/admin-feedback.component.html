@@ -1,0 +1,14 @@
+<div class="d-flex flex-row flex-wrap p-3 h-auto justify-content-start" >
+  <mat-card class="feedback-card m-2 mat-elevation-z4" *ngFor="let feedback of feedbacks" [ngStyle]="{'background':!feedback.solved?(feedback.important?'#ffff99':'#ffffff'):'#99ff99'}">
+    <mat-card-title>Date: {{(feedback.date.seconds*1000) | date}}
+    </mat-card-title>
+    <mat-card-content class="d-flex flex-column justify-content-between h-75" >
+    <p style="margin-top: 20px">{{feedback.message}}</p>
+      <div class="d-flex flex-column">
+        <div>Mark it as important: <mat-checkbox color="primary" [(ngModel)]="feedback.important" (change)="setImportantFeedback($event, feedback.id)"></mat-checkbox></div>
+        <div>Mark it as solved: &nbsp; &nbsp; &nbsp; <mat-checkbox color="primary" [(ngModel)]="feedback.solved" (change)="setSolvedFeedback($event, feedback.id)"></mat-checkbox></div>
+      </div>
+  </mat-card-content>
+
+  </mat-card>
+</div>

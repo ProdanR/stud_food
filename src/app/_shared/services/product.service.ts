@@ -42,6 +42,8 @@ export class ProductService {
     productRef.set(product, {
       merge: true
     })
+
+    this._snackBar.open("Edit product successfully", "", this.configSnackBar);
   }
 
   //edit products
@@ -51,6 +53,8 @@ export class ProductService {
   deleteProduct(productId) {
     const productRef = this.productsRef.doc(productId);
     productRef.delete();
+
+    this._snackBar.open("Product deleted successfully", "", this.configSnackBar);
   }
 
   //delete product
@@ -104,6 +108,13 @@ export class ProductService {
     })
   }
 
+  setProductToUnavailable(id:any){
+    const prodcutRef = this.productsRef.doc(id);
+    prodcutRef.update({
+      available: false
+    })
+  }
+
 
   //start category
   addNewCategory(category: any) {
@@ -111,6 +122,17 @@ export class ProductService {
       name: category,
       order: 1000
     });
+    this._snackBar.open("New category added successfully", "", this.configSnackBar);
+  }
+
+  deleteCategory(id){
+    const categoryRef = this.categoriesRef.doc(id);
+    categoryRef.delete();
+    this._snackBar.open("Category deleted successfully", "", this.configSnackBar);
+  }
+
+  getAllProductsWithCategory(id){
+    return this.db.collection('/products',ref => ref.where('category_id', '==', id));
   }
 
   getAllCategories() {

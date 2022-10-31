@@ -25,7 +25,7 @@
        cdkDropList
        #finishedList="cdkDropList"
        [cdkDropListData]="finishedOrders"
-       [cdkDropListConnectedTo]="[inProgressList,deliveredList]"
+       [cdkDropListConnectedTo]="[deliveredList]"
        (cdkDropListDropped)="drop($event)"
        id="FINISHED">
     <h2 style="color: #00BFA6 ">FINISHED</h2>
@@ -36,7 +36,6 @@
        cdkDropList
        #deliveredList="cdkDropList"
        [cdkDropListData]="deliveredOrders"
-       [cdkDropListConnectedTo]="[finishedList]"
        (cdkDropListDropped)="drop($event)"
        id="DELIVERED">
 

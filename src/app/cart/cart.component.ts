@@ -94,7 +94,14 @@ export class CartComponent implements OnInit {
       this._snackBar.open("Order placed successfully", "", this.configSnackBar);
       // this.currentUser.currentOrders.push(order);
       // this.userService.addCurrentOrders(this.currentUser.currentOrders, this.currentUser.uid);
+
       this.userService.addOrderToUser(order, this.currentUser.uid);
+
+      if(order.payMethod=="FromApp"){
+        let moneyToDecrement= 0-order.totalPrice;
+        this.userService.updateMoneyInApp(moneyToDecrement,order.client.uid);
+      }
+
       //asta va fi pus doar in vom avea un status final CANCELED, DELIVERE, (FINISED)
       // this.userService.addOrderToUserOrderHistory(order, this.currentUser.uid);
     });

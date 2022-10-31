@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {MetadataService} from "../../_shared/services/metadata.service";
 
 @Component({
   selector: 'app-order-card',
@@ -9,7 +10,12 @@ export class OrderCardComponent implements OnInit {
   @Input() order;
   dateToDisplay:any;
 
-  constructor() { }
+  constructor() {
+
+  }
+
+
+
 
   ngOnInit(): void {
     this.dateToDisplay= new Date(this.order.date.seconds*1000);
